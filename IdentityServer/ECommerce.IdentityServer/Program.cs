@@ -47,12 +47,12 @@ namespace ECommerce.IdentityServer
                 {
                     var serviceProvider = scope.ServiceProvider;
                     var applicationDbContext = serviceProvider.GetRequiredService<ApplicationDbContext>();
-                    applicationDbContext.Database.MigrateAsync();
+                    applicationDbContext.Database.Migrate();
                     var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
                    
-                   if (userManager.Users.Any() is false)
+                   if (!userManager.Users.Any())
                    {
-                         userManager.CreateAsync(new ApplicationUser {UserName="admin", Email="mutalibshg@code.edu.az"}, "admin").Wait();
+                        userManager.CreateAsync(new ApplicationUser {UserName="admin", Email="mutalibshg@code.edu.az"}, "admin").Wait();
                    }
                 }
 

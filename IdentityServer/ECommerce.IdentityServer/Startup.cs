@@ -37,6 +37,7 @@ namespace ECommerce.IdentityServer
                     cfg.Password.RequireNonAlphanumeric = false;
                     cfg.Password.RequireDigit = false;
                     cfg.Password.RequireUppercase = false;
+                    cfg.Password.RequiredLength = 3;
                     })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
