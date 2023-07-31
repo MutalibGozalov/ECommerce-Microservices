@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "services", "services", "{3550AC12-9667-4EB8-AA95-C0DED2D2B5D8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalog", "Catalog", "{E17ECAA7-C354-4728-93F4-E1BA63B258A9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F0FDB929-2904-4627-9CF6-BAFE07518918}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerce.Services.Catalog.Api", "services\Catalog\src\ECommerce.Services.Catalog.Api\ECommerce.Services.Catalog.Api.csproj", "{AD357010-E349-49F2-87DD-AAA9F20763A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerce.Services.Catalog.Domain", "services\Catalog\src\ECommerce.Services.Catalog.Domain\ECommerce.Services.Catalog.Domain.csproj", "{9710D659-1A5B-4B0F-B863-CE6B5016F56E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerce.Services.Catalog.Application", "services\Catalog\src\ECommerce.Services.Catalog.Application\ECommerce.Services.Catalog.Application.csproj", "{F3D4EC47-CD24-403D-89AB-7BAEBEACE5A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerce.Services.Catalog.Infrastructure", "services\Catalog\src\ECommerce.Services.Catalog.Infrastructure\ECommerce.Services.Catalog.Infrastructure.csproj", "{070CF248-6BEB-4B05-93A0-855C6B94C622}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{45F1ADD4-0D0F-473B-913B-5D68F3CBA13B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerce.Shared", "Shared\ECommerce.Shared\ECommerce.Shared.csproj", "{8EE6C460-B00C-4C4F-ADE1-D59A3A217D61}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AD357010-E349-49F2-87DD-AAA9F20763A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD357010-E349-49F2-87DD-AAA9F20763A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD357010-E349-49F2-87DD-AAA9F20763A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD357010-E349-49F2-87DD-AAA9F20763A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9710D659-1A5B-4B0F-B863-CE6B5016F56E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9710D659-1A5B-4B0F-B863-CE6B5016F56E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9710D659-1A5B-4B0F-B863-CE6B5016F56E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9710D659-1A5B-4B0F-B863-CE6B5016F56E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3D4EC47-CD24-403D-89AB-7BAEBEACE5A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3D4EC47-CD24-403D-89AB-7BAEBEACE5A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3D4EC47-CD24-403D-89AB-7BAEBEACE5A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3D4EC47-CD24-403D-89AB-7BAEBEACE5A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{070CF248-6BEB-4B05-93A0-855C6B94C622}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{070CF248-6BEB-4B05-93A0-855C6B94C622}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{070CF248-6BEB-4B05-93A0-855C6B94C622}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{070CF248-6BEB-4B05-93A0-855C6B94C622}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EE6C460-B00C-4C4F-ADE1-D59A3A217D61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EE6C460-B00C-4C4F-ADE1-D59A3A217D61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EE6C460-B00C-4C4F-ADE1-D59A3A217D61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EE6C460-B00C-4C4F-ADE1-D59A3A217D61}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E17ECAA7-C354-4728-93F4-E1BA63B258A9} = {3550AC12-9667-4EB8-AA95-C0DED2D2B5D8}
+		{F0FDB929-2904-4627-9CF6-BAFE07518918} = {E17ECAA7-C354-4728-93F4-E1BA63B258A9}
+		{AD357010-E349-49F2-87DD-AAA9F20763A3} = {F0FDB929-2904-4627-9CF6-BAFE07518918}
+		{9710D659-1A5B-4B0F-B863-CE6B5016F56E} = {F0FDB929-2904-4627-9CF6-BAFE07518918}
+		{F3D4EC47-CD24-403D-89AB-7BAEBEACE5A2} = {F0FDB929-2904-4627-9CF6-BAFE07518918}
+		{070CF248-6BEB-4B05-93A0-855C6B94C622} = {F0FDB929-2904-4627-9CF6-BAFE07518918}
+		{8EE6C460-B00C-4C4F-ADE1-D59A3A217D61} = {45F1ADD4-0D0F-473B-913B-5D68F3CBA13B}
+	EndGlobalSection
+EndGlobal

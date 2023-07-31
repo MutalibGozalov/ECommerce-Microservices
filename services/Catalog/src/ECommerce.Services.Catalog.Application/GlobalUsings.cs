@@ -1,0 +1,9 @@
+global using ECommerce.Services.Catalog.Domain.Entities;
+global using MediatR;
+global using ECommerce.Shared.Dtos;
+global using MongoDB.Driver;
+global using AutoMapper;
+global using ECommerce.Services.Catalog.Application.Settings;
+global using FluentValidation;
+global using Microsoft.Extensions.DependencyInjection;
+global using ECommerce.Services.Catalog.Application.Common.Mapping;
