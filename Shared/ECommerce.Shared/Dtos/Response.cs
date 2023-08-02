@@ -3,9 +3,9 @@ using System.Text.Json.Serialization;
 
 namespace ECommerce.Shared.Dtos
 {
-    public class Response<T>
+    public class Response<T> where T : class
     {
-        public T? Data { get; set; }
+        public T Data { get; set; }
         [JsonIgnore]
         public int StatusCode { get; set; }
         [JsonIgnore]
