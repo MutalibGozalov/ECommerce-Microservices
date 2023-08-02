@@ -13,7 +13,7 @@ namespace ECommerce.IdentityServer
 
         public static IEnumerable<ApiResource> ApiResources => new ApiResource[]
         {
-            new ApiResource("resource_catalog") {Scopes = {"catalog_fullpermission"}},
+            new ApiResource("resource_catalog1") {Scopes = {"catalog_fullpermission"}},
             new ApiResource("resource_photostock") {Scopes = {"photo_stock_fullpermission"}},
         };
         public static IEnumerable<IdentityResource> IdentityResources =>
@@ -36,7 +36,7 @@ namespace ECommerce.IdentityServer
                 new Client {
                     ClientName = "Asp.Net Core MVC",
                     ClientId = "WebMvcClient",
-                    ClientSecrets = {new Secret("secret123!".Sha256())},
+                    ClientSecrets = {new Secret("secret".Sha256())},
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
                     AllowedScopes = {"catalog_fullpermission","photo_stock_fullpermission", IdentityServerConstants.LocalApi.ScopeName}
                 }
