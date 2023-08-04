@@ -28,4 +28,17 @@ public class PhotosController : CustomBaseController
 
         return CreateActionResultInstance(Response<PhotoDto>.Failure("photo is empty", 400));
     }
+
+    [HttpDelete]
+    public IActionResult PhotoDelete(string photoUrl)
+    {
+        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/photos", photoUrl);
+        if (System.IO.File.Exists(path) is false)
+        {
+           return CreateActionResultInstance(Response<NoContent>.Failure("photo not found", 404));
+        }
+        System.IO.File.Delete(path);
+
+        return CreateActionResultInstance(Response<NoContent>.Success(204));
+    }
 }
