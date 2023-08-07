@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace ECommerce.Shared.Dtos
 {
-    public class Response<T> where T : class
+    public class Response<T>// where T : class
     {
         public T Data { get; set; }
         [JsonIgnore]
