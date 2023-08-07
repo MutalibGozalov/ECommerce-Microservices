@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\ECommerce.Services.Basket.Application\ECommerce.Services.Basket.Application.csproj" />
+    <ProjectReference Include="..\ECommerce.Services.Cart.Application\ECommerce.Services.Cart.Application.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

@@ -1,7 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\ECommerce.Services.Basket.Domain\ECommerce.Services.Basket.Domain.csproj" />
+    <ProjectReference Include="..\ECommerce.Services.Cart.Domain\ECommerce.Services.Cart.Domain.csproj" />
+    <ProjectReference Include="..\..\..\..\Shared\ECommerce.Shared\ECommerce.Shared.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
