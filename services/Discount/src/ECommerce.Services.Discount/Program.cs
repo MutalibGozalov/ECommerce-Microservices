@@ -1,4 +1,5 @@
 using System.IdentityModel.Tokens.Jwt;
+using ECommerce.Services.Discount.Services;
 using ECommerce.Shared.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -24,6 +25,8 @@ JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("sub");
 //Context
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ISharedIdentityService, SharedIdentityService>();
+
+builder.Services.AddScoped<IDiscountService, DiscountService>();
 
 builder.Services.AddControllers(options => {
     options.Filters.Add(new AuthorizeFilter(requireAuthorizePolicy));
