@@ -16,6 +16,7 @@ namespace ECommerce.IdentityServer
         {
             new ApiResource("resource_catalog") {Scopes = {"catalog_fullpermission"}},
             new ApiResource("resource_photostock") {Scopes = {"photo_stock_fullpermission"}},
+            new ApiResource("resource_cart") {Scopes = {"cart_fullpermission"}},
         };
         public static IEnumerable<IdentityResource> IdentityResources =>
         new IdentityResource[]
@@ -31,6 +32,7 @@ namespace ECommerce.IdentityServer
             {
                 new ApiScope("catalog_fullpermission", "Full permission for Catalog Api"),
                 new ApiScope("photo_stock_fullpermission", "Full permission for Photo Stock Api"),
+                new ApiScope("cart_fullpermission", "Full permission for Cart Api"),
                 new ApiScope(IdentityServerConstants.LocalApi.ScopeName)
             };
 
@@ -51,6 +53,7 @@ namespace ECommerce.IdentityServer
                     ClientSecrets = {new Secret("secret".Sha256())},
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
                     AllowedScopes = {
+                        "cart_fullpermission",
                         IdentityServerConstants.StandardScopes.Email, 
                         IdentityServerConstants.StandardScopes.OpenId, 
                         IdentityServerConstants.StandardScopes.Profile,

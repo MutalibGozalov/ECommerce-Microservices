@@ -37,6 +37,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerce.Services.Cart.Inf
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerce.Services.Cart.Api", "services\Cart\src\ECommerce.Services.Cart.Api\ECommerce.Services.Cart.Api.csproj", "{49354A71-931F-451F-9230-625D41C4A37A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IdentityServer", "IdentityServer", "{8E015034-F9F4-4F14-A168-034DC89081E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerce.IdentityServer", "IdentityServer\ECommerce.IdentityServer\ECommerce.IdentityServer.csproj", "{8CD8C05D-1BA6-4664-B079-D458B1CCD6C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -86,6 +90,10 @@ Global
 		{49354A71-931F-451F-9230-625D41C4A37A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49354A71-931F-451F-9230-625D41C4A37A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49354A71-931F-451F-9230-625D41C4A37A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CD8C05D-1BA6-4664-B079-D458B1CCD6C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CD8C05D-1BA6-4664-B079-D458B1CCD6C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CD8C05D-1BA6-4664-B079-D458B1CCD6C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CD8C05D-1BA6-4664-B079-D458B1CCD6C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E17ECAA7-C354-4728-93F4-E1BA63B258A9} = {3550AC12-9667-4EB8-AA95-C0DED2D2B5D8}
@@ -103,5 +111,6 @@ Global
 		{F92B91EF-C6E3-44C5-8C55-9D8A0D4EC200} = {7EF36B03-74AF-452A-B1A1-4B1942BE67B9}
 		{A4EFDA90-FB71-4C30-A860-32544D9835CD} = {7EF36B03-74AF-452A-B1A1-4B1942BE67B9}
 		{49354A71-931F-451F-9230-625D41C4A37A} = {7EF36B03-74AF-452A-B1A1-4B1942BE67B9}
+		{8CD8C05D-1BA6-4664-B079-D458B1CCD6C8} = {8E015034-F9F4-4F14-A168-034DC89081E5}
 	EndGlobalSection
 EndGlobal

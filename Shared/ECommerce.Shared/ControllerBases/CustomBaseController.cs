@@ -14,7 +14,7 @@ namespace ECommerce.Shared.ControllerBases
 {
     public class CustomBaseController : ControllerBase
     {
-        public IActionResult CreateActionResultInstance<T>(Response<T> response) where T : class
+        public IActionResult CreateActionResultInstance<T>(Response<T> response)// where T : class
         {
             return new ObjectResult(response)
             {

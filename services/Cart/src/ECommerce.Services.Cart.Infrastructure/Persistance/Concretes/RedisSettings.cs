@@ -1,4 +1,4 @@
-namespace ECommerce.Services.Cart.Application.Settings;
+namespace ECommerce.Services.Cart.Infrastructure.Persistance.Concretes;
 public class RedisSettings : IRedisSettings
 {
     public string? Host { get; set; }

@@ -1,13 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <ItemGroup>
-    <ProjectReference Include="..\ECommerce.Services.Cart.Application\ECommerce.Services.Cart.Application.csproj" />
+    <ProjectReference Include="..\ECommerce.Services.Cart.Application\ECommerce.Services.Cart.Application.csproj"/>
   </ItemGroup>
-
+  <ItemGroup>
+    <PackageReference Include="StackExchange.Redis" Version="2.6.122"/>
+  </ItemGroup>
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
 </Project>
