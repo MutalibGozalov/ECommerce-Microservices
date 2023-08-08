@@ -87,3 +87,4 @@ public class DiscountService : IDiscountService
 }
 
 //docker run --name postgresql-discount -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=Alaska2017 -p 5432:5432 -d postgres
+// CREATE TABLE leads (id serial PRIMARY KEY, userid varchar(200) unique not null, rate smallint not null, code varchar(50) not null, createddate timestamp not null default CURRENT_TIMESTAMP)
