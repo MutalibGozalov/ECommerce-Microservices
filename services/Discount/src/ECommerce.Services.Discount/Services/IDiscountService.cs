@@ -9,5 +9,5 @@ public interface IDiscountService
     Task<Response<NoContent>> Create(DiscountDto discountDto);
     Task<Response<NoContent>> Update(DiscountDto discountDto);
     Task<Response<NoContent>> Delete(int id);
-    Task<Response<DiscountDto>> GetByCodeAndUserId(string code, int userId);
+    Task<Response<DiscountDto>> GetByCodeAndUserId(string code, string userId);
 }
