@@ -26,7 +26,7 @@ public class DiscountService : IDiscountService
 
     public async Task<Response<DiscountDto>> GetById(int id)
     {
-        var discount = (await _dbConnection.QueryAsync<DiscountDto>($"SELECT * FROM discount WHERE Id = @Id", new { Id = id })).SingleOrDefault();
+        var discount = (await _dbConnection.QueryAsync<DiscountDto>($"SELECT * FROM discount WHERE id = @Id", new { Id = id })).SingleOrDefault();
 
         if (discount is null)
         {
@@ -38,7 +38,7 @@ public class DiscountService : IDiscountService
 
     public async Task<Response<DiscountDto>> GetByCodeAndUserId(string code, int userId)
     {
-        var discount = (await _dbConnection.QueryAsync<DiscountDto>($"SELECT * FROM discount WHERE Code = @Code AND UserId = @Id", new { Code = code, Id = userId })).SingleOrDefault();
+        var discount = (await _dbConnection.QueryAsync<DiscountDto>($"SELECT * FROM discount WHERE code = @Code AND userid = @Id", new { Code = code, Id = userId })).SingleOrDefault();
 
         if (discount is null)
         {
@@ -50,7 +50,7 @@ public class DiscountService : IDiscountService
 
     public async Task<Response<NoContent>> Create(DiscountDto discountDto)
     {
-        var saveStatus = await _dbConnection.ExecuteAsync("INSERT INTO discount (UserId, Rate, Code) VALUES(@UserId, @Rate, @Code)", discountDto);
+        var saveStatus = await _dbConnection.ExecuteAsync("INSERT INTO discount (userId, rate, code) VALUES(@UserId, @Rate, @Code)", discountDto);
 
         if (saveStatus > 0)
         {
@@ -63,7 +63,7 @@ public class DiscountService : IDiscountService
 
     public async Task<Response<NoContent>> Update(DiscountDto discountDto)
     {
-        var updateStatus = await _dbConnection.ExecuteAsync("UPDATE discount SET UserId = @UserId, Code = @Code, Rate = @Rate WHERE Id = @Id", discountDto);
+        var updateStatus = await _dbConnection.ExecuteAsync("UPDATE discount SET userid = @UserId, code = @Code, rate = @Rate WHERE id = @Id", discountDto);
 
         if (updateStatus > 0)
         {
@@ -74,7 +74,7 @@ public class DiscountService : IDiscountService
     }
     public async Task<Response<NoContent>> Delete(int id)
     {
-        var deleteStatus = await _dbConnection.ExecuteAsync("DELETE FROM discount WHERE Id = @Id", new { Id = id });
+        var deleteStatus = await _dbConnection.ExecuteAsync("DELETE FROM discount WHERE id = @Id", new { Id = id });
 
         if (deleteStatus > 0)
         {
