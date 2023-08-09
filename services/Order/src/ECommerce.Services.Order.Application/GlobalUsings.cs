@@ -1,0 +1,1 @@
+global using ECommerce.Services.Order.Domain.Entities;
