@@ -8,7 +8,6 @@ public class OrderDetailDto : IMapFrom<OrderDetail>
     public string ProductName { get; set; } = null!;
     public decimal ProductPrice { get; set; }
     public byte ProductQuantity { get; set; }
-    public TrackingDto? Tracking { get; set; }
     public int TrackingId { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime ModifiedAt { get; set; }

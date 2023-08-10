@@ -19,13 +19,13 @@ public class GetProductsQueryHandler : IRequestHandler<GetProductsQuery, Respons
     }
     public async Task<Response<List<ProductDto>>> Handle(GetProductsQuery request, CancellationToken cancellationToken)
     {
-        var products = await _productCollection.Find(p => true).ToListAsync();
+        var products = await _productCollection.Find(p => true).ToListAsync(cancellationToken);
 
         if (products.Any())
         {
             foreach (var product in products)
             {
-                product.Category = await _categoryCollection.Find(c => c.Id == product.CategoryId).FirstAsync() ?? new Category {Id = "64c35857acCUSTOM8f70b07a", SubcategoryId="64c35857acCUSTOM8f70b07a", Name = "CUSTOM"};
+                product.Category = await _categoryCollection.Find(c => c.Id == product.CategoryId).FirstAsync(cancellationToken);
             }
         }
         else products = new List<Product>();

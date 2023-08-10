@@ -1,7 +1,7 @@
 
 namespace ECommerce.Services.Order.Application.Order.Commands
 {
-    public class CreateOrder : IRequest<Response<NoContent>>, IMapFrom<OrderModel>
+    public class CreateOrderCommand : IRequest<Response<NoContent>>, IMapFrom<OrderModel>
     {
     public string UserId { get; set; } = null!;
     public int ShippingId { get; set; }

@@ -1,18 +1,18 @@
 namespace ECommerce.Services.Order.Application.Order.Handlers;
 
-    public class CreateOrderCommandValidationHandler : IRequestHandler<CreateOrder, Response<NoContent>>
+public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Response<NoContent>>
 {
 
     private readonly IMapper _mapper;
     private readonly IAppDbContext _context;
 
-    public CreateOrderCommandValidationHandler(IMapper mapper, IAppDbContext context)
+    public CreateOrderCommandHandler(IMapper mapper, IAppDbContext context)
     {
         _mapper = mapper;
         _context = context;
     }
 
-    public async Task<Response<NoContent>> Handle(CreateOrder request, CancellationToken cancellationToken)
+    public async Task<Response<NoContent>> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
         OrderModel newOrder = _mapper.Map<OrderModel>(request);
         await _context.Orders.AddAsync(newOrder, cancellationToken);

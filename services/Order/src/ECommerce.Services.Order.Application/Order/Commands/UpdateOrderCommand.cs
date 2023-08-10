@@ -1,6 +1,6 @@
 
-namespace ECommerce.Services.Order.Application.Common.Dtos;
-public class OrderDto: IMapFrom<OrderModel>
+namespace ECommerce.Services.Order.Application.Order.Commands;
+public class UpdateOrderCommand : IRequest<Response<NoContent>>, IMapFrom<OrderModel>
 {
     public int Id { get; set; }
     public string UserId { get; set; } = null!;
@@ -8,6 +8,4 @@ public class OrderDto: IMapFrom<OrderModel>
     public int PaymentId { get; set; }
     public int ShippingAddressId { get; set; }
     public int[] OrderDetailIds { get; set; } = null!;
-    public DateTime CreatedAt { get; set; }
-    public DateTime ModifiedAt { get; set; }
 }

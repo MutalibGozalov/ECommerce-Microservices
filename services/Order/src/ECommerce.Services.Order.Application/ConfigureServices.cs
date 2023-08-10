@@ -1,8 +1,6 @@
 using System.Reflection;
 using ECommerce.Services.Order.Application.Common.Behaviour;
 
-
-
 namespace Microsoft.Extensions.DependencyInjection;
  public static class ConfigureServices
  {
