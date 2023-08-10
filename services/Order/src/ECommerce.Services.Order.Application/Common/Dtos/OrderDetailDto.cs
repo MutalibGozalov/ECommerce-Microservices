@@ -1,6 +1,6 @@
 
 namespace ECommerce.Services.Order.Application.Common.Dtos;
-public class OrderDetailsDto
+public class OrderDetailDto : IMapFrom<OrderDetail>
 {
     public int Id { get; set; }
     public int OrderId { get; set; }

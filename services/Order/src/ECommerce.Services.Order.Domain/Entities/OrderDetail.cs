@@ -1,5 +1,5 @@
 namespace ECommerce.Services.Order.Domain.Entities;
-public class OrderDetails : BaseAuditable
+public class OrderDetail : BaseAuditable
 {
     public int OrderId { get; set; }
     public Order Order { get; set; } = null!;

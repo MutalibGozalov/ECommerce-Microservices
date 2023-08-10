@@ -1,6 +1,6 @@
 
 namespace ECommerce.Services.Order.Application.Common.Dtos;
- public class ShippingDto
+ public class ShippingDto: IMapFrom<Shipping>
  {
     public int Id { get; set; }
     public string ShippingName { get; set; } = null!;

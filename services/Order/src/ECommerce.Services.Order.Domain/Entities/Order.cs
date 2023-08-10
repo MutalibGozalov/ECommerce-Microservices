@@ -6,5 +6,5 @@ public class Order : BaseAuditable
     public int ShippingId { get; set; }
     public int PaymentId { get; set; }
     public int ShippingAddressId { get; set; }
-    public List<OrderDetails> OrderDetails { get; set; } = null!;
+    public List<OrderDetail> OrderDetails { get; set; } = null!;
 }

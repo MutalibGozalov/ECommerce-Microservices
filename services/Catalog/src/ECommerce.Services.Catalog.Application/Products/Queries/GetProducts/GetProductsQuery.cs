@@ -25,7 +25,7 @@ public class GetProductsQueryHandler : IRequestHandler<GetProductsQuery, Respons
         {
             foreach (var product in products)
             {
-                product.Category = await _categoryCollection.Find(c => c.Id == product.CategoryId).FirstAsync();
+                product.Category = await _categoryCollection.Find(c => c.Id == product.CategoryId).FirstAsync() ?? new Category {Id = "64c35857acCUSTOM8f70b07a", SubcategoryId="64c35857acCUSTOM8f70b07a", Name = "CUSTOM"};
             }
         }
         else products = new List<Product>();
