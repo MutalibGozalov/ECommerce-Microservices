@@ -1,6 +1,4 @@
 
-using ECommerce.Services.Order.Application.Order.Queries;
-
 namespace ECommerce.Services.Order.Application.Order.Handlers;
 public class GetOrderByIdQueryHandler : IRequestHandler<GetOrderByIdQuery, Response<OrderDto>>
 {  
@@ -18,6 +16,9 @@ public class GetOrderByIdQueryHandler : IRequestHandler<GetOrderByIdQuery, Respo
     {
         var order = await _context.Orders.FirstOrDefaultAsync(o => o.Id == request.Id, cancellationToken);
         var orderDto = _mapper.Map<OrderDto>(order);
-        return Response<OrderDto>.Success(orderDto, 200);
+        if(order is not null)
+            return Response<OrderDto>.Success(orderDto, 200);
+        
+        return Response<OrderDto>.Failure("Order not found", 404);
     }
 }

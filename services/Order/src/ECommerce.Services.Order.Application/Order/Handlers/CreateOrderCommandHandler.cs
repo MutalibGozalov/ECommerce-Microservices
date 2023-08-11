@@ -1,5 +1,4 @@
 namespace ECommerce.Services.Order.Application.Order.Handlers;
-
 public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Response<NoContent>>
 {
 
