@@ -9,14 +9,15 @@ public class DeleteOrderCommandHandler : IRequestHandler<DeleteOrderCommand, Res
         _context = context;
     }
 
-    public Task<Response<NoContent>> Handle(DeleteOrderCommand request, CancellationToken cancellationToken)
+    public async Task<Response<NoContent>> Handle(DeleteOrderCommand request, CancellationToken cancellationToken)
     {
         var order = _context.Orders.FirstOrDefault(o => o.Id == request.Id);
         if (order is not null)  
         {
           _context.Orders.Remove(order);
-          return Task.FromResult(Response<NoContent>.Success(204));
+          await _context.SaveChangesAsync(cancellationToken);
+          return Response<NoContent>.Success(200);
         }
-        return Task.FromResult(Response<NoContent>.Failure("Order not found", 404));
+        return Response<NoContent>.Failure("Order not found", 404);
     }
 }

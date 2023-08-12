@@ -17,7 +17,9 @@ public class DeleteTrackingCommandHandler : IRequestHandler<DeleteTrackingComman
         if (deleteTracking is not null)
         {
             _context.Trackings.Remove(deleteTracking);
-            return Response<NoContent>.Success(204);
+            await _context.SaveChangesAsync(cancellationToken);
+
+            return Response<NoContent>.Success(200);
         }
 
         return Response<NoContent>.Failure("Tracking not found", 404);

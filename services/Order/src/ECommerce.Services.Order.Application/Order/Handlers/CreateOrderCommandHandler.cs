@@ -14,8 +14,9 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Res
     public async Task<Response<NoContent>> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
         OrderModel newOrder = _mapper.Map<OrderModel>(request);
-        await _context.Orders.AddAsync(newOrder, cancellationToken);
-        return Response<NoContent>.Success(204);
+        var result = await _context.Orders.AddAsync(newOrder, cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken);
+        return Response<NoContent>.Success(200);
     }
 
 }

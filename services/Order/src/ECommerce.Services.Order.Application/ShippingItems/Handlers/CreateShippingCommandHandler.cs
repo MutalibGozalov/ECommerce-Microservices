@@ -14,8 +14,9 @@ public class CreateShippingCommandHandler : IRequestHandler<CreateShippingComman
         var shipping = new Shipping{ShippingName = request.ShippingName};
 
         await _context.Shippings.AddAsync(shipping, cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken);
 
-        return Response<NoContent>.Success(204);
+        return Response<NoContent>.Success(200);
     }
 
 }

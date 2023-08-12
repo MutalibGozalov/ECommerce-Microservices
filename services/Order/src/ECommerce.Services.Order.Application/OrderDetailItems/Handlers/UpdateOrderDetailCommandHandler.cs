@@ -19,7 +19,9 @@ namespace ECommerce.Services.Order.Application.OrderDetailItems.Handlers;
         {
             orderDetail = _mapper.Map<OrderDetail>(request);
             _context.OrderDetails.Update(orderDetail);
-            return Response<NoContent>.Success(204);
+            await _context.SaveChangesAsync(cancellationToken);
+
+            return Response<NoContent>.Success(200);
         }
 
         return Response<NoContent>.Failure("Order Detail not found", 404);

@@ -16,6 +16,7 @@ public class CreateOrderDetailCommandHandler : IRequestHandler<CreateOrderDetail
     {
        var orderDetail = _mapper.Map<OrderDetail>(request);
        await _context.OrderDetails.AddAsync(orderDetail);
-       return Response<NoContent>.Success(204);
+       await _context.SaveChangesAsync(cancellationToken);
+       return Response<NoContent>.Success(200);
     }
 }

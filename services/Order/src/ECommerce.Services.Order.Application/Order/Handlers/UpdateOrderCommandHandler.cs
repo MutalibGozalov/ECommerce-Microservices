@@ -11,14 +11,15 @@ public class UpdateOrderCommandHandler : IRequestHandler<UpdateOrderCommand, Res
         _mapper = mapper;
     }
 
-    public Task<Response<NoContent>> Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
+    public async Task<Response<NoContent>> Handle(UpdateOrderCommand request, CancellationToken cancellationToken)
     {
-        var order = _context.Orders.FirstOrDefault(o => o.Id == request.Id);
+        var order = _context.Orders.AsNoTracking().FirstOrDefault(o => o.Id == request.Id);
         if (order is not null)
         {
             _context.Orders.Update(_mapper.Map<OrderModel>(request));
-            return Task.FromResult(Response<NoContent>.Success(204));
+            await _context.SaveChangesAsync(cancellationToken);
+            return Response<NoContent>.Success(200);
         }
-        return Task.FromResult(Response<NoContent>.Failure("Order not found", 404));
+        return Response<NoContent>.Failure("Order not found", 404);
     }
 }

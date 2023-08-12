@@ -16,7 +16,7 @@ public class GetOrdersQueryHandler : IRequestHandler<GetOrdersQuery, Response<Li
 
     public async Task<Response<List<OrderDto>>> Handle(GetOrdersQuery request, CancellationToken cancellationToken)
     {
-        var orders = await _context.Orders.ToListAsync(cancellationToken);
+        var orders = await _context.Orders.AsNoTracking().ToListAsync(cancellationToken);
         var orderDtos = _mapper.Map<List<OrderDto>>(orders);
         return Response<List<OrderDto>>.Success(orderDtos, 200);
 

@@ -17,7 +17,9 @@ public class UpdateShippingCommandHandler : IRequestHandler<UpdateShippingComman
         if (shipping is not null)
         {
             _context.Shippings.Update(updateShipping);
-            return Response<NoContent>.Success(204);
+            await _context.SaveChangesAsync(cancellationToken);
+
+            return Response<NoContent>.Success(200);
         }
 
         return Response<NoContent>.Failure("Shipping not found", 404);

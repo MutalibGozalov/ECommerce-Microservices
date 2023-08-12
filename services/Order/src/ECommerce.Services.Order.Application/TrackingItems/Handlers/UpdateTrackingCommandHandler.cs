@@ -17,7 +17,9 @@ public class UpdateTrackingCommandHandler : IRequestHandler<UpdateTrackingComman
         if (tracking is not null)
         {
             _context.Trackings.Update(updateTracking);
-            return Response<NoContent>.Success(204);
+            await _context.SaveChangesAsync(cancellationToken);
+
+            return Response<NoContent>.Success(200);
         }
 
         return Response<NoContent>.Failure("Tracking not found", 404);

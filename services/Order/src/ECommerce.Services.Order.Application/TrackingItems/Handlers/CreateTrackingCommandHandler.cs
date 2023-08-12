@@ -13,7 +13,8 @@ public class CreateTrackingCommandHandler : IRequestHandler<CreateTrackingComman
     {
         var createTracking = new Tracking {TrackingNumber = request.TrackingNumber};
         await _context.Trackings.AddAsync(createTracking, cancellationToken);
+        await _context.SaveChangesAsync(cancellationToken);
 
-        return Response<NoContent>.Success(204);
+        return Response<NoContent>.Success(200);
     }
 }

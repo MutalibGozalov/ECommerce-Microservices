@@ -1,6 +1,11 @@
+using ECommerce.Shared.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+//Context
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<ISharedIdentityService, SharedIdentityService>();
 
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);

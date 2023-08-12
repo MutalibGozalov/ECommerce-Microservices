@@ -10,15 +10,16 @@ namespace ECommerce.Services.Order.Application.OrderDetailItems.Handlers
         }
 
 
-        public Task<Response<NoContent>> Handle(DeleteOrderDetailCommand request, CancellationToken cancellationToken)
+        public async Task<Response<NoContent>> Handle(DeleteOrderDetailCommand request, CancellationToken cancellationToken)
         {
             var orderDetail = _context.OrderDetails.FirstOrDefault(o => o.Id == request.Id);
             if (orderDetail is not null)  
             {
             _context.OrderDetails.Remove(orderDetail);
-            return Task.FromResult(Response<NoContent>.Success(204));
+            await _context.SaveChangesAsync(cancellationToken);
+            return Response<NoContent>.Success(200);
             }
-            return Task.FromResult(Response<NoContent>.Failure("Order not found", 404));
+            return Response<NoContent>.Failure("Order not found", 404);
         }
 
     }
