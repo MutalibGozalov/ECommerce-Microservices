@@ -1,6 +1,6 @@
 namespace ECommerce.Services.Order.Application.OrderDetailItems.Commands;
 
-public class UpdateOrderDetailCommand : IRequest<Response<NoContent>>
+public class UpdateOrderDetailCommand : IRequest<Response<NoContent>>, IMapFrom<OrderDetail>
 {
     public int Id { get; set; }
     public int OrderId { get; set; }

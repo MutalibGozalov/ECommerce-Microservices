@@ -12,7 +12,7 @@ public class UpdateShippingCommandHandler : IRequestHandler<UpdateShippingComman
     public async Task<Response<NoContent>> Handle(UpdateShippingCommand request, CancellationToken cancellationToken)
     {
         var updateShipping = new Shipping {Id = request.Id, ShippingName = request.ShippingName};
-        var shipping = await _context.Shippings.FirstOrDefaultAsync(s => s.Id == request.Id);
+        var shipping = await _context.Shippings.AsNoTracking().FirstOrDefaultAsync(s => s.Id == request.Id);
 
         if (shipping is not null)
         {

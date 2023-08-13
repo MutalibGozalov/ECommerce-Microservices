@@ -13,7 +13,7 @@ public class GetTrackingsQueryHandler : IRequestHandler<GetTrackingsQuery, Respo
 
     public async Task<Response<List<TrackingDto>>> Handle(GetTrackingsQuery request, CancellationToken cancellationToken)
     {
-        var trackings = await _context.Trackings.ToListAsync(cancellationToken);
+        var trackings = await _context.Trackings.AsNoTracking().ToListAsync(cancellationToken);
         var trackingDtos = _mapper.Map<List<TrackingDto>>(trackings);
         return Response<List<TrackingDto>>.Success(trackingDtos, 200);
     }

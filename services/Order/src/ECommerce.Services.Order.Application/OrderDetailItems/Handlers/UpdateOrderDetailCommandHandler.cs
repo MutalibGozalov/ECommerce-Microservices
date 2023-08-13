@@ -14,7 +14,7 @@ namespace ECommerce.Services.Order.Application.OrderDetailItems.Handlers;
     public async Task<Response<NoContent>> Handle(UpdateOrderDetailCommand request, CancellationToken cancellationToken)
     {
         
-        var orderDetail = await _context.OrderDetails.FirstOrDefaultAsync(o => o.Id == request.Id);
+        var orderDetail = await _context.OrderDetails.AsNoTracking().FirstOrDefaultAsync(o => o.Id == request.Id);
         if (orderDetail is not null)
         {
             orderDetail = _mapper.Map<OrderDetail>(request);

@@ -13,7 +13,7 @@ public class GetOrderDetailsByOrderIdQueryHandler : IRequestHandler<GetOrderDeta
 
     public async Task<Response<List<OrderDetailDto>>> Handle(GetOrderDetailsByOrderIdQuery request, CancellationToken cancellationToken)
     {
-        var orderDetails = await _context.OrderDetails.Where(o => o.OrderId == request.OrderId).ToListAsync(cancellationToken);
+        var orderDetails = await _context.OrderDetails.AsNoTracking().Where(o => o.OrderId == request.OrderId).ToListAsync(cancellationToken);
         return Response<List<OrderDetailDto>>.Success( _mapper.Map<List<OrderDetailDto>>(orderDetails), 200);
     }
 

@@ -13,7 +13,7 @@ public class GetShippingsQueryHandler : IRequestHandler<GetShippingsQuery, Respo
 
     public async Task<Response<List<ShippingDto>>> Handle(GetShippingsQuery request, CancellationToken cancellationToken)
     {
-        var shippings = await _context.Shippings.ToListAsync(cancellationToken);
+        var shippings = await _context.Shippings.AsNoTracking().ToListAsync(cancellationToken);
 
         return Response<List<ShippingDto>>.Success(_mapper.Map<List<ShippingDto>>(shippings), 200);
     }

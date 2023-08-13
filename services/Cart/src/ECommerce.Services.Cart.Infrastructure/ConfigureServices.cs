@@ -18,7 +18,7 @@ public static class ConfigureServices
         services.AddSingleton<IRedisService>(serviceProvider => {
             var redisSettings = serviceProvider.GetRequiredService<IOptions<RedisSettings>>().Value;
 
-            var redis = new RedisService(redisSettings.Host, redisSettings.Port);
+            var redis = new RedisService(redisSettings.Host ?? "localhost", redisSettings.Port);
 
             redis.Connect();
 

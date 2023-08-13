@@ -13,7 +13,7 @@ public class GetShippingByIdQueryHandler : IRequestHandler<GetShippingByIdQuery,
 
     public async Task<Response<ShippingDto>> Handle(GetShippingByIdQuery request, CancellationToken cancellationToken)
     {
-        var shipping = await _context.Shippings.FirstOrDefaultAsync(s => s.Id == request.Id, cancellationToken);
+        var shipping = await _context.Shippings.AsNoTracking().FirstOrDefaultAsync(s => s.Id == request.Id, cancellationToken);
         var shippingDto = _mapper.Map<ShippingDto>(shipping);
         if (shipping is not null)
             return Response<ShippingDto>.Success(shippingDto, 200);

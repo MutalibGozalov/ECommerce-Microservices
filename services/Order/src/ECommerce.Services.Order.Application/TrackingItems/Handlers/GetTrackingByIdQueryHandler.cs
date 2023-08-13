@@ -11,7 +11,7 @@ public class GetTrackingByIdQueryHandler : IRequestHandler<GetTrackingByIdQuery,
 
     public async Task<Response<TrackingDto>> Handle(GetTrackingByIdQuery request, CancellationToken cancellationToken)
     {
-       var tracking = await _context.Trackings.FirstOrDefaultAsync(t => t.Id == request.Id);
+       var tracking = await _context.Trackings.AsNoTracking().FirstOrDefaultAsync(t => t.Id == request.Id);
        if (tracking is not null)
        {
             var trackingDto = new TrackingDto {Id = request.Id, TrackingNumber = tracking.TrackingNumber};

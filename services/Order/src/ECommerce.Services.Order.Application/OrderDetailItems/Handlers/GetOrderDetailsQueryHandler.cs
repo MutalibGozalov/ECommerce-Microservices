@@ -15,7 +15,7 @@ public class GetOrderDetailsQueryHandler : IRequestHandler<GetOrderDetailsQuery,
 
     public async Task<Response<List<OrderDetailDto>>> Handle(GetOrderDetailsQuery request, CancellationToken cancellationToken)
     {
-        var orderDetails = _mapper.Map<List<OrderDetailDto>>(await _context.OrderDetails.ToListAsync(cancellationToken));
+        var orderDetails = _mapper.Map<List<OrderDetailDto>>(await _context.OrderDetails.AsNoTracking().ToListAsync(cancellationToken));
         return Response<List<OrderDetailDto>>.Success(orderDetails, 200);
     }
 }
