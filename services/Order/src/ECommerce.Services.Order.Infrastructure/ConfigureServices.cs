@@ -1,10 +1,15 @@
 using Microsoft.Extensions.Configuration;
-
+using ECommerce.Shared.Services;
 namespace Microsoft.Extensions.DependencyInjection;
 public static class ConfigureServices
 {
     public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
     {
+        //Context
+        services.AddHttpContextAccessor();
+        services.AddScoped<ISharedIdentityService, SharedIdentityService>();
+
+        //DbContext
         services.AddScoped<AuditableEntitySaveChangesInterceptor>();
         services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
@@ -14,6 +19,8 @@ public static class ConfigureServices
 
         services.AddScoped<AddDbContextInitializer>();
 
+
+        // DateTime service
         services.AddTransient<IDateTime, DateTimeService>();
 
         return services;

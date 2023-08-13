@@ -18,6 +18,11 @@ public class GetOrdersQueryHandler : IRequestHandler<GetOrdersQuery, Response<Li
     {
         var orders = await _context.Orders.AsNoTracking().ToListAsync(cancellationToken);
         var orderDtos = _mapper.Map<List<OrderDto>>(orders);
+        foreach(var o in orderDtos) {
+            var details =  _context.OrderDetails.AsNoTracking().Where(od => od.OrderId == o.Id);
+            var idArray = await details.Select(od => od.Id).ToArrayAsync();
+            o.OrderDetailIds = idArray;
+        };
         return Response<List<OrderDto>>.Success(orderDtos, 200);
 
     }

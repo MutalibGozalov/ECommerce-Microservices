@@ -15,7 +15,14 @@ public class GetOrdersByUserIdQueryHandler : IRequestHandler<GetOrdersByUserIdQu
     public async Task<Response<List<OrderDto>>> Handle(GetOrdersByUserIdQuery request, CancellationToken cancellationToken)
     {
         var userOrders = await _context.Orders.Where(o => o.UserId == request.UserId).AsNoTracking().ToListAsync();
-        return Response<List<OrderDto>>.Success(_mapper.Map<List<OrderDto>>(userOrders), 200);
+        var orderDtos = _mapper.Map<List<OrderDto>>(userOrders);
+        
+         foreach(var o in orderDtos) {
+            var details =  _context.OrderDetails.AsNoTracking().Where(od => od.OrderId == o.Id);
+            var idArray = await details.Select(od => od.Id).ToArrayAsync();
+            o.OrderDetailIds = idArray;
+        };
+        return Response<List<OrderDto>>.Success(orderDtos, 200);
     }
 
 }

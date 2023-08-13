@@ -18,6 +18,7 @@ namespace ECommerce.IdentityServer
             new ApiResource("resource_photostock") {Scopes = {"photo_stock_fullpermission"}},
             new ApiResource("resource_cart") {Scopes = {"cart_fullpermission"}},
             new ApiResource("resource_discount") {Scopes = {"discount_fullpermission"}},
+            new ApiResource("resource_order") {Scopes = {"order_fullpermission"}}
         };
         public static IEnumerable<IdentityResource> IdentityResources =>
         new IdentityResource[]
@@ -35,6 +36,7 @@ namespace ECommerce.IdentityServer
                 new ApiScope("photo_stock_fullpermission", "Full permission for Photo Stock Api"),
                 new ApiScope("cart_fullpermission", "Full permission for Cart Api"),
                 new ApiScope("discount_fullpermission", "Full permission for Discount Api"),
+                new ApiScope("order_fullpermission", "Full permission for Order Api"),
                 new ApiScope(IdentityServerConstants.LocalApi.ScopeName)
             };
 
@@ -61,6 +63,7 @@ namespace ECommerce.IdentityServer
                     AllowedScopes = {
                         "cart_fullpermission",
                         "discount_fullpermission",
+                        "order_fullpermission",
                         IdentityServerConstants.StandardScopes.Email,
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,

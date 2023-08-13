@@ -7,5 +7,4 @@ public class UpdateOrderCommand : IRequest<Response<NoContent>>, IMapFrom<OrderM
     public int ShippingId { get; set; }
     public int PaymentId { get; set; }
     public int ShippingAddressId { get; set; }
-    public int[] OrderDetailIds { get; set; } = null!;
 }
