@@ -1,5 +1,5 @@
 
-namespace ECommerce.Web.Services.Interfaces;
+namespace ECommerce.Web.Models;
 public class ServiceApiSettings
 {
     public string? BaseUri { get; set; }

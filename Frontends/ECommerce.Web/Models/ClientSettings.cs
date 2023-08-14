@@ -1,4 +1,4 @@
-namespace ECommerce.Web.Services.Interfaces;
+namespace ECommerce.Web.Models;
 public class ClientSettings
 {
     public Client? WebClient { get; set; }

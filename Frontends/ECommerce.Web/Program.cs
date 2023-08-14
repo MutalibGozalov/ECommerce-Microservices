@@ -1,3 +1,4 @@
+using ECommerce.Web.Models;
 using ECommerce.Web.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
