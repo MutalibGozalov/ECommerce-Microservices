@@ -69,7 +69,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerce.Gateway", "Gatewa
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontends", "Frontends", "{EBD2AD01-19A8-45B3-9F60-CD26DE615FE5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerce.web", "Frontends\ECommerce.Web\ECommerce.web.csproj", "{13147FF3-FA48-44DB-928B-CB14732E6AE0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerce.Web", "Frontends\ECommerce.Web\ECommerce.Web.csproj", "{13147FF3-FA48-44DB-928B-CB14732E6AE0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
