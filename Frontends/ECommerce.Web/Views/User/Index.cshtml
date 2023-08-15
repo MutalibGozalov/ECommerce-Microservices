@@ -1,0 +1,23 @@
+@{
+    ViewData["Title"] = "Index";
+}
+@model ECommerce.Web.Models.UserViewModel
+<div class="row">
+    <div class="col-md-9">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">User credentials</h5>
+                <table class="table-stripped table">
+                    <tr>
+                        <td>Username</td>
+                        <td>Email</td>
+                    </tr>
+                    <tr>
+                        <td>@Model.UserName</td>
+                        <td>@Model.Email</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
