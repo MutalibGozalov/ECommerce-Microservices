@@ -32,7 +32,7 @@ namespace ECommerce.IdentityServer
             new IdentityResource() {Name = "roles", DisplayName="Roles", Description="User roles", UserClaims = new[] {"role"}}
         };
 
-        public static IEnumerable<ApiScope> ApiScopes =>  // Scope --> Claim
+        public static IEnumerable<ApiScope> ApiScopes =>  // Scope --> Claim     -> permission types
             new ApiScope[]
             {
                 new ApiScope("catalog_fullpermission", "Full permission for Catalog Api"),
