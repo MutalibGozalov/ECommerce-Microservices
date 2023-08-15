@@ -1,3 +1,5 @@
+using ECommerce.web.Services;
+using ECommerce.web.Services.InterfacesL;
 using ECommerce.Web.Models;
 using ECommerce.Web.Services;
 using ECommerce.Web.Services.Interfaces;
@@ -8,13 +10,18 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddHttpClient<IIdentityService, IdentityService>();
+builder.Services.AddHttpClient<IUserService, UserService>(options =>
+{
+    // options.BaseAddress = new Uri();
+});
 builder.Services.Configure<ClientSettings>(builder.Configuration.GetSection("ClientSettings"));
 builder.Services.Configure<ServiceApiSettings>(builder.Configuration.GetSection("ServiceApiSettings"));
 
-builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>{
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+{
     options.LoginPath = "/Auth/SignIn";
     options.ExpireTimeSpan = TimeSpan.FromDays(60);
-    options.SlidingExpiration =true;
+    options.SlidingExpiration = true;
     options.Cookie.Name = "ecommercewebcookie";
 });
 
