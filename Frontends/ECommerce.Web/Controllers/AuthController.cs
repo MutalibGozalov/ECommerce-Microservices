@@ -26,6 +26,27 @@ namespace ECommerce.Web.Controllers
         {
             return View();
         }
+        
+        [HttpPost]
+        public async Task<IActionResult> SignIn(SigninInput signinInput)
+        {
+            if(ModelState.IsValid is false)
+            {
+                return View();
+            }
+
+            var response = await _identityService.SignIn(signinInput);
+
+            if(response.IsSuccessful is false)
+            {
+                response.Errors.ForEach(e => {
+                    ModelState.AddModelError(String.Empty, e);
+                });
+                return View(); 
+            }
+
+           return RedirectToAction("Index", "Home");
+        }
 
         [HttpPost]
         public async Task<IActionResult> SignIn(SigninInput signinInput)
