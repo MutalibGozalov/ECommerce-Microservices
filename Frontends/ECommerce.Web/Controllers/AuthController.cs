@@ -48,29 +48,6 @@ namespace ECommerce.Web.Controllers
            return RedirectToAction("Index", "Home");
         }
 
-        [HttpPost]
-        public async Task<IActionResult> SignIn(SigninInput signinInput)
-        {
-            if (ModelState.IsValid is false)
-            {
-                return View();
-            }
-
-            var response = await _identityService.SignIn(signinInput);
-
-            if (response.IsSuccessful is false)
-            {
-                foreach (var error in response.Errors)
-                {
-                    ModelState.AddModelError(String.Empty, error);
-                }
-
-                return View();
-            }
-
-            return RedirectToAction("Index", "Home");
-        }
-
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
