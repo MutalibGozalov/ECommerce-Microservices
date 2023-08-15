@@ -1,5 +1,6 @@
 using ECommerce.web.Services;
 using ECommerce.web.Services.InterfacesL;
+using ECommerce.Web.Handler;
 using ECommerce.Web.Models;
 using ECommerce.Web.Services;
 using ECommerce.Web.Services.Interfaces;
@@ -20,7 +21,7 @@ builder.Services.AddHttpClient<IIdentityService, IdentityService>();
 builder.Services.AddHttpClient<IUserService, UserService>(options =>
 {
     options.BaseAddress = new Uri(serviceApiSettings.IdentityBaseUri);
-});
+}).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
 
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>

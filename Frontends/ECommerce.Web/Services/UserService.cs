@@ -4,10 +4,16 @@ using ECommerce.web.Services.InterfacesL;
 namespace ECommerce.web.Services;
 public class UserService : IUserService
 {
-    private readonly IUserService _userService;
-    public Task<UserViewModel> GetUser()
+    private readonly HttpClient _httpClient;
+
+    public UserService(HttpClient httpClient)
     {
-        throw new NotImplementedException();
+        _httpClient = httpClient;
+    }
+
+    public async Task<UserViewModel> GetUser()
+    {
+        return await _httpClient.GetFromJsonAsync<UserViewModel>("/api/user/getuser");
     }
 
 }
