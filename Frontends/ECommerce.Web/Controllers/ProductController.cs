@@ -1,4 +1,5 @@
 using ECommerce.Shared.Services;
+using ECommerce.Web.Models.Catalog;
 using ECommerce.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -29,5 +30,23 @@ public class ProductController : Controller
         var categories = await _catalogService.GetAllCategoriesAsync();
         ViewBag.categoryList = new SelectList(categories, "Id", "Name");
         return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Create(ProductCreateInput productCreateInput)
+    {
+        var categories = await _catalogService.GetAllCategoriesAsync();
+        ViewBag.categoryList = new SelectList(categories, "Id", "Name");
+
+        if (ModelState.IsValid is false)
+        {
+            return View();
+        }
+
+        productCreateInput.StoreId = 1;
+
+        await _catalogService.CreateProductAsync(productCreateInput);
+
+        return RedirectToAction("Index");
     }
 }
