@@ -4,7 +4,7 @@ using FluentValidation.Results;
 public class ValidationException : Exception
 {
     public ValidationException()
-        : base("One or more validation failures have occurred.")
+        : base("One or more validation failures have occurred DARLIN.")
     {
         Errors = new Dictionary<string, string[]>();
     }
