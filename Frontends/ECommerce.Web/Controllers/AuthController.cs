@@ -1,5 +1,7 @@
 using ECommerce.Web.Models;
 using ECommerce.Web.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerce.Web.Controllers;
@@ -19,28 +21,43 @@ public class AuthController : Controller
     {
         return View();
     }
-    
+
     [HttpPost]
     public async Task<IActionResult> SignIn(SigninInput signinInput)
     {
-        if(ModelState.IsValid is false)
+        if (ModelState.IsValid is false)
         {
             return View();
         }
 
         var response = await _identityService.SignIn(signinInput);
 
-        if(response.IsSuccessful is false)
+        if (response.IsSuccessful is false)
         {
-            response.Errors.ForEach(e => {
+            response.Errors.ForEach(e =>
+            {
                 ModelState.AddModelError(String.Empty, e);
             });
-            return View(); 
+            return View();
         }
 
-       return RedirectToAction("Index", "Home");
+        return RedirectToAction("Index", "Home");
     }
 
+    public async Task<IActionResult> Logout()
+    {
+        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+        await _identityService.RevokeRefreshToken();
+
+        return RedirectToAction("Index", "Home");
+    }
+
+
+
+
+
+    
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {

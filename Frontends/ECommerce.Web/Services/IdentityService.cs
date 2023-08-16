@@ -179,6 +179,7 @@ public class IdentityService : IIdentityService
             ClientId = _clientSettings.WebClientForUser.ClientId,
             ClientSecret = _clientSettings.WebClientForUser.ClientSecret,
             Address = discovery.RevocationEndpoint,
+            Token = refreshToken,
             TokenTypeHint = "refresh_token"
         };
 
