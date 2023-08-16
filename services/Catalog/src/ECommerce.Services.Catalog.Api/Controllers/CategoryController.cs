@@ -47,10 +47,10 @@ public class CategoryController : CustomBaseController
         return CreateActionResultInstance(response);
     }
 
-    [HttpDelete]
-    public async Task<IActionResult> Delete(DeleteCategoryCommand deleteCategoryCommand)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(string id)
     {
-        var response = await Mediator.Send(deleteCategoryCommand);
+        var response = await Mediator.Send(new DeleteCategoryCommand{Id = id});
         return CreateActionResultInstance(response);
     }
 

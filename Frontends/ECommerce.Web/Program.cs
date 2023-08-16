@@ -2,9 +2,8 @@ using ECommerce.Web.Services;
 using ECommerce.Web.Services.Interfaces;
 using ECommerce.Web.Handler;
 using ECommerce.Web.Models;
-using ECommerce.Web.Services;
-using ECommerce.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Data.Common;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +19,10 @@ var serviceApiSettings = builder.Configuration.GetSection("ServiceApiSettings").
 builder.Services.AddScoped<ResourceOwnerPasswordTokenHandler>();
 
 builder.Services.AddHttpClient<IIdentityService, IdentityService>();
+builder.Services.AddHttpClient<ICatalogService, CatalogService>(options =>
+{
+    options.BaseAddress = new Uri($"{serviceApiSettings.GatewayBaseUri}/{serviceApiSettings.Catalog.Path}");
+});
 
 builder.Services.AddHttpClient<IUserService, UserService>(options =>
 {
