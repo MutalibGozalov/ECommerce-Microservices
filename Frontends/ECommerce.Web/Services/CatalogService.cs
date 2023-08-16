@@ -79,7 +79,7 @@ public class CatalogService : ICatalogService
     #endregion
 
     #region Category
-    public async Task<List<CategoryViewModel>> GetAllCategoriessAsync()
+    public async Task<List<CategoryViewModel>> GetAllCategoriesAsync()
     {
         var response = await _httpClient.GetAsync("category/getall");
 

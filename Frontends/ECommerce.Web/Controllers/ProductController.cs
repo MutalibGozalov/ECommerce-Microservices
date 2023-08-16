@@ -2,6 +2,8 @@ using ECommerce.Shared.Services;
 using ECommerce.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+
 
 namespace ECommerce.Web.Controllers;
 [Authorize]
@@ -20,5 +22,12 @@ public class ProductController : Controller
     {
         var data = await _catalogService.GetAllProductsAsync();
         return View(data);
+    }
+
+    public async Task<IActionResult> Create()
+    {
+        var categories = await _catalogService.GetAllCategoriesAsync();
+        ViewBag.categoryList = new SelectList(categories, "Id", "Name");
+        return View();
     }
 }

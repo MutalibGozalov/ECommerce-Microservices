@@ -21,7 +21,7 @@ public interface ICatalogService
     #endregion
 
     #region Category
-    Task<List<CategoryViewModel>> GetAllCategoriessAsync();
+    Task<List<CategoryViewModel>> GetAllCategoriesAsync();
     Task<CategoryViewModel> GetCategoryByIdAsync(string Id);
     Task<bool> CreateCategoryAsync(CategoryCreateInput productCreateInput);
     Task<bool> UpdateCategoryAsync(CategoryUpdateInput productUpdateInput);
