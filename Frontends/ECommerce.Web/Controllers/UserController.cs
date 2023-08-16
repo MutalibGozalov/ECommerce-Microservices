@@ -1,4 +1,4 @@
-using ECommerce.Web.Services.InterfacesL;
+using ECommerce.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,6 +16,6 @@ public class UserController : Controller
 
     public async Task<IActionResult> Index()
     {
-        return View(_userService.GetUser());
+        return View(await _userService.GetUser());
     }
 }

@@ -1,18 +1,19 @@
 @{
     ViewData["Title"] = "Index";
 }
-@model ECommerce.Web.Models.UserViewModel
+@model UserViewModel
 <div class="row">
     <div class="col-md-9">
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">User credentials</h5>
                 <table class="table-stripped table">
-                    <tr>
+                    <th>
                         <td>Username</td>
                         <td>Email</td>
-                    </tr>
+                    </th>
                     <tr>
+                        <td></td>
                         <td>@Model.UserName</td>
                         <td>@Model.Email</td>
                     </tr>
