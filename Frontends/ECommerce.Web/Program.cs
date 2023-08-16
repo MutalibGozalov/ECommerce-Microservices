@@ -1,5 +1,5 @@
-using ECommerce.web.Services;
-using ECommerce.web.Services.InterfacesL;
+using ECommerce.Web.Services;
+using ECommerce.Web.Services.InterfacesL;
 using ECommerce.Web.Handler;
 using ECommerce.Web.Models;
 using ECommerce.Web.Services;

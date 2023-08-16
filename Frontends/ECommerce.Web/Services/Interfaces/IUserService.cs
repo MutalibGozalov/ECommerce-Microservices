@@ -1,6 +1,6 @@
-using ECommerce.web.Models;
+using ECommerce.Web.Models;
 
-namespace ECommerce.web.Services.InterfacesL;
+namespace ECommerce.Web.Services.Interfaces;
 public interface IUserService
 {
     Task<UserViewModel> GetUser();

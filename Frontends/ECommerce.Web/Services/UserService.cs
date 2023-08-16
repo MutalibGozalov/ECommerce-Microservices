@@ -1,7 +1,7 @@
-using ECommerce.web.Models;
-using ECommerce.web.Services.InterfacesL;
+using ECommerce.Web.Models;
+using ECommerce.Web.Services.Interfaces;
 
-namespace ECommerce.web.Services;
+namespace ECommerce.Web.Services;
 public class UserService : IUserService
 {
     private readonly HttpClient _httpClient;

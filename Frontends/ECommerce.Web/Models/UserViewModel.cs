@@ -1,4 +1,4 @@
-namespace ECommerce.web.Models;
+namespace ECommerce.Web.Models;
 public class UserViewModel
 {
     public string Id { get; set; }
