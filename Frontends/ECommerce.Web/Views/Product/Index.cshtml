@@ -18,6 +18,7 @@
                             <th>Product name</th>
                             <th>Product price</th>
                             <th>Product description</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -28,6 +29,7 @@
                                 <td>@product.Name</td>
                                 <td>@product.DisplayPrice</td>
                                 <td>@product.Description</td>
+                                <td><a asp-controller="Product" asp-action="Update" asp-route-id="@product.Id" class="btn btn-success">Edit</a></td>
                             </tr>
                         }
                     </tbody>

@@ -49,4 +49,50 @@ public class ProductController : Controller
 
         return RedirectToAction("Index");
     }
+
+    public async Task<IActionResult> Update(string id)
+    {
+        var product = await _catalogService.GetProductByIdAsync(id);
+        var categories = await _catalogService.GetAllCategoriesAsync();
+        
+
+        if (product is not null)
+        {
+            var productUpdateInput = new ProductUpdateInput
+            {
+                Id = product.Id,
+                CategoryId = product.CategoryId,
+                Name = product.Name,
+                Description = product.Description,
+                DisplayPrice = product.DisplayPrice,
+                Image = product.Image
+
+            };
+            ViewBag.categoryList = new SelectList(categories, "Id", "Name", product.Id);
+
+            return View(productUpdateInput);
+        }
+
+        return RedirectToAction(nameof(Index));
+    }
+
+
+
+
+    [HttpPost]
+    public async Task<IActionResult> Update(ProductUpdateInput productUpdateInput)
+    {
+        var categories = await _catalogService.GetAllCategoriesAsync();
+        ViewBag.categoryList = new SelectList(categories, "Id", "Name");
+
+        if (ModelState.IsValid is false)
+        {
+            return View();
+        }
+
+        await _catalogService.UpdateProductAsync(productUpdateInput);
+
+        return RedirectToAction(nameof(Index));
+
+    }
 }

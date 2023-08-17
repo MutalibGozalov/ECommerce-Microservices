@@ -8,8 +8,8 @@ public class UpdateProductCommand : IRequest<Response<NoContent>>, IMapFrom<Prod
     public string? Description { get; set; }
     public decimal DisplayPrice { get; set; }
     public int StoreId { get; set; }
-    public string Image { get; set; } = null!;
-    public string[] ProductVariations { get; set; } = null!;
+    public string? Image { get; set; } = null!;
+    public string[]? ProductVariations { get; set; } = null!;
 }
 
 public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand, Response<NoContent>>
