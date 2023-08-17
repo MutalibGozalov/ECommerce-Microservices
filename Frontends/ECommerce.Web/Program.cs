@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using ECommerce.Web.Services;
 using ECommerce.Web.Services.Interfaces;
 using ECommerce.Web.Handler;
@@ -5,6 +6,7 @@ using ECommerce.Web.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Data.Common;
 using ECommerce.Shared.Services;
+using ECommerce.Web.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +17,8 @@ builder.Services.Configure<ServiceApiSettings>(builder.Configuration.GetSection(
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddAccessTokenManagement();
+
+builder.Services.AddSingleton<PhotoHelper>();
 
 builder.Services.AddScoped<ISharedIdentityService, SharedIdentityService>();
 

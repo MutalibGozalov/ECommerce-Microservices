@@ -177,7 +177,7 @@ public class CatalogService : ICatalogService
 
     public async Task<bool> UpdateProductVariationAsync(ProductVariationUpdateInput productVariationUpdateInput)
     {
-        var response = await _httpClient.PutAsJsonAsync("ProductVariation/update", productVariationUpdateInput);
+        var response = await _httpClient.PutAsJsonAsync("ProductVariation/update", productVariationUpdateInput); 
 
         return response.IsSuccessStatusCode;
     }

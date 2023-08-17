@@ -35,8 +35,8 @@ public class ProductController : Controller
     [HttpPost]
     public async Task<IActionResult> Create(ProductCreateInput productCreateInput)
     {
-        var categories = await _catalogService.GetAllCategoriesAsync();
-        ViewBag.categoryList = new SelectList(categories, "Id", "Name");
+        // var categories = await _catalogService.GetAllCategoriesAsync();
+        // ViewBag.categoryList = new SelectList(categories, "Id", "Name");
 
         if (ModelState.IsValid is false)
         {
