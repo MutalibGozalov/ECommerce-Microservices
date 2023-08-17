@@ -7,11 +7,14 @@ using ECommerce.Web.Services.Interfaces;
 namespace ECommerce.Web.Services;
 public class CatalogService : ICatalogService
 {
-    private HttpClient _httpClient;
+    private readonly HttpClient _httpClient;
+    private readonly IPhotoStockService _photoStockService;
 
-    public CatalogService(HttpClient httpClient)
+    public CatalogService(HttpClient httpClient, IPhotoStockService photoStockService)
     {
         _httpClient = httpClient;
+        _photoStockService = photoStockService;
+
     }
 
     #region Product
@@ -60,8 +63,14 @@ public class CatalogService : ICatalogService
 
     public async Task<bool> CreateProductAsync(ProductCreateInput productCreateInput)
     {
-        var response = await _httpClient.PostAsJsonAsync("product/create", productCreateInput);
+        var photoServiceResult = await _photoStockService.UploadPhoto(productCreateInput.PhotoFormFile);
+        if (photoServiceResult is not null)
+        {
+            productCreateInput.Image = photoServiceResult.Url;
+        }
 
+
+        var response = await _httpClient.PostAsJsonAsync("product/create", productCreateInput);
         return response.IsSuccessStatusCode;
     }
     public async Task<bool> UpdateProductAsync(ProductUpdateInput productUpdateInput)

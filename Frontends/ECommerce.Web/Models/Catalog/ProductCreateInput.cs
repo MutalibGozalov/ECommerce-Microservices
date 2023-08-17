@@ -8,4 +8,5 @@ public class ProductCreateInput
     public int StoreId { get; set; }
     public string? Image { get; set; } = null!;
     public string[]? ProductVariations { get; set; } = null!;
+    public IFormFile PhotoFormFile { get; set; }
 }

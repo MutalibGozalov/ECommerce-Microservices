@@ -31,7 +31,10 @@
                         <input asp-for="DisplayPrice" class="form-control">
                         <span class="text-danger" asp-validation-for="DisplayPrice"></span>
                     </div> 
-
+                    <div class="mb-3">
+                        <label asp-for="PhotoFormFile">Product image</label>
+                        <input type="file" asp-for="PhotoFormFile" class="form-control">
+                    </div>
                     <button type="submit" class="btn btn-primary">Add Product</button>
                 </form>
             </div>
