@@ -1,5 +1,6 @@
 using System.Text.Json;
 using ECommerce.Shared.Dtos;
+using ECommerce.Web.Helpers;
 using ECommerce.Web.Models;
 using ECommerce.Web.Models.Catalog;
 using ECommerce.Web.Services.Interfaces;
@@ -9,12 +10,13 @@ public class CatalogService : ICatalogService
 {
     private readonly HttpClient _httpClient;
     private readonly IPhotoStockService _photoStockService;
+    private readonly PhotoHelper _photoHelper;
 
-    public CatalogService(HttpClient httpClient, IPhotoStockService photoStockService)
+    public CatalogService(HttpClient httpClient, IPhotoStockService photoStockService, PhotoHelper photoHelper)
     {
         _httpClient = httpClient;
         _photoStockService = photoStockService;
-
+        _photoHelper = photoHelper;
     }
 
     #region Product
@@ -31,6 +33,11 @@ public class CatalogService : ICatalogService
         }
 
         var responseSuccess = await response.Content.ReadFromJsonAsync<Response<List<ProductViewModel>>>();
+        
+        responseSuccess.Data.ForEach(data => {
+            data.Image = _photoHelper.GetPhotoUrl(data.Image);
+        });
+
         return responseSuccess.Data;
     }
     public async Task<ProductViewModel> GetProductByIdAsync(string id)

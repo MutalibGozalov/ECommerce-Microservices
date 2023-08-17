@@ -26,7 +26,7 @@
                         @foreach (var product in Model)
                         {
                             <tr>
-                                <td>Picture</td>
+                                <td><img style="width: 72px;" src="@product.Image" class="img-thumbnail"/></td>
                                 <td>@product.CategoryName</td>
                                 <td>@product.Name</td>
                                 <td>@product.DisplayPrice</td>
