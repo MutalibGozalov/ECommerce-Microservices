@@ -93,6 +93,11 @@ public class ProductController : Controller
         await _catalogService.UpdateProductAsync(productUpdateInput);
 
         return RedirectToAction(nameof(Index));
+    }
 
+    public async Task<IActionResult> Delete(string id)
+    {
+        await _catalogService.DeleteProductAsync(id);
+        return RedirectToAction(nameof(Index));
     }
 }

@@ -32,6 +32,7 @@
                                 <td>@product.DisplayPrice</td>
                                 <td>@product.Description</td>
                                 <td><a asp-controller="Product" asp-action="Update" asp-route-id="@product.Id" class="btn btn-success">Edit</a></td>
+                                <td><a asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id" class="btn btn-danger">Delete</a></td>
                             </tr>
                         }
                     </tbody>

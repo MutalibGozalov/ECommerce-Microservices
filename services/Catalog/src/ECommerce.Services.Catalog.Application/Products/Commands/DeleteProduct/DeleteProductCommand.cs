@@ -20,7 +20,7 @@ public class DeleteProductCommandHandler : IRequestHandler<DeleteProductCommand,
 
         if (result.DeletedCount > 0)
         {
-            return Response<NoContent>.Success(204);
+            return Response<NoContent>.Success(200);
         }
         else return Response<NoContent>.Failure("Product not found", 404);
     }
