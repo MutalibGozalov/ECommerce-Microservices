@@ -1,5 +1,5 @@
 namespace ECommerce.Services.Catalog.Application.Products.Queries;
- public class GetProductsQuery : IRequest<Response<List<ProductDto>>> { }
+public class GetProductsQuery : IRequest<Response<List<ProductDto>>> { }
 
 public class GetProductsQueryHandler : IRequestHandler<GetProductsQuery, Response<List<ProductDto>>>
 {
@@ -30,6 +30,12 @@ public class GetProductsQueryHandler : IRequestHandler<GetProductsQuery, Respons
         }
         else products = new List<Product>();
 
-        return Response<List<ProductDto>>.Success(_mapper.Map<List<ProductDto>>(products), 200);
+        var productDtos = _mapper.Map<List<ProductDto>>(products);
+
+        foreach (var productDto in productDtos)
+        {
+            productDto.CategoryName = _mapper.Map<Product>(productDto).Category.Name;
+        }
+        return Response<List<ProductDto>>.Success(productDtos, 200);
     }
 }
