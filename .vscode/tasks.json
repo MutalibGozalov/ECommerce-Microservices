@@ -86,6 +86,18 @@
             "problemMatcher": "$msCompile"
         },
         {
+            "label": "build_discount",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/services/Discount/src/ECommerce.Services.Discount/ECommerce.Services.Discount.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
             "label": "publish",
             "command": "dotnet",
             "type": "process",

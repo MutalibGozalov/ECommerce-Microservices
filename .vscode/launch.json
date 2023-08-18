@@ -110,7 +110,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build_cart",
-            "program": "${workspaceFolder}services/Cart/src/ECommerce.Services.Cart.Api/bin/Debug/net7.0/ECommerce.Services.Cart.Api.dll",
+            "program": "${workspaceFolder}/services/Cart/src/ECommerce.Services.Cart.Api/bin/Debug/net7.0/ECommerce.Services.Cart.Api.dll",
             "args": [],
             "cwd": "${workspaceFolder}/services/Cart/src/ECommerce.Services.Cart.Api",
             "stopAtEntry": false,
@@ -126,6 +126,26 @@
             }
         },
         {
+            "name": "discount",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_discount",
+            "program": "${workspaceFolder}/services/Discount/src/ECommerce.Services.Discount/bin/Debug/net7.0/ECommerce.Services.Discount.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/services/Discount/src/ECommerce.Services.Discount",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },   
+        {
             "name": ".NET Core Attach",
             "type": "coreclr",
             "request": "attach"
@@ -133,13 +153,15 @@
     ],
     "compounds": [
         {
-          "name": "LAUNCH ME",
+          "name": "LAUNCH ALL",
           "configurations": [
             "web",
             "Identity",
             "gateway",
             "catalog",
-            "photostock"
+            "photostock",
+            "cart",
+            "discount"
           ],
           "stopAll": true
         }
