@@ -1,8 +1,10 @@
 using ECommerce.Web.Models.Cart;
 using ECommerce.Web.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ECommerce.Web.Controllers;
+[Authorize]
 public class CartController : Controller
 {
     private readonly ICatalogService _catalogService;

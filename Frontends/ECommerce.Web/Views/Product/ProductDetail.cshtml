@@ -17,8 +17,10 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Price: @Model.DisplayPrice $</h4>
-                <a asp-controller="Cart" asp-action="AddItemToCart" asp-route-productId="@Model.Id" class="btn btn-primary btn-block">Add to card</a>
+                <div class="d-grid">
+                    <a asp-controller="Cart" asp-action="AddItemToCart" asp-route-productId="@Model.Id" class="btn btn-primary">Add to card</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    </div>
