@@ -35,6 +35,7 @@
                     <div class="mb-3">
                         <label asp-for="PhotoFormFile">Product image</label>
                         <input type="file" asp-for="PhotoFormFile" class="form-control">
+                        <span class="text-danger" asp-validation-for="Image"></span>
                     </div>
                     <button type="submit" class="btn btn-primary">Update Product</button>
                 </form>
