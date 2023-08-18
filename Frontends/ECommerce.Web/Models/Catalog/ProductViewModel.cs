@@ -10,6 +10,7 @@ public class ProductViewModel
     public decimal DisplayPrice { get; set; }
     public int StoreId { get; set; }
     public string Image { get; set; } = null!;
+    public string DetailImage { get; set; } = null!;
     public string[] ProductVariations { get; set; } = null!;
     public DateTime CreatedAt { get; set; }
     public DateTime ModifiedAt { get; set; }

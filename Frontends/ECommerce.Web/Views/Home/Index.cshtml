@@ -14,18 +14,21 @@
         if (counter == 1 || (counter % 3) == 1)
             @Html.Raw("<div class='row row-cols-1 row-cols-md-3 g-4 mt-4'>")
 
-        <div class="col">
-            <div class="card">
-                <img src="@product.Image" class="card-img-top" style="height: 200px; object-fit: scale-down;" alt="@product.Name">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <h5 style="display: inline-block;" class="card-title">@product.Name</h5>
-                        <h5 style="display: inline-block; color: blue;" class="card-title">@product.DisplayPrice $</h5>
+        <a asp-controller="Product" asp-action="ProductDetail" asp-route-id="@product.Id">
+            <div class="col">
+                <div class="card">
+                    <img src="@product.DetailImage" class="card-img-top" style="height: 200px; object-fit: scale-down;"
+                        alt="@product.Name">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <h5 style="display: inline-block;" class="card-title">@product.Name</h5>
+                            <h5 style="display: inline-block; color: blue;" class="card-title">@product.DisplayPrice $</h5>
+                        </div>
+                        <p class="card-text">@product.ShortDescription</p>
                     </div>
-                    <p class="card-text">@product.ShortDescription</p>
                 </div>
             </div>
-        </div>
+        </a>
 
         if (counter % 3 == 0)
             @Html.Raw("</div>")

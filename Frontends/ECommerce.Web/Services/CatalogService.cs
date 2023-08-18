@@ -36,7 +36,7 @@ public class CatalogService : ICatalogService
 
         responseSuccess.Data.ForEach(data =>
         {
-            data.Image = _photoHelper.GetPhotoUrl(data.Image);
+            data.DetailImage = _photoHelper.GetPhotoUrl(data.Image);
         });
 
         return responseSuccess.Data;
@@ -51,6 +51,7 @@ public class CatalogService : ICatalogService
         }
 
         var responseSuccess = await response.Content.ReadFromJsonAsync<Response<ProductViewModel>>();
+        responseSuccess.Data.DetailImage = _photoHelper.GetPhotoUrl(responseSuccess.Data.Image);
         return responseSuccess.Data;
     }
     public async Task<List<ProductViewModel>> GetAllProductByStoreIdAsync(int storeId)
@@ -63,6 +64,11 @@ public class CatalogService : ICatalogService
         }
 
         var responseSuccess = await response.Content.ReadFromJsonAsync<Response<List<ProductViewModel>>>();
+        responseSuccess.Data.ForEach(d =>
+        {
+            d.DetailImage = _photoHelper.GetPhotoUrl(d.Image);
+
+        });
         return responseSuccess.Data;
     }
 

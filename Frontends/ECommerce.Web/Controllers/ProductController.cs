@@ -25,6 +25,12 @@ public class ProductController : Controller
         return View(data);
     }
 
+    public async Task<IActionResult> ProductDetail(string id)
+    {
+        var data = await _catalogService.GetProductByIdAsync(id);
+        return View(data);
+    }
+
     public async Task<IActionResult> Create()
     {
         var categories = await _catalogService.GetAllCategoriesAsync();
@@ -54,7 +60,7 @@ public class ProductController : Controller
     {
         var product = await _catalogService.GetProductByIdAsync(id);
         var categories = await _catalogService.GetAllCategoriesAsync();
-        
+
 
         if (product is not null)
         {
