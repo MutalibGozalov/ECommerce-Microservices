@@ -33,8 +33,9 @@ public class CatalogService : ICatalogService
         }
 
         var responseSuccess = await response.Content.ReadFromJsonAsync<Response<List<ProductViewModel>>>();
-        
-        responseSuccess.Data.ForEach(data => {
+
+        responseSuccess.Data.ForEach(data =>
+        {
             data.Image = _photoHelper.GetPhotoUrl(data.Image);
         });
 
@@ -82,6 +83,12 @@ public class CatalogService : ICatalogService
     }
     public async Task<bool> UpdateProductAsync(ProductUpdateInput productUpdateInput)
     {
+        var photoServiceResult = await _photoStockService.UploadPhoto(productUpdateInput.PhotoFormFile);
+        if (photoServiceResult is not null)
+        {
+            await _photoStockService.DeletePhoto(productUpdateInput.Image);
+            productUpdateInput.Image = photoServiceResult.Url;
+        }
         var response = await _httpClient.PutAsJsonAsync("product/update", productUpdateInput);
 
         return response.IsSuccessStatusCode;
@@ -184,7 +191,7 @@ public class CatalogService : ICatalogService
 
     public async Task<bool> UpdateProductVariationAsync(ProductVariationUpdateInput productVariationUpdateInput)
     {
-        var response = await _httpClient.PutAsJsonAsync("ProductVariation/update", productVariationUpdateInput); 
+        var response = await _httpClient.PutAsJsonAsync("ProductVariation/update", productVariationUpdateInput);
 
         return response.IsSuccessStatusCode;
     }
