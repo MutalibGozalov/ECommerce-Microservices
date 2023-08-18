@@ -106,6 +106,26 @@
             }
         },
         {
+            "name": "cart",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_cart",
+            "program": "${workspaceFolder}services/Cart/src/ECommerce.Services.Cart.Api/bin/Debug/net7.0/ECommerce.Services.Cart.Api.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/services/Cart/src/ECommerce.Services.Cart.Api",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
             "name": ".NET Core Attach",
             "type": "coreclr",
             "request": "attach"
