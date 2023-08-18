@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using ECommerce.Web.Models;
 using ECommerce.Web.Services.Interfaces;
+using Microsoft.AspNetCore.Diagnostics;
+using ECommerce.Web.Exceptions;
 
 namespace ECommerce.Web.Controllers;
 
@@ -29,6 +31,12 @@ public class HomeController : Controller
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
+        var errorFeatures = HttpContext.Features.Get<IExceptionHandlerFeature>();
+
+        if (errorFeatures is not null && errorFeatures.Error is UnAuthorizeException)
+        {
+            return RedirectToAction(nameof(AuthController.Logout), "Auth");
+        }
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }
