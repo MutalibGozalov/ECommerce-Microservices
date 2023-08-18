@@ -9,7 +9,7 @@ using ECommerce.Web.Helpers;
 namespace  Microsoft.Extensions.DependencyInjection;
 public static class ConfigureServices
 {
-    public static IServiceCollection AddMvcWebServices(this IServiceCollection services, ConfigurationManager configuration)
+    public static IServiceCollection AddMvcWebServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<ClientSettings>(configuration.GetSection("ClientSettings"));
         services.Configure<ServiceApiSettings>(configuration.GetSection("ServiceApiSettings"));
