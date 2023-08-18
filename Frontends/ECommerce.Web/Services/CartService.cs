@@ -39,14 +39,18 @@ public class CartService : ICartService
         return result.IsSuccessStatusCode;
     }
 
-    public async Task AddCartItem(CartItemViewModel cartItemViewModel)
+    public async Task AddItemToCart(CartItemViewModel cartItemViewModel)
     {
         var cart = await Get();
 
         if (cart is not null)
-            if (cart.CartItems.Any(i => i.ProductId == cartItemViewModel.ProductId) is false)
+        {
+            var cartItem = cart.CartItems.FirstOrDefault(i => i.ProductId == cartItemViewModel.ProductId);
+            if (cartItem is null)
                 cart.CartItems.Add(cartItemViewModel);
-
+            else
+                cartItem.Quantity++;
+        }
         else
         {
             cart = new CartViewModel { };
@@ -66,21 +70,19 @@ public class CartService : ICartService
         var cartItem = cart.CartItems.FirstOrDefault(i => i.ProductId == productId);
 
         if (cartItem is null)
-        {
             return false;
-        }
 
-        var result = cart.CartItems.Remove(cartItem);
-
-        if (result is false)
+        else if (cartItem.Quantity == 1)
         {
-            return false;
+            var result = cart.CartItems.Remove(cartItem);
+            if (cart.CartItems.Any() is false)
+            {
+                cart.DiscountCode = null;
+            }
+            return result;
         }
 
-        if (cart.CartItems.Any() is false)
-        {
-            cart.DiscountCode = null;
-        }
+        cartItem.Quantity--;
 
         return await SaveOrUpdate(cart);
 
