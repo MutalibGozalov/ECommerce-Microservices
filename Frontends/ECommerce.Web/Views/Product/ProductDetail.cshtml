@@ -6,7 +6,7 @@
 <div class="row">
     <div class="col-md-9">
         <div class="card">
-            <img src="@Model.DetailImage" alt="" class="card-img-tab">
+            <img width="500px" src="@Model.DetailImage" alt="" class="card-img-tab">
             <div class="card-body">
                 <h5 class="card-title">@Model.Name</h5>
                 <p class="card-text">@Model.Description</p>
@@ -17,7 +17,7 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Price: @Model.DisplayPrice $</h4>
-                <a href="#" class="btn btn-primary btn-block">Add to card</a>
+                <a asp-controller="Cart" asp-action="AddItemToCart" asp-route-productId="@Model.Id" class="btn btn-primary btn-block">Add to card</a>
             </div>
         </div>
     </div>

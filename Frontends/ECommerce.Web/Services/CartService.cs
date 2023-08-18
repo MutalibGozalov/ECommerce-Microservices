@@ -53,7 +53,7 @@ public class CartService : ICartService
         }
         else
         {
-            cart = new CartViewModel { };
+            cart = new CartViewModel();
             cart.CartItems.Add(cartItemViewModel);
         }
 
@@ -74,12 +74,12 @@ public class CartService : ICartService
 
         else if (cartItem.Quantity == 1)
         {
-            var result = cart.CartItems.Remove(cartItem);
+            cart.CartItems.Remove(cartItem);
             if (cart.CartItems.Any() is false)
             {
                 cart.DiscountCode = null;
             }
-            return result;
+            return await SaveOrUpdate(cart);
         }
 
         cartItem.Quantity--;

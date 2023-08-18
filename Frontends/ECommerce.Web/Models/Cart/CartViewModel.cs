@@ -1,6 +1,10 @@
 namespace ECommerce.Web.Models.Cart;
 public class CartViewModel
 {
+    public CartViewModel()
+    {
+        CartItems = new();
+    }
     public string UserId { get; set; } = null!;
     public string? DiscountCode { get; set; }
     public int? DiscountRate { get; set; }

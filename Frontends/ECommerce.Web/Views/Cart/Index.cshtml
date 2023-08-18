@@ -19,17 +19,30 @@
                             <th></th>
                             <th></th>
                         </tr>
-                    </table>
-                    @foreach(var product in Model.CartItems)
-                    {
+                        @foreach (var product in Model.CartItems)
+                        {
+                            <tr>
+                                <td>@product.Name</td>
+                                <td>@product.Price $</td>
+                                <td>@product.Quantity</td>
+                                <td><a asp-controller="Cart" asp-action="AddItemToCart" asp-route-productId="@product.ProductId"
+                                        class="btn btn-primary"><i class="bi bi-plus"></i></a></td>
+                                <td><a asp-controller="Cart" asp-action="RemoveCartItem" asp-route-productId="@product.ProductId"
+                                        class="btn btn-danger"><i class="bi bi-dash"></i></a></td>
+                            </tr>
+                        }
+                        @if (Model.HasDiscount)
+                        {
+                            <tr>
+                                <td>Discount</td>
+                                <td colspan="3">% @Model.DiscountRate.Value</td>
+                            </tr>
+                        }
                         <tr>
-                            <td>@product.Name</td>
-                            <td>@product.Price $</td>
-                            <td>@product.Quantity</td>
-                            <td><a asp-controller="Cart" asp-action="AddItemToCart" asp-route-id="@product.ProductId" class="btn btn-primary"><i class="bi bi-plus"></i></a></td>
-                            <td><a asp-controller="Cart" asp-action="RemoveCartItem" asp-route-id="@product.ProductId" class="btn btn-danger"><i class="bi bi-dash"></i></a></td>
+                            <td>Total price</td>
+                            <th colspan="3">@Model.TotalPrice $</th>
                         </tr>
-                    }
+                    </table>
                 }
                 else
                 {
