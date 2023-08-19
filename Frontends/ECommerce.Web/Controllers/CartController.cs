@@ -43,6 +43,11 @@ public class CartController : Controller
 
     public async Task<IActionResult> ApplyDiscount(DiscountApplyInput discountApplyInput)
     {
+        if (ModelState.IsValid is false)
+        {
+            TempData["discountError"] = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).First();
+            return RedirectToAction(nameof(Index));
+        }
         var discountStatus = await _cartService.ApplyDiscount(discountApplyInput.Code);
         TempData["discountstatus"] = discountStatus;
         return RedirectToAction(nameof(Index));
