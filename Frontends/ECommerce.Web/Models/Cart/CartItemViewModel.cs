@@ -8,7 +8,7 @@ public class CartItemViewModel
     public decimal Price { get; set; }
     public int Quantity { get; set; }
 
-    private decimal? DiscountPrice { get; set; }
+    private decimal? DiscountPrice;
     public decimal GetCurrentPrice
     {
         get => DiscountPrice is not null ? DiscountPrice.Value : Price;
