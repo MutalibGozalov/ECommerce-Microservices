@@ -1,4 +1,5 @@
 using ECommerce.Web.Models.Cart;
+using ECommerce.Web.Models.Discount;
 using ECommerce.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -40,4 +41,16 @@ public class CartController : Controller
         return RedirectToAction(nameof(Index));
     }
 
+    public async Task<IActionResult> ApplyDiscount(DiscountApplyInput discountApplyInput)
+    {
+        var discountStatus = await _cartService.ApplyDiscount(discountApplyInput.Code);
+        TempData["discountstatus"] = discountStatus;
+        return RedirectToAction(nameof(Index));
+    }
+
+    public async Task<IActionResult> CancelDiscount()
+    {
+        await _cartService.CancelDiscount();
+        return RedirectToAction(nameof(Index));
+    }
 }

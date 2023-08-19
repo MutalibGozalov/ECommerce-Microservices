@@ -6,10 +6,12 @@ namespace ECommerce.Web.Services;
 public class CartService : ICartService
 {
     private readonly HttpClient _httpClient;
+    private readonly IDiscountService _discountService;
 
-    public CartService(HttpClient httpClient)
+    public CartService(HttpClient httpClient, IDiscountService discountService)
     {
         _httpClient = httpClient;
+        _discountService = discountService;
     }
 
     public async Task<CartViewModel> Get()
@@ -88,17 +90,41 @@ public class CartService : ICartService
 
     }
 
-    public Task<bool> ApplyDiscount(string discountCode)
+    public async Task<bool> ApplyDiscount(string discountCode)
     {
-        throw new NotImplementedException();
+        await CancelDiscount();
+        var cart = await Get();
+
+        if (cart is null || cart.DiscountCode == null)
+        {
+            return false;
+        }
+
+        var hasDiscount = await _discountService.GetDiscount(discountCode);
+
+        if (hasDiscount is null)
+        {
+            return false;
+        }
+
+        cart.DiscountRate = hasDiscount.Rate;
+        cart.DiscountCode = hasDiscount.Code;
+
+        await SaveOrUpdate(cart);
+        return true;
     }
 
-    public Task<bool> CancelDiscount()
+    public async Task<bool> CancelDiscount()
     {
-        throw new NotImplementedException();
+        var cart = await Get();
+        if (cart is null)
+        {
+            return false;
+        }
+
+        cart.DiscountCode = null;
+        await SaveOrUpdate(cart);
+
+        return true;
     }
-
-
-
-
 }

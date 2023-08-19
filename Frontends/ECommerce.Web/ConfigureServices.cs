@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using ECommerce.Shared.Services;
 using ECommerce.Web.Helpers;
 
-namespace  Microsoft.Extensions.DependencyInjection;
+namespace Microsoft.Extensions.DependencyInjection;
 public static class ConfigureServices
 {
     public static IServiceCollection AddMvcWebServices(this IServiceCollection services, IConfiguration configuration)
@@ -49,6 +49,11 @@ public static class ConfigureServices
         services.AddHttpClient<ICartService, CartService>(options =>
         {
             options.BaseAddress = new Uri($"{serviceApiSettings.GatewayBaseUri}/{serviceApiSettings.Cart.Path}");
+        }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
+
+        services.AddHttpClient<IDiscountService, DiscountService>(options =>
+        {
+            options.BaseAddress = new Uri($"{serviceApiSettings.GatewayBaseUri}/{serviceApiSettings.Discount.Path}");
         }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
 
         services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
