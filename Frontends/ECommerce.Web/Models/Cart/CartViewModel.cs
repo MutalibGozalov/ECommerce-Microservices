@@ -8,7 +8,7 @@ public class CartViewModel
     public string UserId { get; set; } = null!;
     public string? DiscountCode { get; set; }
     public int? DiscountRate { get; set; }
-    
+
     private List<CartItemViewModel>? _cartItems;
 
     public List<CartItemViewModel>? CartItems
@@ -37,6 +37,18 @@ public class CartViewModel
 
     public bool HasDiscount
     {
-        get => string.IsNullOrEmpty(DiscountCode) is false;
+        get => string.IsNullOrEmpty(DiscountCode) is false && DiscountRate.HasValue;
+    }
+
+
+    public void ApplyDiscount(int rate, string code)
+    {
+        DiscountRate = rate;
+        DiscountCode = code;
+    }
+    public void CancelDiscount()
+    {
+        DiscountCode = null;
+        DiscountRate = null;
     }
 }

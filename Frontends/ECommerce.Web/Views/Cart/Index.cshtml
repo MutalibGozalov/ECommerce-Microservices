@@ -50,13 +50,16 @@
                             <div class="alert alert-success">
                                 "@Model.DiscountCode" discount code applied
                             </div>
+                            <a asp-controller="Cart" asp-action="CancelDiscount">(cancel)</a>
                         }
-                        @if(TempData["discountstatus"] is not null && TempData["discountstatus"] is false)
+                        @if(TempData["discountstatus"] is not null && (bool)TempData["discountstatus"] is false)
                         {
                             <div class="text-danger">Discount code is expired or not correct</div>
                         }
                         <div class="input-group mb-3">
-                            <input type="text" >
+                            <input type="text" name="DiscountApplyInput.Code" class="form-control">
+                            <button class="btn btn-outline-secondary">Apply</button>
+                            <div asp-validation-summary="All"></div>
                         </div>
                     </form>
                 }

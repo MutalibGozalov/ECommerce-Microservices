@@ -95,7 +95,7 @@ public class CartService : ICartService
         await CancelDiscount();
         var cart = await Get();
 
-        if (cart is null || cart.DiscountCode == null)
+        if (cart is null)
         {
             return false;
         }
@@ -107,22 +107,22 @@ public class CartService : ICartService
             return false;
         }
 
-        cart.DiscountRate = hasDiscount.Rate;
-        cart.DiscountCode = hasDiscount.Code;
+        cart.ApplyDiscount(hasDiscount.Rate, hasDiscount.Code);
 
         await SaveOrUpdate(cart);
+
         return true;
     }
 
     public async Task<bool> CancelDiscount()
     {
         var cart = await Get();
-        if (cart is null)
+        if (cart is null || cart.DiscountCode is null)
         {
             return false;
         }
 
-        cart.DiscountCode = null;
+        cart.CancelDiscount();
         await SaveOrUpdate(cart);
 
         return true;
