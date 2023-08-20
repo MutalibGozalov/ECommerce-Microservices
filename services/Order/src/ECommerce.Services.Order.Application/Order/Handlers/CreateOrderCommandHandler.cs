@@ -1,5 +1,5 @@
 namespace ECommerce.Services.Order.Application.Order.Handlers;
-public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Response<NoContent>>
+public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Response<OrderDto>>
 {
 
     private readonly IMapper _mapper;
@@ -11,12 +11,12 @@ public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, Res
         _context = context;
     }
 
-    public async Task<Response<NoContent>> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
+    public async Task<Response<OrderDto>> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
     {
         OrderModel newOrder = _mapper.Map<OrderModel>(request);
-        var result = await _context.Orders.AddAsync(newOrder, cancellationToken);
+        await _context.Orders.AddAsync(newOrder, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
-        return Response<NoContent>.Success(200);
+        return Response<OrderDto>.Success(_mapper.Map<OrderDto>(newOrder), 200);
     }
 
 }

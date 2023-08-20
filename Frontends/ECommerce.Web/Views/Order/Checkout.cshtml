@@ -1,0 +1,55 @@
+@{
+    ViewData["Title"] = "Checkout - complete order";
+}
+@model CheckOutInfoInput
+
+<form asp-controller="Order" asp-action="Checkout" method="post">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Payment credentials</h5>
+                    <div class="md-3">
+                        <label class="form-label" asp-for="ShippingAddressId"></label>
+                        <select asp-for="ShippingAddressId" class="form-control" asp-items="@ViewBag.addressList">
+                            <option value="">Choose address</option>
+                        </select>
+                    </div>
+                     <div class="md-3">shippingList
+                        <label class="form-label" asp-for="PaymentId"></label>
+                        <select asp-for="PaymentId" class="form-control" asp-items="@ViewBag.creaditCartList">
+                            <option value="">Choose Payment Method</option>
+                        </select>
+                    </div>
+                     <div class="md-3">
+                        <label class="form-label" asp-for="PaymentId"></label>
+                        <select asp-for="ShippingId" class="form-control" asp-items="@ViewBag.shippingList">
+                            <option value="">Choose Shipping Method</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Payment summary</h5>
+                    <table class="table table-striped">
+                        @foreach(var item in ViewBag.cart.CartItems as List<CartItemViewModel>)
+                        {
+                            <tr>
+                                <td>@item.Name</td>
+                                <td>@item.Price</td>
+                            </tr>
+                        }
+                        <tr>
+                            <td>@(ViewBag.cart.HasDiscount ? "Total discount price" : "Total price")</td>
+                            <td>@(ViewBag.cart.TotalPrice) $</td>
+                        </tr>
+                    </table>
+                    <button class="btn btn-success" type="submit">Confirm payment</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,3 +1,4 @@
+using ECommerce.Shared.Dtos;
 using ECommerce.Shared.Services;
 using ECommerce.Web.Models.Order;
 using ECommerce.Web.Models.Payment;
@@ -44,14 +45,39 @@ public class OrderService : IOrderService
             ShippingAddressId = checkOutInfoInput.ShippingAddressId,
         };
 
-        cart.CartItems.ForEach(x => {
-            
+        cart.CartItems.ForEach(i =>
+        {
+            orderCreateInput.OrderItems.Add(
+                    new OrderItemCreateInput()
+                    {
+                        ProductId = i.ProductId,
+                        ProductPrice = i.GetCurrentPrice,
+                        ProductName = i.Name,
+                        ProductQuantity = i.Quantity,
+                        TrackingId = Random.Shared.Next(0, 500)
+                    }
+                );
         });
+
+        var response = await _httpClient.PostAsJsonAsync("order", orderCreateInput);
+
+        if (response.IsSuccessStatusCode is false)
+        {
+            return new OrderCreatedViewModel() { Error = "Order could not be completed", IsSuccessfull = false };
+        }
+
+        var orderCreatedViewModel = await response.Content.ReadFromJsonAsync<Response<OrderCreatedViewModel>>();
+        orderCreatedViewModel.Data.IsSuccessfull = true;
+
+        await _cartService.Delete();
+
+        return orderCreatedViewModel.Data;
     }
 
-    public Task<List<OrderViewModel>> GetOrders()
+    public async Task<List<OrderViewModel>> GetOrders()
     {
-        throw new NotImplementedException();
+        var response = await _httpClient.GetFromJsonAsync<Response<List<OrderViewModel>>>("order");
+        return response.Data;
     }
 
     public Task RequestOrder(CheckOutInfoInput checkOutInfoInput)

@@ -66,6 +66,8 @@
                             <div class="text-danger">@TempData["discountError"] (msg from controller)</div>
                         }
                     </form>
+                    <a asp-controller="Order" asp-action="Checkout" class="btn btn-success">Checkout</a>
+                    <a asp-controller="Home" asp-action="Index" class="btn btn-warning">Coniniue shopping</a>
                 }
                 else
                 {
@@ -75,4 +77,3 @@
         </div>
     </div>
 </div>
-
