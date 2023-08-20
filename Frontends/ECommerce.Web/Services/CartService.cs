@@ -92,21 +92,21 @@ public class CartService : ICartService
 
     public async Task<bool> ApplyDiscount(string discountCode)
     {
-        await CancelDiscount();
         var cart = await Get();
 
         if (cart is null)
         {
             return false;
         }
-
+        // not of a cart, just checking if discount is exists on discountdb
         var hasDiscount = await _discountService.GetDiscount(discountCode);
 
         if (hasDiscount is null)
         {
             return false;
         }
-
+        
+        await CancelDiscount();
         cart.ApplyDiscount(hasDiscount.Rate, hasDiscount.Code);
 
         await SaveOrUpdate(cart);

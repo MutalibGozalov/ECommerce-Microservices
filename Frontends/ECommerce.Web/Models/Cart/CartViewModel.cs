@@ -35,6 +35,11 @@ public class CartViewModel
         get => _cartItems.Sum(c => c.GetCurrentPrice * c.Quantity);
     }
 
+    public decimal TotalPriceNoDiscount
+    {
+        get => _cartItems.Sum(c => c.Price * c.Quantity);
+    }
+
     public bool HasDiscount
     {
         get => string.IsNullOrEmpty(DiscountCode) is false && DiscountRate.HasValue;
