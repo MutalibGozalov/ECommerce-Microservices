@@ -14,6 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddMassTransit(m =>
 {
     m.AddConsumer<CreateOrderMessageCommandConsumer>();
+    m.AddConsumer<ProductNameChangedEventConsumer>();
 
     //port: 5672
     m.UsingRabbitMq((context, cfg) =>
@@ -27,6 +28,11 @@ builder.Services.AddMassTransit(m =>
         cfg.ReceiveEndpoint("create-order-service", e => 
         {
             e.ConfigureConsumer<CreateOrderMessageCommandConsumer>(context);
+        });
+
+        cfg.ReceiveEndpoint("product-name-changed-event-order-service", e => 
+        {
+            e.ConfigureConsumer<ProductNameChangedEventConsumer>(context);
         });
     });
 });

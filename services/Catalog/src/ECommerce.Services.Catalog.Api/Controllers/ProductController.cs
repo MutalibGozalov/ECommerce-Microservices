@@ -3,6 +3,8 @@ using ECommerce.Services.Catalog.Application.Products.Commands.CreateProduct;
 using ECommerce.Services.Catalog.Application.Products.Commands.UpdateProduct;
 using ECommerce.Services.Catalog.Application.Products.Commands.DeleteProduct;
 using ECommerce.Services.Catalog.Application.Products.Queries;
+using MassTransit;
+using ECommerce.Shared.Messages;
 
 
 namespace ECommerce.Services.Catalog.Api.Controllers;
@@ -14,9 +16,13 @@ public class ProductController : CustomBaseController
     private ISender? _mediator;
     protected ISender Mediator => _mediator ??= HttpContext.RequestServices.GetRequiredService<ISender>();
 
-    public ProductController(IMediator mediator)
+    private readonly IPublishEndpoint _publishEndpoint;
+
+    public ProductController(IMediator mediator, IPublishEndpoint publishEndpoint)
     {
         _mediator = mediator;
+        _publishEndpoint = publishEndpoint;
+
     }
 
     [HttpGet]
@@ -51,6 +57,12 @@ public class ProductController : CustomBaseController
     public async Task<IActionResult> Update(UpdateProductCommand command)
     {
         var response = await Mediator.Send(command);
+
+        if (response.IsSuccessful)
+        {
+            await _publishEndpoint.Publish(new ProductNameChangedEvent {ProductId = command.Id, ProductName = command.Name});
+        }
+        
         return CreateActionResultInstance(response);
     }
 
