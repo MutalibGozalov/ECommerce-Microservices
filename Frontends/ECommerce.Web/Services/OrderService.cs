@@ -22,8 +22,13 @@ public class OrderService : IOrderService
 
     public async Task<List<OrderViewModel>> GetOrders()
     {
-        var response = await _httpClient.GetFromJsonAsync<Response<List<OrderViewModel>>>("order");
-        return response.Data;
+        var responseOrder = await _httpClient.GetFromJsonAsync<Response<List<OrderViewModel>>>("order");
+        var responseItem = await _httpClient.GetFromJsonAsync<Response<List<OrderItemViewModel>>>("OrderDetail");
+        responseOrder?.Data.ForEach(o =>
+        {
+            o.OrderItem = responseItem.Data.Where(i => i.OrderId == o.Id).ToList();
+        });
+        return responseOrder.Data;
     }
 
 
@@ -124,7 +129,7 @@ public class OrderService : IOrderService
 
         if (responsePayment is false)
             return new OrderRequestedViewModel() { Error = "Payment could not be completed DARLIN", IsSuccessfull = false };
-            
+
         await _cartService.Delete();
 
         return new OrderRequestedViewModel() { IsSuccessfull = true };

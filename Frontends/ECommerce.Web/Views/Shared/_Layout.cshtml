@@ -35,11 +35,13 @@
                                     @User.Identity.Name
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <li><a class="dropdown-item" asp-controller="user">Profile</a></li>
+                                    <li><a href="/User/" class="dropdown-item" >Profile</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" asp-controller="Cart">Shopping Cart <i class="bi bi-cart2"></i></a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" asp-controller="Auth" asp-action="Logout">Sign out</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" asp-controller="Order" asp-action="OrderHistory">Order History</a></li>
                                 </ul>
                             </li>
                         </ul>

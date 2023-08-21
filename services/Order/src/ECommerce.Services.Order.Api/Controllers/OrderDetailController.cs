@@ -34,6 +34,13 @@ public class OrderDetailController : CustomBaseController
         return CreateActionResultInstance(response);
     }
 
+    [HttpGet("GetOrderDetailByOrderId/{orderId}")]
+    public async Task<IActionResult> GetOrderDetailByOrderId(int orderId)
+    {
+        var response = await Mediator.Send(new GetOrderDetailsByOrderIdQuery { OrderId = orderId });
+        return CreateActionResultInstance(response);
+    }
+
     [HttpPost]
     public async Task<IActionResult> CreateOrderDetail(CreateOrderDetailCommand createOrderDetailCommand)
     {

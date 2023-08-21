@@ -1,0 +1,54 @@
+@{
+    ViewData["Title"] = "Order hostory";
+}
+@model List<OrderViewModel>
+
+<h1>Order history</h1>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Your orders</h5>
+                @if (Model.Any())
+                {
+                    <table class="table table-striped table-bordered">
+                        <tr>
+                            <th>Order No</th>
+                            <th>Placed at</th>
+                            <th>Details</th>
+                        </tr>
+                        @foreach (var order in Model)
+                        {
+                            <tr>
+                                <td>@order.Id</td>
+                                <td>@order.CreatedAt.ToShortDateString()</td>
+                                <td>
+                                    <table class="table table-striped">
+                                        <tr>
+                                            <th>Product name</th>
+                                            <th>Price</th>
+                                            <th>Quantity</th>
+                                        </tr>
+                                        @foreach(var item in order.OrderItem)
+                                        {
+                                            <tr>
+                                                <td><a href="">@item.ProductName</a></td>
+                                                <td>@item.ProductPrice</td>
+                                                <td>@item.ProductQuantity</td>
+                                            </tr>
+                                        }
+                                    </table>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                }
+                else
+                {
+                    <div class="alert alert-info">You haven't bought any product yet</div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

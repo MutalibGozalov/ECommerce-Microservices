@@ -74,4 +74,9 @@ public class OrderController : Controller
         ViewBag.orderId = orderId;
         return View();
     }
+
+    public async Task<IActionResult> OrderHistory()
+    {
+        return View(await _orderService.GetOrders());
+    }
 }
