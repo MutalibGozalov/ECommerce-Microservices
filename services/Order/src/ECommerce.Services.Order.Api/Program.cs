@@ -1,5 +1,7 @@
 
 using System.IdentityModel.Tokens.Jwt;
+using ECommerce.Services.Order.Application.Consumer;
+using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -7,6 +9,28 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+//MassTransit
+builder.Services.AddMassTransit(m =>
+{
+    m.AddConsumer<CreateOrderMessageCommandConsumer>();
+
+    //port: 5672
+    m.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host(builder.Configuration["RabbitMQUrl"], "/", host =>
+        {
+            host.Username("guest");
+            host.Password("guest");
+        });
+
+        cfg.ReceiveEndpoint("create-order-service", e => 
+        {
+            e.ConfigureConsumer<CreateOrderMessageCommandConsumer>(context);
+        });
+    });
+});
+
 
 // --- Identity start --
 var requireAuthorizePolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();

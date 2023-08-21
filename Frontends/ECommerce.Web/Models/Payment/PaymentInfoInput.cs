@@ -1,3 +1,4 @@
+using ECommerce.Web.Models.Order;
 namespace ECommerce.Web.Models.Payment;
 public class PaymentInfoInput
 {
@@ -6,5 +7,5 @@ public class PaymentInfoInput
     public string Expriration { get; set; } = null!;
     public string CVV { get; set; } = null!;
     public decimal TotalPrice { get; set; }
-
+    public OrderCreateInput? Order { get; set; }
 }

@@ -1,5 +1,5 @@
 namespace ECommerce.Services.Order.Application.TrackingItems.Handlers;
-public class CreateTrackingCommandHandler : IRequestHandler<CreateTrackingCommand, Response<NoContent>>
+public class CreateTrackingCommandHandler : IRequestHandler<CreateTrackingCommand, Response<int>>
 {
     private readonly IAppDbContext _context;
 
@@ -9,12 +9,12 @@ public class CreateTrackingCommandHandler : IRequestHandler<CreateTrackingComman
     }
 
 
-    public async Task<Response<NoContent>> Handle(CreateTrackingCommand request, CancellationToken cancellationToken)
+    public async Task<Response<int>> Handle(CreateTrackingCommand request, CancellationToken cancellationToken)
     {
         var createTracking = new Tracking {TrackingNumber = request.TrackingNumber};
         await _context.Trackings.AddAsync(createTracking, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
 
-        return Response<NoContent>.Success(200);
+        return Response<int>.Success(createTracking.Id, 200);
     }
 }

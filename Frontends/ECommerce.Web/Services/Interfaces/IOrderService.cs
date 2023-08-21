@@ -7,7 +7,7 @@ public interface IOrderService
     Task<OrderCreatedViewModel> CreateOrder(CheckOutInfoInput checkOutInfoInput);
 
     //Async request with RabbitMQ
-    Task RequestOrder(CheckOutInfoInput checkOutInfoInput);
+    Task<OrderRequestedViewModel> RequestOrder(CheckOutInfoInput checkOutInfoInput);
 
     Task<List<OrderViewModel>> GetOrders();
 }
