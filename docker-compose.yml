@@ -1,0 +1,66 @@
+version: "3.8"
+services:
+    catalogdb:
+        image: mongo
+    cartdb:
+        image: redis
+    discountdb:
+        image: postgres
+    identitydb:
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        user: root
+    orderdb:
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        user: root
+    rabbitmq:
+        image: rabbitmq:3.12.2-management
+    catalog.api:
+        image: catalog_api_image
+        build:
+            context: .
+            dockerfile: services/Catalog/src/ECommerce.Services.Catalog.Api/Dockerfile
+    identityserver.api:
+        image: identityserver_api_image
+        build:
+            context: .
+            dockerfile: IdentityServer/ECommerce.IdentityServer/Dockerfile
+    cart.api:
+        image: cart_api_image
+        build:
+            context: .
+            dockerfile: services/Cart/src/ECommerce.Services.Cart.Api/Dockerfile
+    photostock.api:
+        image: photostock_api_image
+        build:
+            context: .
+            dockerfile: services/PhotoStock/ECommerce.Services.PhotoStock/Dockerfile
+    discount.api:
+        image: discount_api_image
+        build:
+            context: .
+            dockerfile: services/Discount/src/ECommerce.Services.Discount/Dockerfile
+    payment.api:
+        image: payment_api_image
+        build:
+            context: .
+            dockerfile: services/Payment/ECommerce.Services.Payment/Dockerfile
+    order.api:
+        image: order_api_image
+        build:
+            context: .
+            dockerfile: services/Order/src/ECommerce.Services.Order.Api/Dockerfile
+    gateway.api:
+        image: gateway_api_image
+        build:
+            context: .
+            dockerfile: Gateways/ECommerce.Gateway/Dockerfile
+    aspnetcoremvc.web:
+        image: aspnetcoremvc_web_image
+        build:
+            context: .
+            dockerfile: Frontends/ECommerce.Web/Dockerfile
+volumes:
+    catalogdb_volume:
+    discount_volume:
+    identitydb_volume:
+    orderdb_volume:

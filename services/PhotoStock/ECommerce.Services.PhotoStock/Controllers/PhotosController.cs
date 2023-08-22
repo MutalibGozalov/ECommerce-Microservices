@@ -29,7 +29,7 @@ public class PhotosController : CustomBaseController
         return CreateActionResultInstance(Response<PhotoDto>.Failure("photo is empty", 400));
     }
 
-    // GET
+    [HttpDelete]
     public IActionResult PhotoDelete(string photoUrl)
     {
         var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/photos", photoUrl);
