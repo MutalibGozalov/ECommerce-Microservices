@@ -16,4 +16,6 @@ public class RedisService : IRedisService
     public void Connect() => _connectionMultiplexer = ConnectionMultiplexer.Connect($"{_host}:{_port}");
 
     public IDatabase GetDb(int db=1) => _connectionMultiplexer.GetDatabase(db);
+
+    public List<RedisKey> GetKeys() => _connectionMultiplexer.GetServer($"{_host}:{_port}").Keys(1).ToList();
 }

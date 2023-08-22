@@ -1,31 +1,41 @@
+using System.Text.Json;
 using ECommerce.Shared.Messages;
-using ECommerce.Shared.Services;
 using MassTransit;
 
 namespace ECommerce.Services.Cart.Infrastructure.Consumer
 ;
 public class ProductNameChangedEventConsumer : IConsumer<ProductNameChangedEvent>
 {
-    private readonly ICartService _cartService;
-    private readonly ISharedIdentityService _sharedIdentityService;
+    private readonly IRedisService _redisService;
 
-    public ProductNameChangedEventConsumer(ICartService cartService, ISharedIdentityService sharedIdentityService)
+    public ProductNameChangedEventConsumer(IRedisService redisService)
     {
-        _cartService = cartService;
-        _sharedIdentityService = sharedIdentityService;
-
+        _redisService = redisService;
     }
 
     public async Task Consume(ConsumeContext<ProductNameChangedEvent> context)
     {
-        var response = await _cartService.GetCart(_sharedIdentityService.GetUserId);
-        if (response.IsSuccessful)
+        var keys = _redisService.GetKeys();
+
+        if (keys is not null)
         {
-            var cartUpdate = response.Data;
-            cartUpdate.CartItems.FirstOrDefault(i => i.ProductId == context.Message.ProductId).Name = context.Message.ProductName;
-            _cartService.SaveOrUpdate(cartUpdate);
+            foreach (var key in keys)
+            {
+                var redisValue = await _redisService.GetDb().StringGetAsync(key);
+                var cart = JsonSerializer.Deserialize<CartDto>(redisValue);
+
+                cart.CartItems.ForEach(i =>
+                {
+                    if (i.ProductId == context.Message.ProductId)
+                    {
+                        i.Name = context.Message.ProductName;
+                    }
+                });
+
+                await _redisService.GetDb().StringSetAsync(key, JsonSerializer.Serialize(cart));
+            }
         }
-       
+
     }
 
 }

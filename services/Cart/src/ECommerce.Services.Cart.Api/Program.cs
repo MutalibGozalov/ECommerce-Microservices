@@ -1,6 +1,4 @@
 using System.IdentityModel.Tokens.Jwt;
-using ECommerce.Services.Cart.Infrastructure.Consumer;
-using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
@@ -8,29 +6,6 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
-
-//MassTransit
-builder.Services.AddMassTransit(m =>
-{
-    m.AddConsumer<ProductNameChangedEventConsumer>();
-
-    //port: 5672
-    m.UsingRabbitMq((context, cfg) =>
-    {
-        cfg.Host(builder.Configuration["RabbitMQUrl"], "/", host =>
-        {
-            host.Username("guest");
-            host.Password("guest");
-        });
-
-        cfg.ReceiveEndpoint("product-name-changed-event-cart-service", e => 
-        {
-            e.ConfigureConsumer<ProductNameChangedEventConsumer>(context);
-        });
-    });
-});
-
 
 // --- Identity start --
 var requireAuthorizePolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
