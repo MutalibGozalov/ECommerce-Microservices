@@ -27,7 +27,12 @@ public class IdentityService : IIdentityService
         _clientSettings = clientSettings.Value;
         _serviceApiSettings = serviceApiSettings.Value;
     }
+    public async Task<bool> SignUp(SignUpInput signUpInput)
+    {
+        var response = await _httpClient.PostAsJsonAsync("/api/user/signup", signUpInput);
 
+        return response.IsSuccessStatusCode;
+    }
     public async Task<Response<bool>> SignIn(SigninInput signinInput)
     {
         var discovery = await _httpClient.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest

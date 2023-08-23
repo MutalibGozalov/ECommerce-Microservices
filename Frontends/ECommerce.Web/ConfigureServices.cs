@@ -29,7 +29,10 @@ public static class ConfigureServices
         services.AddScoped<ClientCredentialTokenHandler>();
 
         services.AddHttpClient<IClientCredentialTokenService, ClientCredentialTokenService>();
-        services.AddHttpClient<IIdentityService, IdentityService>();
+        services.AddHttpClient<IIdentityService, IdentityService>(options =>
+        {
+            options.BaseAddress = new Uri(serviceApiSettings.IdentityBaseUri);
+        });
 
         services.AddHttpClient<ICatalogService, CatalogService>(options =>
         {

@@ -16,4 +16,11 @@ public class UserService : IUserService
         return await _httpClient.GetFromJsonAsync<UserViewModel>("/api/user/getuser");
     }
 
+    public async Task<bool> SignUp(SignUpInput signUpInput)
+    {
+        var response = await _httpClient.PostAsJsonAsync("/api/user/signup", signUpInput);
+
+        return response.IsSuccessStatusCode;
+    }
+
 }

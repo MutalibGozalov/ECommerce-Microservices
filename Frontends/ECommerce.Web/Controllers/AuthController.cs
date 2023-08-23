@@ -9,20 +9,24 @@ public class AuthController : Controller
 {
     private readonly ILogger<AuthController> _logger;
     private readonly IIdentityService _identityService;
+    private readonly IUserService _userService;
+    private readonly HttpClient _httpClient;
 
-    public AuthController(ILogger<AuthController> logger, IIdentityService identityService)
+    public AuthController(ILogger<AuthController> logger, IIdentityService identityService, IUserService userService, HttpClient httpClient)
     {
         _logger = logger;
         _identityService = identityService;
+        _userService = userService;
+        _httpClient = httpClient;
     }
 
-    [HttpGet]
+    [HttpGet("SignIn")]
     public IActionResult SignIn()
     {
         return View();
     }
 
-    [HttpPost]
+    [HttpPost("SignIn")]
     public async Task<IActionResult> SignIn(SigninInput signinInput)
     {
         if (ModelState.IsValid is false)
@@ -44,6 +48,32 @@ public class AuthController : Controller
         return RedirectToAction("Index", "Home");
     }
 
+
+
+    [HttpGet("SignUp")]
+    public IActionResult SignUp()
+    {
+        return View();
+    }
+
+    [HttpPost("SignUp")]
+    public async Task<IActionResult> SignUp(SignUpInput signUpInput)
+    {
+        if (ModelState.IsValid is false)
+        {
+            return View();
+        }
+
+        var response = await _identityService.SignUp(signUpInput);
+
+        if (response is false)
+        {
+            return View();
+        }
+
+        return RedirectToAction("SignIn");
+    }
+
     public async Task<IActionResult> Logout()
     {
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
@@ -57,7 +87,7 @@ public class AuthController : Controller
 
 
 
-    
+
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
