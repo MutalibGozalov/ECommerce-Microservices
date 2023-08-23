@@ -1,6 +1,7 @@
 
 using System.IdentityModel.Tokens.Jwt;
 using ECommerce.Services.Order.Application.Consumer;
+using ECommerce.Services.Order.Infrastructure.Persistance;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -25,12 +26,12 @@ builder.Services.AddMassTransit(m =>
             host.Password("guest");
         });
 
-        cfg.ReceiveEndpoint("create-order-service", e => 
+        cfg.ReceiveEndpoint("create-order-service", e =>
         {
             e.ConfigureConsumer<CreateOrderMessageCommandConsumer>(context);
         });
 
-        cfg.ReceiveEndpoint("product-name-changed-event-order-service", e => 
+        cfg.ReceiveEndpoint("product-name-changed-event-order-service", e =>
         {
             e.ConfigureConsumer<ProductNameChangedEventConsumer>(context);
         });
@@ -40,7 +41,8 @@ builder.Services.AddMassTransit(m =>
 
 // --- Identity start --
 var requireAuthorizePolicy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+{
     options.Authority = builder.Configuration["IdentityServerURL"];
     options.Audience = "resource_order";
     options.RequireHttpsMetadata = false;
@@ -52,7 +54,8 @@ JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("sub");
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 
-builder.Services.AddControllers(options => {
+builder.Services.AddControllers(options =>
+{
     options.Filters.Add(new AuthorizeFilter(requireAuthorizePolicy));
 });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -66,6 +69,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    InitializeDatabase(app);
 }
 
 app.UseHttpsRedirection();
@@ -76,3 +80,19 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
+
+
+
+
+
+async void InitializeDatabase(WebApplication app)
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var initaliser = scope.ServiceProvider.GetRequiredService<AddDbContextInitializer>();
+        await initaliser.InitialiseAsync();
+        // await initaliser.SeedAsync();
+    }
+}
