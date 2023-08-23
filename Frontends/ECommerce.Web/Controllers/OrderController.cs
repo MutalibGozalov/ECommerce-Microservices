@@ -31,10 +31,10 @@ public class OrderController : Controller
             new {Id = 3, CardNumber = "Master ..5342"}
         };
         var shippings = new List<object>(){
-            new {Id = 1004, ShippingName = "ExpCargo"},
-            new {Id = 5, ShippingName = "FedEx"},
-            new {Id = 1006, ShippingName = "Wolt"},
-            new {Id = 1007, ShippingName = "Mover"}
+            new {Id = 1, ShippingName = "ExpCargo"},
+            new {Id = 2, ShippingName = "FedEx"},
+            new {Id = 3, ShippingName = "Wolt"},
+            new {Id = 4, ShippingName = "Mover"}
         };
 
         ViewBag.addressList = new SelectList(addresses, "Id", "Address");
