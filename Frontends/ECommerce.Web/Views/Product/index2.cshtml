@@ -457,7 +457,6 @@
     </header>
 
     <main class="main-wrapper">
-
         <!-- Start Slider Area -->
         <div class="axil-main-slider-area main-slider-style-2 main-slider-style-8">
             <div class="container">
@@ -521,7 +520,6 @@
             </div>
         </div>
         <!-- End Slider Area -->
-
         <!-- Start Flash Sale Area  -->
         <div class="axil-new-arrivals-product-area fullwidth-container flash-sale-area bg-color-white axil-section-gap pb--0">
             <div class="container ml--xxl-0">
@@ -539,7 +537,7 @@
                             <div class="slick-single-layout">
                             <div class="axil-product product-style-four">
                                 <div class="thumbnail">
-                                    <a href="single-product.html">
+                                    <a asp-controller="Product" asp-action="ProductDetail2" asp-route-id="@product.Id">
                                         <img data-sal="zoom-out" data-sal-delay="100" data-sal-duration="1500" src="@product.DetailImage" alt="Product Images">
                                     </a>
                                     <div class="label-block label-right">
@@ -555,7 +553,7 @@
                                 </div>
                                 <div class="product-content">
                                     <div class="inner">
-                                        <h5 class="title"><a href="single-product.html">@product.Name</a></h5>
+                                        <h5 class="title"><a asp-controller="Product" asp-action="ProductDetail2" asp-route-id="@product.Id">@product.Name</a></h5>
                                         <div class="product-price-variant">
                                             <span class="price old-price">$80</span>
                                             <span class="price current-price">$@product.DisplayPrice</span>
@@ -571,7 +569,6 @@
             </div>
         </div>
         <!-- End Flash Sale Area  -->
-
         <!-- Start Categorie Area  -->
         <div class="axil-categorie-area bg-color-white axil-section-gapcommon">
             <div class="container">
@@ -703,7 +700,6 @@
             </div>
         </div>
         <!-- End Categorie Area  -->
-
         <!-- Start Best Sellers Product Area  -->
         <div class="axil-best-seller-product-area bg-color-white axil-section-gap pt--0">
             <div class="container">
@@ -718,7 +714,7 @@
                             <div class="slick-single-layout">
                             <div class="axil-product product-style-three">
                                 <div class="thumbnail">
-                                    <a href="single-product.html">
+                                    <a asp-controller="Product" asp-action="ProductDetail2" asp-route-id="@product.Id">
                                         <img data-sal="fade" data-sal-delay="100" data-sal-duration="1500" src="@product.DetailImage" alt="Product Images">
                                     </a>
                                     <div class="product-hover-action">
@@ -741,7 +737,7 @@
                                     </span>
                                             <span class="rating-number">(18)</span>
                                         </div>
-                                        <h5 class="title"><a href="single-product.html">@product.Name</a></h5>
+                                        <h5 class="title"><a asp-controller="Product" asp-action="ProductDetail2" asp-route-id="@product.Id">@product.Name</a></h5>
                                         <div class="product-price-variant">
                                             <span class="price current-price">$30</span>
                                             <span class="price old-price">$@product.DisplayPrice</span>
@@ -757,7 +753,6 @@
             </div>
         </div>
         <!-- End  Best Sellers Product Area  -->
-
         <!-- Poster Countdown Area  -->
         <div class="axil-poster-countdown">
             <div class="container">
@@ -790,7 +785,6 @@
             </div>
         </div>
         <!-- End Poster Countdown Area  -->
-
         <!-- Start Expolre Product Area  -->
         <div class="axil-product-area bg-color-white axil-section-gap">
             <div class="container">
@@ -806,7 +800,7 @@
                                 <div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb--30">
                                 <div class="axil-product product-style-one">
                                     <div class="thumbnail">
-                                        <a href="single-product.html">
+                                        <a asp-controller="Product" asp-action="ProductDetail2" asp-route-id="@product.Id">
                                             <img data-sal="zoom-out" data-sal-delay="200" data-sal-duration="800" class="main-img" src="@product.DetailImage" alt="Product Images">
                                             <img class="hover-img" src="~/assets/images/product/electric/product-08.png" alt="Product Images">
                                         </a>
@@ -837,7 +831,7 @@
                                         </span>
                                                 <span class="rating-number">(64)</span>
                                             </div>
-                                            <h5 class="title"><a href="single-product.html">@product.Name</a></h5>
+                                            <h5 class="title"><a asp-controller="Product" asp-action="ProductDetail2" asp-route-id="@product.Id">@product.Name</a></h5>
                                             <div class="product-price-variant">
                                                 <span class="price current-price">$@product.DisplayPrice</span>
                                                 <span class="price old-price">$49.99</span>
@@ -951,12 +945,10 @@
                         <!-- End .thumbnail -->
                     </div>
                     <!-- End .slick-single-layout -->
-
                 </div>
             </div>
         </div>
         <!-- End Testimonila Area  -->
-
         <!-- Start New Arrivals Product Area  -->
         <div class="axil-new-arrivals-product-area bg-color-white axil-section-gap pb--50">
             <div class="container">
@@ -964,13 +956,13 @@
                     <span class="title-highlighter highlighter-primary"><i class="far fa-shopping-basket"></i> This Week’s</span>
                     <h2 class="title">New Arrivals</h2>
                 </div>
+                <div class="new-arrivals-product-activation slick-layout-wrapper--30 axil-slick-arrow  arrow-top-slide">
                 @foreach(var product in @Model)
                 {
-                    <div class="new-arrivals-product-activation slick-layout-wrapper--30 axil-slick-arrow  arrow-top-slide">
                     <div class="slick-single-layout">
                         <div class="axil-product product-style-two has-color-pick">
                             <div class="thumbnail">
-                                <a href="single-product.html">
+                                <a asp-controller="Product" asp-action="ProductDetail2" asp-route-id="@product.Id">
                                     <img data-sal="fade" data-sal-delay="100" data-sal-duration="1500" src="@product.DetailImage" alt="Product Images">
                                 </a>
                                 <div class="label-block label-right">
@@ -989,7 +981,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <h5 class="title"><a href="single-product.html">@product.Name</a></h5>
+                                    <h5 class="title"><a asp-controller="Product" asp-action="ProductDetail2" asp-route-id="@product.Id">@product.Name</a></h5>
                                     <div class="product-price-variant">
                                         <span class="price old-price">$50</span>
                                         <span class="price current-price">$@product.DisplayPrice</span>
@@ -1005,11 +997,9 @@
                             </div>
                         </div>
                     </div>
-                    </div>
                 }
-                  
+            </div>
         <!-- End New Arrivals Product Area  -->
-
         <!-- Start Axil Newsletter Area  -->
         <div class="axil-newsletter-area axil-section-gap pt--0">
             <div class="container">
@@ -1029,10 +1019,7 @@
             <!-- End .container -->
         </div>
         <!-- End Axil Newsletter Area  -->
-
     </main>
-
-
     <div class="service-area">
         <div class="container">
             <div class="row row-cols-xl-4 row-cols-sm-2 row-cols-1 row--20">
@@ -1207,7 +1194,6 @@
         <!-- End Copyright Area  -->
     </footer>
     <!-- End Footer Area  -->
-
     <!-- Product Quick View Modal Start -->
     <div class="modal fade quick-view-product" id="quick-view-modal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -1322,9 +1308,7 @@
                                                 </ul>
                                             </div>
                                             <!-- End Product Variation  -->
-
                                         </div>
-
                                         <!-- Start Product Action Wrapper  -->
                                         <div class="product-action-wrapper d-flex-center">
                                             <!-- Start Quentity Action  -->
@@ -1337,7 +1321,6 @@
                                                 <li class="wishlist"><a href="wishlist.html" class="axil-btn wishlist-btn"><i class="far fa-heart"></i></a></li>
                                             </ul>
                                             <!-- End Product Action  -->
-
                                         </div>
                                         <!-- End Product Action Wrapper  -->
                                     </div>
@@ -1350,7 +1333,6 @@
         </div>
     </div>
     <!-- Product Quick View Modal End -->
-
     <!-- Header Search Modal End -->
     <div class="header-search-modal" id="header-search-modal">
         <button class="card-close sidebar-close"><i class="fas fa-times"></i></button>
@@ -1430,9 +1412,6 @@
         </div>
     </div>
     <!-- Header Search Modal End -->
-
-
-
     <div class="cart-dropdown" id="cart-dropdown">
         <div class="cart-content-wrap">
             <div class="cart-header">
@@ -1524,7 +1503,6 @@
             </div>
         </div>
     </div>
-
 
     <!-- JS
 ============================================ -->
