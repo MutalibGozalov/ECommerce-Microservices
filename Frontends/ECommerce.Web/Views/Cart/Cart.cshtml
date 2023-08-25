@@ -65,11 +65,19 @@
                             <a asp-controller="Cart" asp-action="CancelDiscount">(cancel)</a>
                         }
                         <div class="input-group product-cupon">
-                            <input placeholder="Enter coupon code" type="text">
+                            <input name="DiscountApplyInput.Code" placeholder="Enter coupon code" type="text">
                             <div class="product-cupon-btn">
                                 <button type="submit" class="axil-btn btn-outline">Apply</button>
                             </div>
                         </div>
+                        @if (TempData["discountstatus"] is not null && (bool)TempData["discountstatus"] is false)
+                        {
+                            <div class="text-danger">Discount code is expired or not correct (msg from index itshelf)</div>
+                        }
+                        @if (TempData["discountError"] is not null)
+                        {
+                            <div class="text-danger">@TempData["discountError"] (msg from controller)</div>
+                        }
                     </form>
                         <div class="update-btn">
                             <a href="#" class="axil-btn btn-outline">Update Cart</a>

@@ -23,11 +23,6 @@ public class HomeController : Controller
         return View(await _catalogService.GetAllProductsAsync());
     }
 
-    public async Task<IActionResult> Index2()
-    {
-        return View(await _catalogService.GetAllProductsAsync());
-    }
-
     public IActionResult Privacy()
     {
         return View();

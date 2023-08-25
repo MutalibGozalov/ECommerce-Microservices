@@ -38,13 +38,13 @@ public class CartController : Controller
             Price = product.DisplayPrice,
             Quantity = 1
         });
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction(nameof(Cart));
     }
 
     public async Task<IActionResult> RemoveCartItem(string productId)
     {
         await _cartService.RevokeCartItem(productId);
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction(nameof(Cart));
     }
 
     public async Task<IActionResult> ApplyDiscount(DiscountApplyInput discountApplyInput)
@@ -52,16 +52,16 @@ public class CartController : Controller
         if (ModelState.IsValid is false)
         {
             TempData["discountError"] = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).First();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Cart));
         }
         var discountStatus = await _cartService.ApplyDiscount(discountApplyInput.Code);
         TempData["discountstatus"] = discountStatus;
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction(nameof(Cart));
     }
 
     public async Task<IActionResult> CancelDiscount()
     {
         await _cartService.CancelDiscount();
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction(nameof(Cart));
     }
 }
