@@ -56,12 +56,21 @@
  
                     </div>
                     <div class="cart-update-btn-area">
+                    <form asp-controller="Cart" asp-action="ApplyDiscount">
+                        @if (Model.HasDiscount)
+                        {
+                            <div class="alert alert-success">
+                                "@Model.DiscountCode" discount code applied
+                            </div>
+                            <a asp-controller="Cart" asp-action="CancelDiscount">(cancel)</a>
+                        }
                         <div class="input-group product-cupon">
                             <input placeholder="Enter coupon code" type="text">
                             <div class="product-cupon-btn">
                                 <button type="submit" class="axil-btn btn-outline">Apply</button>
                             </div>
                         </div>
+                    </form>
                         <div class="update-btn">
                             <a href="#" class="axil-btn btn-outline">Update Cart</a>
                         </div>
