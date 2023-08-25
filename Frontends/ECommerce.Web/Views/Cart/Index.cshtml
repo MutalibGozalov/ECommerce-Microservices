@@ -25,11 +25,8 @@
                                 <td>@product.Name</td>
                                 <td>@product.Price $ @(Model.HasDiscount ? $"(%{Model.DiscountRate} applied, {product.TotalPrice}$)" : "")</td>
                                 <td>@product.Quantity</td>
-                                <td><a asp-controller="Cart" asp-action="AddItemToCart" asp-route-productId="@product.ProductId"
-                                        class="btn btn-primary"><i class="bi bi-plus"></i></a></td>
-                                <td><a asp-controller="Cart" asp-action="RemoveCartItem"
-                                        asp-route-productId="@product.ProductId" class="btn btn-danger"><i
-                                            class="bi bi-dash"></i></a></td>
+                                <td><a asp-controller="Cart" asp-action="AddItemToCart" asp-route-productId="@product.ProductId" class="btn btn-primary"><i class="bi bi-plus"></i></a></td>
+                                <td><a asp-controller="Cart" asp-action="RemoveCartItem" asp-route-productId="@product.ProductId" class="btn btn-danger"><i class="bi bi-dash"></i></a></td>
                             </tr>
                         }
                         @if (Model.HasDiscount)
