@@ -41,7 +41,7 @@ public class OrderService : IOrderService
             CartNumber = checkOutInfoInput.CartNumber,
             Expriration = checkOutInfoInput.Expriration,
             CVV = checkOutInfoInput.CVV,
-            TotalPrice = cart.TotalPrice,
+            TotalPrice = cart.GetTotalDiscountPrice,
         };
 
         var responsePayment = await _paymentService.ReceivePayment(paymentInfoInput);
@@ -63,7 +63,7 @@ public class OrderService : IOrderService
                     new OrderItemCreateInput()
                     {
                         ProductId = i.ProductId,
-                        ProductPrice = i.GetCurrentPrice,
+                        ProductPrice = i.TotalDiscountPrice,
                         ProductName = i.Name,
                         ProductQuantity = i.Quantity,
                         TrackingId = Random.Shared.Next(0, 500)
@@ -107,7 +107,7 @@ public class OrderService : IOrderService
                     new OrderItemCreateInput()
                     {
                         ProductId = i.ProductId,
-                        ProductPrice = i.GetCurrentPrice,
+                        ProductPrice = i.TotalDiscountPrice,
                         ProductName = i.Name,
                         ProductQuantity = i.Quantity,
                         TrackingId = Random.Shared.Next(0, 500)
@@ -121,7 +121,7 @@ public class OrderService : IOrderService
             CartNumber = checkOutInfoInput.CartNumber,
             Expriration = checkOutInfoInput.Expriration,
             CVV = checkOutInfoInput.CVV,
-            TotalPrice = cart.TotalPrice,
+            TotalPrice = cart.GetTotalDiscountPrice,
             Order = orderCreateInput
         };
 

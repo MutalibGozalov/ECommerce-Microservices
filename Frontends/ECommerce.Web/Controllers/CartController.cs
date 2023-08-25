@@ -22,6 +22,12 @@ public class CartController : Controller
         return View(await _cartService.Get());
     }
 
+    public async Task<IActionResult> Cart()
+    {
+        return View(await _cartService.Get());
+    }
+
+
     public async Task<IActionResult> AddItemToCart(string productId)
     {
         var product = await _catalogService.GetProductByIdAsync(productId);

@@ -25,18 +25,6 @@ public class ProductController : Controller
         return View(data);
     }
 
-    public async Task<IActionResult> Index3()
-    {
-         var data = await _catalogService.GetAllProductsAsync();
-        return View(data);
-    }
-
-    public async Task<IActionResult> ProductDetail2(string id)
-    {
-        var data = await _catalogService.GetProductByIdAsync(id);
-        return View(data);
-    }
-
     public async Task<IActionResult> ProductDetail(string id)
     {
         var data = await _catalogService.GetProductByIdAsync(id);

@@ -8,11 +8,24 @@ public class CartItemViewModel
     public decimal Price { get; set; }
     public byte Quantity { get; set; }
 
-    private decimal? DiscountPrice;
-    public decimal GetCurrentPrice
+    public decimal? DiscountPrice { get; set; }
+
+    private decimal? _TotalPrice;
+    public decimal TotalPrice
     {
-        get => DiscountPrice is not null ? DiscountPrice.Value : Price;
+        get => Price*(decimal)Quantity;
     }
+
+    private decimal? _TotalDiscountPrice;
+    public decimal TotalDiscountPrice
+    {
+        get => DiscountPrice is not null ? DiscountPrice.Value*(decimal)Quantity : Price*(decimal)Quantity;
+    }
+
+
+
+
+
     public void AppliedDiscount(decimal discountPrice)
     {
         DiscountPrice = discountPrice;

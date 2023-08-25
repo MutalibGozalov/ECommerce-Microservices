@@ -30,14 +30,14 @@ public class CartViewModel
             _cartItems = value;
         }
     }
-    public decimal TotalPrice
+    public decimal GetTotalPrice
     {
-        get => _cartItems.Sum(c => c.GetCurrentPrice * c.Quantity);
+        get => _cartItems.Sum(c => c.TotalPrice);
     }
 
-    public decimal TotalPriceNoDiscount
+    public decimal GetTotalDiscountPrice
     {
-        get => _cartItems.Sum(c => c.Price * c.Quantity);
+        get => _cartItems.Sum(c => c.TotalDiscountPrice);
     }
 
     public bool HasDiscount
