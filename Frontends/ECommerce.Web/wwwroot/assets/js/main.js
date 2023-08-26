@@ -217,31 +217,30 @@
         },
 
         quantityRanger: function() {
-            console.log('wrking');
-
             $('.pro-qty').prepend('<span class="dec qtybtn">-</span>');
             $('.pro-qty').append('<span class="inc qtybtn">+</span>');
             $('.qtybtn').on('click', function() {
                 var $button = $(this);
                 var oldValue = $button.parent().find('input').val();
-                var productId = $button.attr('productId');
+                var productId = $button.parent().find('input').attr("product-id");
+                console.log(productId);
                 if ($button.hasClass('inc')) {
                     var newVal = parseFloat(oldValue) + 1;
-                    console.log('wrking');
+                    console.log(productId);
                     
                     incrementQty(productId);
                 } else {
                     // Don't allow decrementing below zero
                     if (oldValue > 0) {
                         var newVal = parseFloat(oldValue) - 1;
-                        console.log('wrking');
+                        console.log(productId);
 
                     } else {
                         newVal = 0;
-                     console.log('wrking');
+                     console.log(productId);
 
                     }
-                    console.log('wrking');
+                    console.log(productId);
                     decrementQty(productId);
                 }
                 $button.parent().find('input').val(newVal);
@@ -1147,26 +1146,31 @@
 
     
     const incrementQty = (id) => {
-        $.post("Cart/AddItemToCart?productId=${id}}",
+        let url = `/Cart/AddItemToCart?productId=${id}`;
+
+        $.ajax(
         {
-        
-        },
+            type: 'GET',
+            url: url
+        }/* ,
         function(data, status){
+            console.log(id, status, url);
             console.log(data);
-            alert("Data: " + data + "\nStatus: " + status);
-        });
+
+        } */);
     }
 
     const decrementQty = (id) => {
-        $.post("Cart/RemoveCartItem?productId=${id}}",
+        let url = `/Cart/RemoveCartItem?productId=${id}`;
+        $.ajax(
         {
-        
-        },
+            type: 'GET',
+            url: url
+        }/* ,
         function(data, status){
+            console.log(id, status, url);
             console.log(data);
-
-            alert("Data: " + data + "\nStatus: " + status);
-        });
+        } */);
     }
 
 })(window, document, jQuery);
