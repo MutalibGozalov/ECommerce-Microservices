@@ -217,31 +217,26 @@
         },
 
         quantityRanger: function() {
-            console.log('wrking');
 
             $('.pro-qty').prepend('<span class="dec qtybtn">-</span>');
             $('.pro-qty').append('<span class="inc qtybtn">+</span>');
             $('.qtybtn').on('click', function() {
                 var $button = $(this);
                 var oldValue = $button.parent().find('input').val();
-                var productId = $button.attr('productId');
+                var productId = $button.attr('product-id');
                 if ($button.hasClass('inc')) {
                     var newVal = parseFloat(oldValue) + 1;
-                    console.log('wrking');
                     
                     incrementQty(productId);
                 } else {
                     // Don't allow decrementing below zero
                     if (oldValue > 0) {
                         var newVal = parseFloat(oldValue) - 1;
-                        console.log('wrking');
+                        console.log('working dec', productId);
 
                     } else {
                         newVal = 0;
-                     console.log('wrking');
-
                     }
-                    console.log('wrking');
                     decrementQty(productId);
                 }
                 $button.parent().find('input').val(newVal);
@@ -1147,25 +1142,25 @@
 
     
     const incrementQty = (id) => {
-        $.post("Cart/AddItemToCart?productId=${id}}",
+        $.post(`Cart/AddItemToCart?productId=${id}}`,
         {
         
         },
         function(data, status){
-            console.log(data);
-            alert("Data: " + data + "\nStatus: " + status);
+            console.log(incrementQty);
+            alert("Data: " + 'incrementQty' + "\nStatus: " + status);
         });
     }
 
     const decrementQty = (id) => {
-        $.post("Cart/RemoveCartItem?productId=${id}}",
+        $.post(`Cart/RemoveCartItem?productId=${id}}`,
         {
         
         },
         function(data, status){
-            console.log(data);
+            console.log(decrementQty);
 
-            alert("Data: " + data + "\nStatus: " + status);
+            alert("Data: " + 'decrementQty' + "\nStatus: " + status);
         });
     }
 
