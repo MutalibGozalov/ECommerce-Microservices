@@ -37,7 +37,6 @@ public class CartService : ICartService
     public async Task<bool> Delete()
     {
         var result = await _httpClient.DeleteAsync("cart/DeleteCart");
-
         return result.IsSuccessStatusCode;
     }
 

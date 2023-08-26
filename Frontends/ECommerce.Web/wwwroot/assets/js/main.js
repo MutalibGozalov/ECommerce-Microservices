@@ -23,8 +23,11 @@
             axilInit.menuLinkActive();
             axilInit.headerIconToggle();
             axilInit.priceRangeSlider();
+
             axilInit.productRemover();
             axilInit.quantityRanger();
+            axilInit.addToCart();
+
             axilInit.axilSlickActivation();
             axilInit.countdownInit('.coming-countdown', '2023/10/01');
             axilInit.campaignCountdown('.campaign-countdown', '2023/10/01');
@@ -248,15 +251,25 @@
         },
 
         productRemover: (e) => {
-            $('.product-remove').on('click', function() {
-                var id = $(this).parent().attr("product-id");
-                console.log(id,'deleted');
-
+            $('.product-remove').children('a').on('click', function() {
+                var id = $(this).parent().parent().attr("product-id");
                 $.ajax({
                     type: 'GET',
                     url: `/Cart/DeleteCartItem?productId=${id}`
                 });
-                $(this).parent().remove();
+                $(this).parent().parent().remove();
+            });
+        },
+
+        addToCart: (e) => {
+            $('.select-option').children('a').on('click', function(e) {
+                e.preventDefault();
+                var id = $(this).attr("product-id");
+                $.ajax({
+                    type: 'GET',
+                    url: `/Cart/AddItemToCar2?productId=${id}`
+                });
+                $(this).text('Added to cart');
             });
         },
 

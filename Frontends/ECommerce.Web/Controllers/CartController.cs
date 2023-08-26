@@ -19,7 +19,7 @@ public class CartController : Controller
 
     public async Task<IActionResult> Index()
     {
-        return View(await _cartService.Get());
+        return View("Cart", await _cartService.Get());
     }
 
     public async Task<IActionResult> Cart()
@@ -27,7 +27,11 @@ public class CartController : Controller
         return View(await _cartService.Get());
     }
 
-
+    public async Task<IActionResult> DeleteCart()
+    {
+        await _cartService.Delete();
+        return View("Cart");
+    }
     public async Task<IActionResult> AddItemToCart(string productId)
     {
         var product = await _catalogService.GetProductByIdAsync(productId);
@@ -38,7 +42,45 @@ public class CartController : Controller
             Price = product.DisplayPrice,
             Quantity = 1
         });
-        return RedirectToAction(nameof(Cart));
+        return Json("added");
+    }
+
+    public async Task<IActionResult> AddItemToCar2(string productId)
+    {
+        var product = await _catalogService.GetProductByIdAsync(productId);
+
+        var cart = await _cartService.Get();
+
+        if (cart is not null)
+        {
+            var cartItem = cart.CartItems.FirstOrDefault(i => i.ProductId == productId);
+            if (cartItem is null)
+            {
+                await _cartService.AddItemToCart(new CartItemViewModel
+                {
+                    ProductId = product.Id,
+                    Name = product.Name,
+                    Price = product.DisplayPrice,
+                    Quantity = 1
+                });
+                return Json("Added to cart");
+            }
+            else
+            {
+                return Json("Already in cart");
+            }
+        }
+        else
+        {
+            await _cartService.AddItemToCart(new CartItemViewModel
+                {
+                    ProductId = product.Id,
+                    Name = product.Name,
+                    Price = product.DisplayPrice,
+                    Quantity = 1
+                });
+            return Json("Added to cart");
+        }
     }
 
     public async Task<IActionResult> RemoveCartItem(string productId)
