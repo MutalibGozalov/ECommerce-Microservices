@@ -62,6 +62,25 @@ public class CartService : ICartService
         await SaveOrUpdate(cart);
     }
 
+    public async Task<bool> DeleteCartItem(string productId)
+    {
+        var cart = await Get();
+
+        if (cart is null)
+            return false;
+
+        var cartItem = cart.CartItems.FirstOrDefault(i => i.ProductId == productId);
+
+        if (cartItem is null)
+            return false;
+        
+        cart.CartItems.Remove(cartItem);
+        if (cart.CartItems.Any() is false)
+        {
+            cart.DiscountCode = null;
+        }
+        return await SaveOrUpdate(cart);
+    }
     public async Task<bool> RevokeCartItem(string productId)
     {
         var cart = await Get();

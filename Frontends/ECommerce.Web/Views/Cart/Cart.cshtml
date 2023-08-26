@@ -33,7 +33,7 @@
                             <tbody>
                                 @foreach(var product in Model.CartItems)
                                 {
-                                <tr>
+                                <tr product-id="@product.ProductId">
                                     <td class="product-remove"><a href="#" class="remove-wishlist"><i class="fal fa-times"></i></a></td>
                                     <td class="product-thumbnail"><a href="single-product.html"><img src="~/assets/images/product/electric/product-01.png" alt="Digital Product"></a></td>
                                     <td class="product-title"><a href="single-product.html">@product.Name</a></td>

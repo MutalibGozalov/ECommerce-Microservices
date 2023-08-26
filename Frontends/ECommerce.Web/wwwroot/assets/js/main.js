@@ -23,6 +23,7 @@
             axilInit.menuLinkActive();
             axilInit.headerIconToggle();
             axilInit.priceRangeSlider();
+            axilInit.productRemover();
             axilInit.quantityRanger();
             axilInit.axilSlickActivation();
             axilInit.countdownInit('.coming-countdown', '2023/10/01');
@@ -220,30 +221,42 @@
             $('.pro-qty').prepend('<span class="dec qtybtn">-</span>');
             $('.pro-qty').append('<span class="inc qtybtn">+</span>');
             $('.qtybtn').on('click', function() {
-                var $button = $(this);
-                var oldValue = $button.parent().find('input').val();
-                var productId = $button.parent().find('input').attr("product-id");
-                console.log(productId);
-                if ($button.hasClass('inc')) {
+                var $span = $(this);
+                var $row = $(this).parent().parent().parent();
+                var oldValue = $span.parent().find('input').val();
+                var productId = $span.parent().find('input').attr("product-id");
+                if ($span.hasClass('inc')) {
                     var newVal = parseFloat(oldValue) + 1;
-                    console.log(productId);
-                    
+    
                     incrementQty(productId);
                 } else {
                     // Don't allow decrementing below zero
                     if (oldValue > 0) {
                         var newVal = parseFloat(oldValue) - 1;
                         console.log(productId);
-
+                        if (newVal==0) {
+                            $row.remove();
+                        }
                     } else {
                         newVal = 0;
-                     console.log(productId);
-
                     }
-                    console.log(productId);
+
                     decrementQty(productId);
                 }
-                $button.parent().find('input').val(newVal);
+                $span.parent().find('input').val(newVal);
+            });
+        },
+
+        productRemover: (e) => {
+            $('.product-remove').on('click', function() {
+                var id = $(this).parent().attr("product-id");
+                console.log(id,'deleted');
+
+                $.ajax({
+                    type: 'GET',
+                    url: `/Cart/DeleteCartItem?productId=${id}`
+                });
+                $(this).parent().remove();
             });
         },
 
@@ -1148,29 +1161,18 @@
     const incrementQty = (id) => {
         let url = `/Cart/AddItemToCart?productId=${id}`;
 
-        $.ajax(
-        {
+        $.ajax({
             type: 'GET',
             url: url
-        }/* ,
-        function(data, status){
-            console.log(id, status, url);
-            console.log(data);
-
-        } */);
+        });
     }
 
     const decrementQty = (id) => {
         let url = `/Cart/RemoveCartItem?productId=${id}`;
-        $.ajax(
-        {
+        $.ajax({
             type: 'GET',
             url: url
-        }/* ,
-        function(data, status){
-            console.log(id, status, url);
-            console.log(data);
-        } */);
+        });
     }
 
 })(window, document, jQuery);

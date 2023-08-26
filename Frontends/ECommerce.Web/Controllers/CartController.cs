@@ -47,6 +47,12 @@ public class CartController : Controller
         return RedirectToAction(nameof(Cart));
     }
 
+    public async Task<IActionResult> DeleteCartItem(string productId)
+    {
+        await _cartService.DeleteCartItem(productId);
+        return RedirectToAction(nameof(Cart));
+    }
+
     public async Task<IActionResult> ApplyDiscount(DiscountApplyInput discountApplyInput)
     {
         if (ModelState.IsValid is false)
