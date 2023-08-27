@@ -47,11 +47,6 @@ public class OrderController : Controller
     [HttpPost]
     public async Task<IActionResult> Checkout(CheckOutInfoInput checkOutInfoInput)
     {
-
-        /*  Synchronius request
-         var orderStatus = await _orderService.CreateOrder(checkOutInfoInput); */
-
-        // Async request
          var orderRequestStatus = await _orderService.RequestOrder(checkOutInfoInput);
 
 
