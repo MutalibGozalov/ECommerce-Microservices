@@ -45,7 +45,7 @@ public class CartController : Controller
         return Json("added");
     }
 
-    public async Task<IActionResult> AddItemToCar2(string productId)
+    public async Task<IActionResult> AddItemToCart2(string productId)
     {
         var product = await _catalogService.GetProductByIdAsync(productId);
 

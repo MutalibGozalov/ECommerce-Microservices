@@ -267,9 +267,10 @@
                 var id = $(this).attr("product-id");
                 $.ajax({
                     type: 'GET',
-                    url: `/Cart/AddItemToCar2?productId=${id}`
+                    url: `/Cart/AddItemToCart2?productId=${id}`
+                }).done((data, status) => {
+                    $(this).text(data);
                 });
-                $(this).text('Added to cart');
             });
         },
 
