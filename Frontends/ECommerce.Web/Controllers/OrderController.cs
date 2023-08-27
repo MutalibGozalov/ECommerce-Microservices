@@ -21,14 +21,14 @@ public class OrderController : Controller
     {
         var cart = await _cartService.Get();
         var addresses = new List<object>(){
-            new {Id = 1, Address = "Address: Mahammad Hadi"},
-            new {Id = 2, Address = "Address: Ahmadli 8th"},
-            new {Id = 3, Address = "Address: Ukranian Circle"}
+            new {Id = 1, Address = " Mahammad Hadi"},
+            new {Id = 2, Address = "Ahmadli 8th"},
+            new {Id = 3, Address = "Ukranian Circle"}
         };
         var creaditCarts = new List<object>(){
-            new {Id = 1, CardNumber = "Visa ..3412"},
-            new {Id = 2, CardNumber = "Visa ..4612"},
-            new {Id = 3, CardNumber = "Master ..5342"}
+            new {Id = 1, CardNumber = "Visa 3412"},
+            new {Id = 2, CardNumber = "Visa 4612"},
+            new {Id = 3, CardNumber = "Master 5342"}
         };
         var shippings = new List<object>(){
             new {Id = 1, ShippingName = "ExpCargo"},
@@ -41,7 +41,7 @@ public class OrderController : Controller
         ViewBag.creaditCartList = new SelectList(creaditCarts, "Id", "CardNumber");
         ViewBag.shippingList = new SelectList(shippings, "Id", "ShippingName");
         ViewBag.cart = cart;
-        return View(new CheckOutInfoInput());
+        return View("checkout2", new CheckOutInfoInput());
     }
 
     [HttpPost]

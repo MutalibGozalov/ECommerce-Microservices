@@ -39,12 +39,12 @@
                         {
                             <tr>
                                 <td>@item.Name</td>
-                                <td>@item.Price</td>
+                                <td>@item.TotalPrice</td>
                             </tr>
                         }
                         <tr>
                             <td>@(ViewBag.cart.HasDiscount ? "Total discount price" : "Total price")</td>
-                            <td>@(ViewBag.cart.TotalPrice) $</td>
+                            <td>@(ViewBag.cart.GetTotalPrice) $</td>
                         </tr>
                     </table>
                     <button class="btn btn-success" type="submit">Confirm payment</button>
