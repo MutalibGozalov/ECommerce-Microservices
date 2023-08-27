@@ -23,7 +23,11 @@
             axilInit.menuLinkActive();
             axilInit.headerIconToggle();
             axilInit.priceRangeSlider();
+
+            axilInit.productRemover();
             axilInit.quantityRanger();
+            axilInit.addToCart();
+
             axilInit.axilSlickActivation();
             axilInit.countdownInit('.coming-countdown', '2023/10/01');
             axilInit.campaignCountdown('.campaign-countdown', '2023/10/01');
@@ -217,29 +221,55 @@
         },
 
         quantityRanger: function() {
-
             $('.pro-qty').prepend('<span class="dec qtybtn">-</span>');
             $('.pro-qty').append('<span class="inc qtybtn">+</span>');
             $('.qtybtn').on('click', function() {
-                var $button = $(this);
-                var oldValue = $button.parent().find('input').val();
-                var productId = $button.attr('product-id');
-                if ($button.hasClass('inc')) {
+                var $span = $(this);
+                var $row = $(this).parent().parent().parent();
+                var oldValue = $span.parent().find('input').val();
+                var productId = $span.parent().find('input').attr("product-id");
+                if ($span.hasClass('inc')) {
                     var newVal = parseFloat(oldValue) + 1;
-                    
+    
                     incrementQty(productId);
                 } else {
                     // Don't allow decrementing below zero
                     if (oldValue > 0) {
                         var newVal = parseFloat(oldValue) - 1;
-                        console.log('working dec', productId);
-
+                        console.log(productId);
+                        if (newVal==0) {
+                            $row.remove();
+                        }
                     } else {
                         newVal = 0;
                     }
+
                     decrementQty(productId);
                 }
-                $button.parent().find('input').val(newVal);
+                $span.parent().find('input').val(newVal);
+            });
+        },
+
+        productRemover: (e) => {
+            $('.product-remove').children('a').on('click', function() {
+                var id = $(this).parent().parent().attr("product-id");
+                $.ajax({
+                    type: 'GET',
+                    url: `/Cart/DeleteCartItem?productId=${id}`
+                });
+                $(this).parent().parent().remove();
+            });
+        },
+
+        addToCart: (e) => {
+            $('.select-option').children('a').on('click', function(e) {
+                e.preventDefault();
+                var id = $(this).attr("product-id");
+                $.ajax({
+                    type: 'GET',
+                    url: `/Cart/AddItemToCar2?productId=${id}`
+                });
+                $(this).text('Added to cart');
             });
         },
 
@@ -1142,25 +1172,19 @@
 
     
     const incrementQty = (id) => {
-        $.post(`Cart/AddItemToCart?productId=${id}}`,
-        {
-        
-        },
-        function(data, status){
-            console.log(incrementQty);
-            alert("Data: " + 'incrementQty' + "\nStatus: " + status);
+        let url = `/Cart/AddItemToCart?productId=${id}`;
+
+        $.ajax({
+            type: 'GET',
+            url: url
         });
     }
 
     const decrementQty = (id) => {
-        $.post(`Cart/RemoveCartItem?productId=${id}}`,
-        {
-        
-        },
-        function(data, status){
-            console.log(decrementQty);
-
-            alert("Data: " + 'decrementQty' + "\nStatus: " + status);
+        let url = `/Cart/RemoveCartItem?productId=${id}`;
+        $.ajax({
+            type: 'GET',
+            url: url
         });
     }
 

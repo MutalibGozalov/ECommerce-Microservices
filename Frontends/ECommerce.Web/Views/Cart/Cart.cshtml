@@ -14,7 +14,7 @@
                 <div class="axil-product-cart-wrap">
                     <div class="product-table-heading">
                         <h4 class="title">Your Cart</h4>
-                        <a href="#" class="cart-clear">Clear Shoping Cart</a>
+                        <a href="/Cart/DeleteCart" class="cart-clear">Clear Shoping Cart</a>
                     </div>
                     <div class="table-responsive">
                     @if(Model is not null && Model.CartItems.Any())
@@ -33,7 +33,7 @@
                             <tbody>
                                 @foreach(var product in Model.CartItems)
                                 {
-                                <tr>
+                                <tr product-id="@product.ProductId">
                                     <td class="product-remove"><a href="#" class="remove-wishlist"><i class="fal fa-times"></i></a></td>
                                     <td class="product-thumbnail"><a href="single-product.html"><img src="~/assets/images/product/electric/product-01.png" alt="Digital Product"></a></td>
                                     <td class="product-title"><a href="single-product.html">@product.Name</a></td>
@@ -57,12 +57,12 @@
                     </div>
                     <div class="cart-update-btn-area">
                     <form asp-controller="Cart" asp-action="ApplyDiscount">
-                        @if (Model.HasDiscount)
+                        @if (Model is not null && Model.HasDiscount)
                         {
                             <div class="alert alert-success">
                                 "@Model.DiscountCode" discount code applied
                             </div>
-                            <a asp-controller="Cart" asp-action="CancelDiscount">(cancel)</a>
+                            <a asp-controller="Cart" asp-action="CancelDiscount"><b>cancel</b></a>
                         }
                         <div class="input-group product-cupon">
                             <input name="DiscountApplyInput.Code" placeholder="Enter coupon code" type="text">
@@ -80,7 +80,7 @@
                         }
                     </form>
                         <div class="update-btn">
-                            <a href="#" class="axil-btn btn-outline">Update Cart</a>
+                            <a href="/Cart/cart" class="axil-btn btn-outline">Update Cart</a>
                         </div>
                     </div>
                     <div class="row">
@@ -90,7 +90,7 @@
                                 <div class="summery-table-wrap">
                                     <table class="table summery-table mb--30">
                                         <tbody>
-                                            @if(Model.HasDiscount)
+                                            @if(Model is not null && Model.HasDiscount)
                                             {
                                             <tr class="order-subtotal">
                                                 <td>Subtotal</td>
@@ -114,7 +114,7 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                            @if(Model.HasDiscount)
+                                            @if(Model is not null && Model.HasDiscount)
                                             {
                                             <tr class="order-tax">
                                                 <td>@Model.DiscountRate.Value % Discount</td>
@@ -123,7 +123,7 @@
                                             }
                                             <tr class="order-total">
                                                 <td>Total</td>
-                                                <td class="order-total-amount">$@Model.GetTotalDiscountPrice</td>
+                                                <td class="order-total-amount">$@Model?.GetTotalDiscountPrice</td>
                                             </tr>
                                         </tbody>
                                     </table>
