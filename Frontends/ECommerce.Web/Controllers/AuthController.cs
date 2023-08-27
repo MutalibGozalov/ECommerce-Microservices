@@ -26,11 +26,7 @@ public class AuthController : Controller
         return View();
     }
 
-    [HttpGet("SignIn")]
-    public IActionResult SignIn2()
-    {
-        return View();
-    }
+
 
     [HttpPost("SignIn")]
     public async Task<IActionResult> SignIn(SigninInput signinInput)
@@ -55,12 +51,12 @@ public class AuthController : Controller
     }
 
 
-
     [HttpGet("SignUp")]
     public IActionResult SignUp()
     {
         return View();
     }
+
 
     [HttpPost("SignUp")]
     public async Task<IActionResult> SignUp(SignUpInput signUpInput)

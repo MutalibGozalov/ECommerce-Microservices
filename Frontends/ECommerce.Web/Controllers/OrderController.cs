@@ -41,7 +41,7 @@ public class OrderController : Controller
         ViewBag.creaditCartList = new SelectList(creaditCarts, "Id", "CardNumber");
         ViewBag.shippingList = new SelectList(shippings, "Id", "ShippingName");
         ViewBag.cart = cart;
-        return View("checkout2", new CheckOutInfoInput());
+        return View(new CheckOutInfoInput());
     }
 
     [HttpPost]

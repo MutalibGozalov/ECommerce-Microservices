@@ -19,18 +19,12 @@ public class CartController : Controller
 
     public async Task<IActionResult> Index()
     {
-        return View("Cart", await _cartService.Get());
-    }
-
-    public async Task<IActionResult> Cart()
-    {
         return View(await _cartService.Get());
     }
-
     public async Task<IActionResult> DeleteCart()
     {
         await _cartService.Delete();
-        return View("Cart");
+        return RedirectToAction(nameof(Index));
     }
     public async Task<IActionResult> AddItemToCart(string productId)
     {
@@ -42,7 +36,7 @@ public class CartController : Controller
             Price = product.DisplayPrice,
             Quantity = 1
         });
-        return Json("added");
+        return RedirectToAction(nameof(Index));
     }
 
     public async Task<IActionResult> AddItemToCart2(string productId)
@@ -86,13 +80,13 @@ public class CartController : Controller
     public async Task<IActionResult> RemoveCartItem(string productId)
     {
         await _cartService.RevokeCartItem(productId);
-        return RedirectToAction(nameof(Cart));
+        return RedirectToAction(nameof(Index));
     }
 
     public async Task<IActionResult> DeleteCartItem(string productId)
     {
         await _cartService.DeleteCartItem(productId);
-        return RedirectToAction(nameof(Cart));
+        return RedirectToAction(nameof(Index));
     }
 
     public async Task<IActionResult> ApplyDiscount(DiscountApplyInput discountApplyInput)
@@ -100,16 +94,16 @@ public class CartController : Controller
         if (ModelState.IsValid is false)
         {
             TempData["discountError"] = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).First();
-            return RedirectToAction(nameof(Cart));
+            return RedirectToAction(nameof(Index));
         }
         var discountStatus = await _cartService.ApplyDiscount(discountApplyInput.Code);
         TempData["discountstatus"] = discountStatus;
-        return RedirectToAction(nameof(Cart));
+        return RedirectToAction(nameof(Index));
     }
 
     public async Task<IActionResult> CancelDiscount()
     {
         await _cartService.CancelDiscount();
-        return RedirectToAction(nameof(Cart));
+        return RedirectToAction(nameof(Index));
     }
 }

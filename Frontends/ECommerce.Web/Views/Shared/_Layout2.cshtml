@@ -58,9 +58,17 @@
                     <div class="col-lg-6 col-sm-6 col-12">
                         <div class="header-top-link">
                             <ul class="quick-link">
+                                @if (!User.Identity.IsAuthenticated)
+                                {
                                 <li><a href="#">Help</a></li>
-                                <li><a href="sign-up.html">Join Us</a></li>
+                                <li><a asp-controller="Auth" asp-action="SignUp">Join Us</a></li>
                                 <li><a asp-controller="Auth" asp-action="SignIn">Sign In</a></li>
+                                }
+                                else 
+                                {
+                                <li>@User.Identity.Name</li>
+                                <li><a asp-controller="Auth" asp-action="Logout">Logout</a></li>
+                                }
                             </ul>
                         </div>
                     </div>
@@ -73,7 +81,7 @@
             <div class="container">
                 <div class="header-navbar">
                     <div class="header-brand">
-                        <a href="index.html" class="logo logo-dark">
+                        <a asp-controller="Home" class="logo logo-dark">
                             <img src="~/assets/images/logo/logo.png" alt="Site Logo">
                         </a>
                         <a href="index.html" class="logo logo-light">
@@ -170,7 +178,7 @@
                                 </a>
                             </li>
                             <li class="shopping-cart">
-                                <a href="#" class="cart-dropdown-btn">
+                                <a asp-controller="Cart" class="cart-dropdown-btn">
                                     <span class="cart-count">3</span>
                                     <i class="flaticon-shopping-cart"></i>
                                 </a>
@@ -195,8 +203,8 @@
                                             <a href="#">Language</a>
                                         </li>
                                     </ul>
-                                    <a href="sign-in.html" class="axil-btn btn-bg-primary">Login</a>
-                                    <div class="reg-footer text-center">No account yet? <a href="sign-up.html" class="btn-link">REGISTER HERE.</a></div>
+                                    <a asp-controller="Auth" asp-action="SignIn" class="axil-btn btn-bg-primary">Login</a>
+                                    <div class="reg-footer text-center">No account yet? <a  asp-controller="Auth" asp-action="SignUp" class="btn-link">REGISTER HERE.</a></div>
                                 </div>
                             </li>
                             <li class="axil-mobile-toggle">
