@@ -77,6 +77,13 @@ public static class ConfigureServices
             options.Cookie.Name = "ecommercewebcookie";
         });
 
+
+        services.AddAuthentication().AddGoogle(googleOptions =>
+        {
+            googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
+            googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+        });
+
         services.AddControllersWithViews();
         return services;
     }

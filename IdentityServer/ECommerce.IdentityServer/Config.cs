@@ -12,7 +12,7 @@ namespace ECommerce.IdentityServer
     public static class Config
     {
 
-        public static IEnumerable<ApiResource> ApiResources => new ApiResource[]
+        public static IEnumerable<ApiResource> ApiResources => new ApiResource[] //which API resource the token is for
         {
             new ApiResource("resource_catalog") {Scopes = {"catalog_fullpermission"}},
             new ApiResource("resource_photostock") {Scopes = {"photo_stock_fullpermission"}},
