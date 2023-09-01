@@ -11,7 +11,6 @@ public class CatalogService : ICatalogService
     private readonly HttpClient _httpClient;
     private readonly IPhotoStockService _photoStockService;
     private readonly PhotoHelper _photoHelper;
-
     public CatalogService(HttpClient httpClient, IPhotoStockService photoStockService, PhotoHelper photoHelper)
     {
         _httpClient = httpClient;
@@ -77,12 +76,30 @@ public class CatalogService : ICatalogService
 
     public async Task<bool> CreateProductAsync(ProductCreateInput productCreateInput)
     {
-        var photoServiceResult = await _photoStockService.UploadPhoto(productCreateInput.PhotoFormFile);
-        if (photoServiceResult is not null)
+        var photoServiceResultForProduct = await _photoStockService.UploadPhoto(productCreateInput.PhotoFormFile);
+        if (photoServiceResultForProduct is not null)
         {
-            productCreateInput.Image = photoServiceResult.Url;
+            productCreateInput.Image = photoServiceResultForProduct.Url;
         }
 
+        if (productCreateInput.ProductVariations is not null)
+        {
+            foreach (var item in productCreateInput.ProductVariations)
+            {
+                foreach (var photo in item?.MediaFormFiles)
+                {
+                    var photoServiceResultForItems = await _photoStockService.UploadPhoto(photo);
+                    item.Media.Add(photoServiceResultForItems.Url);
+                }
+                var variationResponse = await _httpClient.PostAsJsonAsync("productvariation/create", item);
+                if (variationResponse.IsSuccessStatusCode is true)
+                {
+                  var productVariationViewModel = await variationResponse.Content.ReadFromJsonAsync<Response<ProductVariatoinViewModel>>();
+                  productCreateInput.ProductVariationIds.Add(productVariationViewModel.Data.Id);
+                }
+
+            }
+        }
 
         var response = await _httpClient.PostAsJsonAsync("product/create", productCreateInput);
         return response.IsSuccessStatusCode;

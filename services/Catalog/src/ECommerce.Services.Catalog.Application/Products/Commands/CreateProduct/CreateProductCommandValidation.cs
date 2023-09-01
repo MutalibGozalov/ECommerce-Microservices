@@ -15,7 +15,7 @@ public class CreateProductCommandValidation : AbstractValidator<CreateProductCom
         .MaximumLength(200)
         .WithMessage("maximum length must be 200");
 
-        RuleForEach(p => p.ProductVariations)
+        RuleForEach(p => p.ProductVariationIds)
         .Length(24)
         .WithMessage("Product Variation Id must be length of 24")
         .Matches("^[a-fA-F0-9]{24}$")

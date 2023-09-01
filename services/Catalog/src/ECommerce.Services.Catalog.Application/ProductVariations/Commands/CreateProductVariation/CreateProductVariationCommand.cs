@@ -4,7 +4,7 @@ public class CreateProductVariationCommand : IRequest<Response<ProductVariationD
     public int SKU { get; set; }
     public int Quantity { get; set; }
     public double Price { get; set; }
-    public string[] Media { get; set; } = null!;
+    public List<string> Media { get; set; } = null!;
 }
 
 public class CreateProductVariationCommandHandler : IRequestHandler<CreateProductVariationCommand, Response<ProductVariationDto>>
