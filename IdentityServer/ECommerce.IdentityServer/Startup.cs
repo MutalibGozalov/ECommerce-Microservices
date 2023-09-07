@@ -19,7 +19,7 @@ namespace ECommerce.IdentityServer
     public class Startup
     {
         public IWebHostEnvironment Environment { get; }
-        public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; }     
 
         public Startup(IWebHostEnvironment environment, IConfiguration configuration)
         {
@@ -73,9 +73,18 @@ namespace ECommerce.IdentityServer
                     // register your IdentityServer with Google at https://console.developers.google.com
                     // enable the Google+ API
                     // set the redirect URI to https://localhost:5001/signin-google
-                    options.ClientId = "copy client ID from Google here";
-                    options.ClientSecret = "copy client secret from Google here";
+                    options.ClientId = "1026298878612-7f88c6tv7i8ba6phv2m1ck146p322t8j.apps.googleusercontent.com";
+                    options.ClientSecret = "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";
                 });
+
+                services.AddCors(options =>
+        {
+            options.AddPolicy("CorsPolicy",
+                builder => builder.WithOrigins("http://localhost:5010/signin-google")
+                .AllowAnyMethod()
+                .AllowCredentials()
+                .AllowAnyHeader());
+        });
         }
 
         public void Configure(IApplicationBuilder app)
@@ -89,6 +98,8 @@ namespace ECommerce.IdentityServer
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseCors("CorsPolicy");
+
             app.UseIdentityServer();
             app.UseAuthentication();
             app.UseAuthorization();

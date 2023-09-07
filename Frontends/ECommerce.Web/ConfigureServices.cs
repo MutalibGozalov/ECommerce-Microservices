@@ -69,19 +69,26 @@ public static class ConfigureServices
             options.BaseAddress = new Uri($"{serviceApiSettings.GatewayBaseUri}/{serviceApiSettings.Order.Path}");
         }).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
 
-        services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+        services.AddAuthentication(options => 
+        {
+            options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = "oidc";
+        }).AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
         {
             options.LoginPath = "/Auth/SignIn";
             options.ExpireTimeSpan = TimeSpan.FromDays(60);
             options.SlidingExpiration = true;
             options.Cookie.Name = "ecommercewebcookie";
-        });
-
-
-        services.AddAuthentication().AddGoogle(googleOptions =>
+        }).AddOpenIdConnect("oidc", options =>
         {
-            googleOptions.ClientId = configuration["Authentication:Google:ClientId"];
-            googleOptions.ClientSecret = configuration["Authentication:Google:ClientSecret"];
+            options.Authority = "http://localhost:5001";
+            options.RequireHttpsMetadata = false;
+
+            options.ClientId = "WebMvcClientForUser";
+            options.ClientSecret = "secret";
+            options.ResponseType = "code";
+
+            options.SaveTokens = true;
         });
 
         services.AddControllersWithViews();

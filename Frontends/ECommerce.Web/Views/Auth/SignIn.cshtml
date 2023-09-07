@@ -3,32 +3,32 @@
     ViewData["Title"] = "Sign In";
 }
 @model ECommerce.Web.Models.SigninInput
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>eTrade || Home</title>
-        <meta name="robots" content="noindex, follow" />
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="google-signin-client_id" content="1026298878612-7f88c6tv7i8ba6phv2m1ck146p322t8j.apps.googleusercontent.com">
-        <!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="~/assets/images/favicon.png">
 
-        <!-- CSS
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>eTrade || Home</title>
+    <meta name="robots" content="noindex, follow" />
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="~/assets/images/favicon.png">
+
+    <!-- CSS
         ============================================ -->
 
-        <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="~/assets/css/vendor/bootstrap.min.css">
-        <link rel="stylesheet" href="~/assets/css/vendor/font-awesome.css">
-        <link rel="stylesheet" href="~/assets/css/vendor/flaticon/flaticon.css">
-        <link rel="stylesheet" href="~/assets/css/vendor/slick.css">
-        <link rel="stylesheet" href="~/assets/css/vendor/slick-theme.css">
-        <link rel="stylesheet" href="~/assets/css/vendor/jquery-ui.min.css">
-        <link rel="stylesheet" href="~/assets/css/vendor/sal.css">
-        <link rel="stylesheet" href="~/assets/css/vendor/magnific-popup.css">
-        <link rel="stylesheet" href="~/assets/css/vendor/base.css">
-        <link rel="stylesheet" href="~/assets/css/style.min.css">
-    </head>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="~/assets/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets/css/vendor/font-awesome.css">
+    <link rel="stylesheet" href="~/assets/css/vendor/flaticon/flaticon.css">
+    <link rel="stylesheet" href="~/assets/css/vendor/slick.css">
+    <link rel="stylesheet" href="~/assets/css/vendor/slick-theme.css">
+    <link rel="stylesheet" href="~/assets/css/vendor/jquery-ui.min.css">
+    <link rel="stylesheet" href="~/assets/css/vendor/sal.css">
+    <link rel="stylesheet" href="~/assets/css/vendor/magnific-popup.css">
+    <link rel="stylesheet" href="~/assets/css/vendor/base.css">
+    <link rel="stylesheet" href="~/assets/css/style.min.css">
+</head>
 <body>
     <div class="axil-signin-area">
 
@@ -74,10 +74,19 @@
                             <div class="form-group d-flex flex-column align-items-center justify-content-equal">
                                 <button type="submit" class="axil-btn w-100 mb-3 btn-bg-primary submit-btn">Sign In</button>
                                 <a href="forgot-password.html" class="forgot-btn">Forget password?</a>
-                                <div class="g-signin2 mt-4" data-width="385" data-height="50" data-theme="dark" data-longtitle="true" data-onsuccess="onSignIn"></div>
-                            </div>
+                                <div id="g_id_onload"
+                                    data-client_id="1026298878612-7f88c6tv7i8ba6phv2m1ck146p322t8j.apps.googleusercontent.com"
+                                    data-context="signin" data-ux_mode="popup"
+                                    data-login_uri="http://localhost:5001/signin-google" data-auto_prompt="false">
+                                </div>
+
+                                <div class="g_id_signin" data-type="standard" data-shape="rectangular"
+                                    data-theme="outline" data-text="signin_with" data-size="large"
+                                    data-logo_alignment="left" data-width="385">
+                                </div>                          
+                              </div>
                         </form>
-                        
+
                     </div>
                 </div>
             </div>
@@ -105,20 +114,7 @@
     <script src="~/assets/js/vendor/isotope.pkgd.min.js"></script>
     <script src="~/assets/js/vendor/counterup.js"></script>
     <script src="~/assets/js/vendor/waypoints.min.js"></script>
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://accounts.google.com/gsi/client" async></script>
     <!-- Main JS -->
     <script src="~/assets/js/main.js"></script>
-
-    <script>
-        function onSignIn(googleUser) {
-            var profile = googleUser.getBasicProfile();
-            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-            console.log('Name: ' + profile.getName());
-            console.log('Image URL: ' + profile.getImageUrl());
-            console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-        }
-    </script>
-    <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
-
-
 </body>
