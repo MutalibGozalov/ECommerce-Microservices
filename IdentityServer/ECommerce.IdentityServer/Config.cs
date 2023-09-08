@@ -59,12 +59,6 @@ namespace ECommerce.IdentityServer
                         "gateway_fullpermission",
                         IdentityServerConstants.LocalApi.ScopeName
                         },
-                        RedirectUris = { "http://localhost:5001/signin-oidc", "http://localhost:5001/signin-google" },
-                        AllowedCorsOrigins = new List<string>
-                        {
-                            "http://localhost:5010"
-                        }
-
                 },
                 new Client {
                     ClientName = "Asp.Net Core MVC",
@@ -89,11 +83,29 @@ namespace ECommerce.IdentityServer
                     RefreshTokenExpiration = TokenExpiration.Absolute,
                     AbsoluteRefreshTokenLifetime = (int)(DateTime.Now.AddDays(60) - DateTime.Now).TotalSeconds, // 60 DAYS
                     RefreshTokenUsage = TokenUsage.ReUse,
-                    RedirectUris = { "http://localhost:5001/signin-oidc", "http://localhost:5001/signin-google" },
-                    AllowedCorsOrigins = new List<string>
+                },
+                new Client
+                {
+                    ClientId = "mvc",
+                    ClientSecrets = { new Secret("secret".Sha256()) },
+
+                    AllowedGrantTypes = GrantTypes.Code,
+                    RequireConsent = false,
+                    RequirePkce = true,
+
+                    // where to redirect to after login
+                    RedirectUris = { "http://localhost:5001/signin-oidc" },
+
+                    // where to redirect to after logout
+                    PostLogoutRedirectUris = { "http://localhost:5001/signout-callback-oidc" },
+
+                    AllowedScopes = new List<string>
                     {
-                        "http://localhost:5010"
-                    }
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile
+                    },
+
+                    // AllowedCorsOrigins = {"http://localhost:5010"}
                 }
             };
     }

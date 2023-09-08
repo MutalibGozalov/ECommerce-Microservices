@@ -84,7 +84,7 @@ public static class ConfigureServices
             options.Authority = "http://localhost:5001";
             options.RequireHttpsMetadata = false;
 
-            options.ClientId = "WebMvcClientForUser";
+            options.ClientId = "mvc";
             options.ClientSecret = "secret";
             options.ResponseType = "code";
 
