@@ -89,7 +89,7 @@ namespace ECommerce.IdentityServer
                     ClientId = "mvc",
                     ClientSecrets = { new Secret("secret".Sha256()) },
 
-                    AllowedGrantTypes = GrantTypes.Code,
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
                     RequireConsent = false,
                     RequirePkce = true,
 
@@ -101,11 +101,22 @@ namespace ECommerce.IdentityServer
 
                     AllowedScopes = new List<string>
                     {
+                        "cart_fullpermission",
+                        "discount_fullpermission",
+                        "order_fullpermission",
+                        "payment_fullpermission",
+                        "gateway_fullpermission",
+                        IdentityServerConstants.StandardScopes.Email,
                         IdentityServerConstants.StandardScopes.OpenId,
-                        IdentityServerConstants.StandardScopes.Profile
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.OfflineAccess,
+                        IdentityServerConstants.LocalApi.ScopeName,
+                        "roles"
                     },
-
-                    // AllowedCorsOrigins = {"http://localhost:5010"}
+                    AccessTokenLifetime = 3600, // 1 HOUR
+                    RefreshTokenExpiration = TokenExpiration.Absolute,
+                    AbsoluteRefreshTokenLifetime = (int)(DateTime.Now.AddDays(60) - DateTime.Now).TotalSeconds, // 60 DAYS
+                    RefreshTokenUsage = TokenUsage.ReUse,
                 }
             };
     }

@@ -24,7 +24,7 @@ namespace ECommerce.IdentityServer.Services
             _tokenHandler = tokenHandler;
         }
     
-        public async Task<Token> ValidateIdTokenAsync(GoogleLoginVM model)
+      /*   public async Task<Token> ValidateIdTokenAsync(GoogleLoginVM model)
         {
             ValidationSettings? settings = new GoogleJsonWebSignature.ValidationSettings()
             {
@@ -54,6 +54,6 @@ namespace ECommerce.IdentityServer.Services
     
             Token token = _tokenHandler.CreateAccessToken(5);
             return token;
-        }
+        } */
     }
 }
