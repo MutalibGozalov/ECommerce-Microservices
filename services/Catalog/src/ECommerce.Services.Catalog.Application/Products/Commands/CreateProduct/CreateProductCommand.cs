@@ -12,7 +12,7 @@ public class CreateProductCommand : IRequest<Response<ProductDto>>, IMapFrom<Pro
     public decimal DisplayPrice { get; set; }
     public int StoreId { get; set; }
     public string? Image { get; set; } = null!;
-    public string[]? ProductVariationIds { get; set; } = null!;
+    public string[]? ProductVariationIds { get; set; }
     public List<CreateProductVariationCommand>? ProductVariations { get; set; }
 }
 

@@ -50,11 +50,11 @@ public class ProductController : CustomBaseController
     [HttpPost]
     public async Task<IActionResult> Create(CreateProductCommand command)
     {
-        command.ProductVariations.ForEach (async item =>
+/*         command.ProductVariations.ForEach (async item =>
         {
             var itemResponse = await Mediator.Send(item);
             command.ProductVariationIds.Append(itemResponse.Data.Id);
-        });
+        }); */
         var response = await Mediator.Send(command);
         return CreateActionResultInstance(response);
     }
