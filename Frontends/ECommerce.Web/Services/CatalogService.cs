@@ -82,7 +82,7 @@ public class CatalogService : ICatalogService
             productCreateInput.Image = photoServiceResultForProduct.Url;
         }
 
-        if (productCreateInput.ProductVariations is not null)
+       /*  if (productCreateInput.ProductVariations is not null)
         {
             foreach (var item in productCreateInput.ProductVariations)
             {
@@ -99,7 +99,7 @@ public class CatalogService : ICatalogService
                 }
 
             }
-        }
+        } */
 
         var response = await _httpClient.PostAsJsonAsync("product/create", productCreateInput);
         return response.IsSuccessStatusCode;

@@ -38,6 +38,13 @@ public class ProductController : Controller
         return View();
     }
 
+    public async Task<IActionResult> Create2()
+    {
+        var categories = await _catalogService.GetAllCategoriesAsync();
+        ViewBag.categoryList = new SelectList(categories, "Id", "Name");
+        return View();
+    }
+
     [HttpPost]
     public async Task<IActionResult> Create(ProductCreateInput productCreateInput)
     {
