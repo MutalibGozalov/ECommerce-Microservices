@@ -1,4 +1,3 @@
-@model List<ProductViewModel>
 <div class="axil-shop-area axil-section-gap bg-color-white">
     <div class="container">
         <div class="row">
@@ -56,9 +55,10 @@
             </div>
         </div>
         <div class="row row--15">
-            @for (int i = 0; i < Model.Count; i++)
-            {
-                <partial name="_StoreProduct" />
+            @foreach(var product in ViewBag.StoreProductList as List<ProductViewModel>)
+            {    
+                ViewBag.product = product;
+                <partial name="_StoreProduct", ViewData["product"] />
             }
         </div>
         <div class="text-center pt--30">

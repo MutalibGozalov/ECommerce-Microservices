@@ -1,24 +1,26 @@
-@model ProductViewModel
+@{
+    var product = ViewBag.product;
+}
 
 <div class="col-xl-3 col-lg-4 col-sm-6">
     <div class="axil-product product-style-one has-color-pick mt--40">
         <div class="thumbnail">
-            <a asp-controller="Product" asp-action="ProductDetail" asp-route-id="@Model.Id">
-               <img src="@Model.DetailImage" alt="Product Images">
+            <a asp-controller="Product" asp-action="ProductDetail" asp-route-id="@product.Id">
+               <img src="@product.DetailImage" alt="Product Images">
             </a>
             <div class="product-hover-action">
                 <ul class="cart-action">
                     <li class="wishlist"><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
-                    <li class="select-option"><a asp-controller="Cart" asp-action="AddItemToCart" asp-route-productId="@Model.Id">Add to Cart</a></li>
+                    <li class="select-option"><a asp-controller="Cart" asp-action="AddItemToCart" asp-route-productId="@product.Id">Add to Cart</a></li>
                     <li class="quickview"><a href="#" data-bs-toggle="modal" data-bs-target="#quick-view-modal"><i class="far fa-eye"></i></a></li>
                 </ul>
             </div>
         </div>
         <div class="product-content">
             <div class="inner">
-                <h5 class="title"><a asp-controller="Product" asp-action="ProductDetail2" asp-route-id="@Model.Id">@Model.Name</a></h5>
+                <h5 class="title"><a asp-controller="Product" asp-action="ProductDetail2" asp-route-id="@product.Id">@product.Name</a></h5>
                 <div class="product-price-variant">
-                    <span class="price current-price">$@Model.DisplayPrice</span>
+                    <span class="price current-price">$@product.DisplayPrice</span>
                 </div>
                 <div class="color-variant-wrapper">
                     <ul class="color-variant">
