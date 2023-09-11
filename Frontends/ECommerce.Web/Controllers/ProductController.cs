@@ -31,6 +31,17 @@ public class ProductController : Controller
         return View(data);
     }
 
+    public async Task<IActionResult> Shop()
+    {
+        var data = await _catalogService.GetAllProductsAsync();
+        return View(data);
+    }
+    public async Task<IActionResult> ProductsJson()
+    {
+        var data = await _catalogService.GetAllProductsAsync();
+        return Json(data);
+    }
+
     [Authorize(AuthenticationSchemes ="Cookies", Roles ="StoreOwner")]
     public async Task<IActionResult> Create()
     {
@@ -39,6 +50,7 @@ public class ProductController : Controller
         return View();
     }
 
+    [Authorize(AuthenticationSchemes ="Cookies", Roles ="StoreOwner")]
     [HttpPost]
     public async Task<IActionResult> Create(ProductCreateInput productCreateInput)
     {
@@ -57,6 +69,7 @@ public class ProductController : Controller
         return RedirectToAction("Index");
     }
 
+    [Authorize(AuthenticationSchemes ="Cookies", Roles ="StoreOwner")]
     public async Task<IActionResult> Update(string id)
     {
         var product = await _catalogService.GetProductByIdAsync(id);
@@ -85,7 +98,7 @@ public class ProductController : Controller
 
 
 
-
+    [Authorize(AuthenticationSchemes ="Cookies", Roles ="StoreOwner")]
     [HttpPost]
     public async Task<IActionResult> Update(ProductUpdateInput productUpdateInput)
     {
@@ -102,6 +115,7 @@ public class ProductController : Controller
         return RedirectToAction(nameof(Index));
     }
 
+    [Authorize(AuthenticationSchemes ="Cookies", Roles ="StoreOwner")]
     public async Task<IActionResult> Delete(string id)
     {
         await _catalogService.DeleteProductAsync(id);

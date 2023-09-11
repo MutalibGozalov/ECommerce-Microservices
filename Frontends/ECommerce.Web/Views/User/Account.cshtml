@@ -55,7 +55,8 @@
                                     <div class="nav nav-tabs" role="tablist">
                                         <a class="nav-item nav-link active" data-bs-toggle="tab" href="#nav-dashboard" role="tab" aria-selected="true"><i class="fas fa-th-large"></i>Dashboard</a>
                                         <a class="nav-item nav-link" data-bs-toggle="tab" href="#nav-orders" role="tab" aria-selected="false"><i class="fas fa-shopping-basket"></i>Orders</a>
-                                        <a class="nav-item nav-link" data-bs-toggle="tab" href="#nav-downloads" role="tab" aria-selected="false"><i class="fas fa-file-download"></i>Downloads</a>
+                                        @if(User.IsInRole("StoreOwner"))
+                                            {<a class="nav-item nav-link" data-bs-toggle="tab" href="#nav-downloads" role="tab" aria-selected="false"><i class="fas fa-file-download"></i>Products In Sale</a>}
                                         <a class="nav-item nav-link" data-bs-toggle="tab" href="#nav-address" role="tab" aria-selected="false"><i class="fas fa-home"></i>Addresses</a>
                                         <a class="nav-item nav-link" data-bs-toggle="tab" href="#nav-account" role="tab" aria-selected="false"><i class="fas fa-user"></i>Account Details</a>
                                         <a class="nav-item nav-link" href="sign-in.html"><i class="fal fa-sign-out"></i>Logout</a>
@@ -106,12 +107,18 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="nav-downloads" role="tabpanel">
-                                    <div class="axil-dashboard-order">
-                                        <p>You don't have any download</p>
+                                @if(User.IsInRole("StoreOwner"))
+                                {
+                                    <div class="tab-pane fade" id="nav-downloads" role="tabpanel">
+                                        @if(ViewBag.StoreProductList is null)
+                                        {
+                                            <div class="axil-dashboard-order">
+                                                <p>You don't have any Products yet, <span><a asp-controller="Product" asp-action="Create">click to add</a></span></p>
+                                            </div>
+                                        }
+                                        else @await Component.InvokeAsync("StoreProduct")
                                     </div>
-                                     @await Component.InvokeAsync("StoreProduct")
-                                </div>
+                                }
                                 <div class="tab-pane fade" id="nav-address" role="tabpanel">
                                     <div class="axil-dashboard-address">
                                         <p class="notice-text">The following addresses will be used on the checkout page by default.</p>
