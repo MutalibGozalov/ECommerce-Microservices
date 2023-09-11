@@ -36,7 +36,7 @@
         <div class="signin-header">
             <div class="row align-items-center">
                 <div class="col-sm-4">
-                    <a href="index.html" class="site-logo"><img src="~/assets/images/logo/logo.png" alt="logo"></a>
+                    <a asp-controller="Home" asp-action="Index" class="site-logo"><img src="~/assets/images/logo/logo.png" alt="logo"></a>
                 </div>
                 <div class="col-sm-8">
                     <div class="singin-header-btn">
@@ -77,9 +77,9 @@
                                 <div id="g_id_onload"
                                     data-client_id="1026298878612-7f88c6tv7i8ba6phv2m1ck146p322t8j.apps.googleusercontent.com"
                                     data-context="signin" data-ux_mode="popup"
-                                    data-login_uri="http://localhost:5001/signin-oidc" data-auto_prompt="false">
+                                    data-login_uri="http://localhost:5001/Account/Login" data-auto_prompt="false">
                                 </div>
-                                <a href="http://localhost:5001/Account/Login">google Login</a> @* ?returnUrl=http%3A%2F%2Flocalhost%3A5010%2F *@
+                                @* <a href="http://localhost:5001/Account/Login">google Login</a> ?returnUrl=http%3A%2F%2Flocalhost%3A5010%2F *@
                                 <div class="g_id_signin" data-type="standard" data-shape="rectangular"
                                     data-theme="outline" data-text="signin_with" data-size="large"
                                     data-logo_alignment="left" data-width="385">

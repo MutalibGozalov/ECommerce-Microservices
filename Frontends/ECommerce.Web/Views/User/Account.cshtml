@@ -67,9 +67,13 @@
                             <div class="tab-content">
                                 <div class="tab-pane fade show active" id="nav-dashboard" role="tabpanel">
                                     <div class="axil-dashboard-overview">
-                                        <div class="welcome-text">Hello Annie (not <span>Annie?</span> <a href="sign-in.html">Log Out</a>)</div>
+                                        <div class="welcome-text">Hello @Model.UserName</div>
                                         <p>From your account dashboard you can view your recent orders, manage your shipping and billing addresses, and edit your password and account details.</p>
                                     </div>
+                                    @if(User.IsInRole("StoreOwner"))
+                                    {
+                                        <button type="submit" class="axil-btn mt--15 mb--15"><a asp-controller="Product" asp-action="Create">Add New Products</a></button>
+                                    }
                                 </div>
                                 <div class="tab-pane fade" id="nav-orders" role="tabpanel">
                                     <div class="axil-dashboard-order">

@@ -31,14 +31,8 @@ public class ProductController : Controller
         return View(data);
     }
 
+    [Authorize(AuthenticationSchemes ="Cookies", Roles ="StoreOwner")]
     public async Task<IActionResult> Create()
-    {
-        var categories = await _catalogService.GetAllCategoriesAsync();
-        ViewBag.categoryList = new SelectList(categories, "Id", "Name");
-        return View();
-    }
-
-    public async Task<IActionResult> Create2()
     {
         var categories = await _catalogService.GetAllCategoriesAsync();
         ViewBag.categoryList = new SelectList(categories, "Id", "Name");
