@@ -41,6 +41,8 @@ namespace ECommerce.IdentityServer
                     cfg.Password.RequireDigit = false;
                     cfg.Password.RequireUppercase = false;
                     cfg.Password.RequiredLength = 3;
+                    cfg.Password.RequireLowercase = false;
+                    cfg.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+ ";
                     })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();

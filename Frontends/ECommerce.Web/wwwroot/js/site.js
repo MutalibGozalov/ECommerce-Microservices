@@ -84,5 +84,4 @@
     getPriceHighestToLowest()
     getPriceBetween(20, 30)
     
-    
 });

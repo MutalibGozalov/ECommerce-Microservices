@@ -1,3 +1,4 @@
+using System.Text.Json;
 using ECommerce.Web.Models;
 using ECommerce.Web.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication;
@@ -57,6 +58,7 @@ public class AuthController : Controller
         return View();
     }
 
+    // sohbet ele menimle ay brat ewitdun ala
 
     [HttpPost("SignUp")]
     public async Task<IActionResult> SignUp(SignUpInput signUpInput)
@@ -76,6 +78,12 @@ public class AuthController : Controller
         return RedirectToAction("SignIn");
     }
 
+    [HttpPost("GoogleSignUp")]
+    public async Task<IActionResult> GoogleSignUp([FromBody] TokenModel data)
+    {
+        var response = await _identityService.GoogleSignUp(data.Credential);
+        return Json(response);
+    }
     public async Task<IActionResult> Logout()
     {
         await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
@@ -84,10 +92,6 @@ public class AuthController : Controller
 
         return RedirectToAction("Index", "Home");
     }
-
-
-
-
 
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

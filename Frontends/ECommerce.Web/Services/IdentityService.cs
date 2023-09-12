@@ -10,6 +10,9 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
+
 
 namespace ECommerce.Web.Services;
 public class IdentityService : IIdentityService
@@ -32,6 +35,27 @@ public class IdentityService : IIdentityService
         var response = await _httpClient.PostAsJsonAsync("/api/user/signup", signUpInput);
 
         return response.IsSuccessStatusCode;
+    }
+
+    public async Task<Response<bool>> GoogleSignUp(string idtoken)
+    {
+        var token = new JwtSecurityToken(jwtEncodedString: idtoken);
+        SignUpInput signUpInput = new ()
+        {
+            Email = token.Claims.First(c => c.Type == "email").Value,
+            Username = token.Claims.First(c => c.Type == "name").Value,
+            Password = CreatePassword(8)
+        };
+
+
+        var response = await _httpClient.PostAsJsonAsync("/api/user/signup", signUpInput);
+        var loginInput = new SigninInput()
+        {
+            Email = signUpInput.Email,
+            Password = signUpInput.Password
+        };
+        var result = await this.SignIn(loginInput); 
+        return result; 
     }
     public async Task<Response<bool>> SignIn(SigninInput signinInput)
     {
@@ -189,5 +213,17 @@ public class IdentityService : IIdentityService
         };
 
         await _httpClient.RevokeTokenAsync(tokenRevocationRequest);
+    }
+
+    public string CreatePassword(int length)
+    {
+            const string valid = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()_+=-`~";
+            StringBuilder res = new StringBuilder();
+            Random rnd = new Random();
+            while (0 < length--)
+            {
+                res.Append(valid[rnd.Next(valid.Length)]);
+            }
+            return res.ToString();
     }
 }
