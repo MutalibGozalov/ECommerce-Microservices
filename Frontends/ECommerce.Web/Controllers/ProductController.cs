@@ -66,7 +66,7 @@ public class ProductController : Controller
 
         await _catalogService.CreateProductAsync(productCreateInput);
 
-        return RedirectToAction("Index");
+        return RedirectToAction(actionName:"", controllerName: "User");
     }
 
     [Authorize(AuthenticationSchemes ="Cookies", Roles ="StoreOwner")]
