@@ -52,7 +52,7 @@ namespace ECommerce.IdentityServer
                    
                    if (!userManager.Users.Any())
                    {
-                        userManager.CreateAsync(new ApplicationUser {UserName="admin", Email="mutalibshg@code.edu.az"}, "admin").Wait();
+                        userManager.CreateAsync(new ApplicationUser {UserName="admin", Email="admin@code.edu.az"}, "admin").Wait();
                    }
                 }
 

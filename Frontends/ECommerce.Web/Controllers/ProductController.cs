@@ -112,7 +112,7 @@ public class ProductController : Controller
 
         await _catalogService.UpdateProductAsync(productUpdateInput);
 
-        return RedirectToAction(nameof(Index));
+        return RedirectToAction(actionName:"", controllerName: "User");
     }
 
     [Authorize(AuthenticationSchemes ="Cookies", Roles ="StoreOwner")]

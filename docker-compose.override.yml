@@ -91,7 +91,7 @@ services:
             - "5012:80"
         volumes:
         - type: bind
-          source: C:\Users\mutalibshg\Pictures\photos
+          source: C:\Users\maham\Desktop\Mete\photos
           target: /app/wwwroot/photos
     discount.api:
         container_name: discount.api
