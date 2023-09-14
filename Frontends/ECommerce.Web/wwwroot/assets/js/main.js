@@ -27,6 +27,7 @@
             axilInit.productRemover();
             axilInit.quantityRanger();
             axilInit.addToCart();
+            axilInit.sortByPrice();
 
             axilInit.axilSlickActivation();
             axilInit.countdownInit('.coming-countdown', '2023/10/01');
@@ -1170,6 +1171,19 @@
 
         },
 
+        sortByPrice: function () {
+            $('.single-select').on('change', (e) => {
+                console.log(e)
+                console.log(e.value)
+                if (e.target.value == 1) {
+                    getPriceLowestToHighest();
+                } 
+                if (e.target.value == 2) {
+                    getPriceHighestToLowest();
+                }
+            })
+        },
+
     }
     axilInit.i();
 
@@ -1201,6 +1215,40 @@
         })
         .fail(error => console.log(error));
     }
+    const getPriceLowestToHighest = () => {
+        let url = `/Product/ProductsJson`;
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: data => priceLowestToHighest(data)
+        })
+        .fail(error => console.log(error));
+    }
+    const getPriceHighestToLowest = () => {
+        let url = `/Product/ProductsJson`;
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: data => priceHighestToLowest(data)
+        })
+        .fail(error => console.log(error));
+    }
+
+    const priceLowestToHighest = (products) => {
+        products = products.sort((a, b) => a.displayPrice - b.displayPrice)
+        products.forEach(e => {
+            console.log('sorted: ', e.displayPrice)
+        });
+        listProducts(products)
+    }
+    const priceHighestToLowest = (products) => {
+        products = products.sort((a, b) => b.displayPrice - a.displayPrice)
+        products.forEach(e => {
+            console.log(' reverse sorted: ', e.displayPrice)
+        });
+        listProducts(products)
+
+    }
     const priceBetween = (products, min, max) => {
         products = products.filter(p => p.displayPrice <= max & p.displayPrice >=min)
         // products.forEach(e => {
@@ -1214,11 +1262,10 @@ const listProducts = (produts) => {
     var container = $('#listArea');
     container.empty()
     produts.forEach(product => {
-        console.log(product)
-        console.log(component(product))
+        // console.log(product)
+        // console.log(component(product))
         container.append(component(product))
     })
-    // container.append(component)
 }
 
     const component = (product) => (`
