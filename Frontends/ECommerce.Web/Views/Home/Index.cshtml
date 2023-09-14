@@ -134,7 +134,7 @@
                                 <div class="thumbnail">
                                     <a asp-controller="Product" asp-action="ProductDetail" asp-route-id="@product.Id">
                                         <img data-sal="fade" data-sal-delay="100" data-sal-duration="1500" src="@product.DetailImage" alt="Product Images">
-                                        <img class="hover-img" src="~/assets/images/product/fashion/product-4.png" alt="Product Images">
+                                        <img class="hover-img" src="@product.DetailImage" alt="Product Images">
                                     </a>
                                     <div class="label-block label-right">
                                         <div class="product-badget">20% OFF</div>
