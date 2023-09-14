@@ -57,7 +57,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="toggle-list product-categories product-gender active">
+                            @* <div class="toggle-list product-categories product-gender active">
                                 <h6 class="title">GENDER</h6>
                                 <div class="shop-submenu">
                                     <ul>
@@ -85,7 +85,6 @@
                                     </ul>
                                 </div>
                             </div>
-
                             <div class="toggle-list product-size active">
                                 <h6 class="title">SIZE</h6>
                                 <div class="shop-submenu">
@@ -100,7 +99,7 @@
                                         <li><a href="#">4XL</a></li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div> *@
                             <div class="toggle-list product-price-range active">
                                 <h6 class="title">PRICE</h6>
                                 <div class="shop-submenu">
@@ -143,7 +142,7 @@
                             </div>
                         </div>
                         <!-- End .row -->
-                        <div class="row row--15">
+                        <div id="listArea" class="row row--15">
                            @foreach(var product in @Model)
                            {
                             <div class="col-xl-4 col-sm-6">
@@ -155,7 +154,7 @@
                                         <div class="product-hover-action">
                                             <ul class="cart-action">
                                                 <li class="wishlist"><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
-                                                <li class="select-option"><a asp-controller="Cart" asp-action="AddItemToCart" asp-route-productId="@product.Id">Add to Cart</a></li>
+                                                <li class="select-option"><a product-id="@product.Id">Add to Cart</a></li>
                                                 <li class="quickview"><a href="#" data-bs-toggle="modal" data-bs-target="#quick-view-modal"><i class="far fa-eye"></i></a></li>
                                             </ul>
                                         </div>
@@ -721,7 +720,7 @@
     <script src="~/assets/js/vendor/waypoints.min.js"></script>
 
     <!-- Main JS -->
-    <script src="~/assets/js/main.js"></script>
     <script src="~/js/site.js"></script>
+    <script src="~/assets/js/main.js"></script>
 
 </body>

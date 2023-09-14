@@ -64,17 +64,22 @@
     }
 
     const priceLowestToHighest = (products) => {
-        products = products.sort(p => p.DisplayPrice)
-        console.log('sorted: ', products)
+        prods = products.sort((a, b) => a.displayPrice - b.displayPrice)
+        prods.forEach(e => {
+            console.log('sorted: ', e.displayPrice)
+        });
     }
     const priceHighestToLowest = (products) => {
-        products = products.sort(p => p.DisplayPrice)
-        products = products.reverse(p => p.DisplayPrice)
-        console.log('reversed: ', products)
+        prods = products.sort((a, b) => b.displayPrice - a.displayPrice)
+        prods.forEach(e => {
+            console.log(' reverse sorted: ', e.displayPrice)
+        });
     }
     const priceBetween = (products, min, max) => {
-        products = products.filter(p => p.DisplayPrice <= max & p.DisplayPrice >=min)
-        console.log(`between ${min} and ${max}`, products)
+        products = products.filter(p => p.displayPrice <= max & p.displayPrice >=min)
+        products.forEach(e => {
+            console.log('pb: ', e.displayPrice)
+        });
     }
     const inCategory = (category) => {
         let products = getAll();
@@ -83,5 +88,4 @@
     getPriceLowestToHighest()
     getPriceHighestToLowest()
     getPriceBetween(20, 30)
-    
 });

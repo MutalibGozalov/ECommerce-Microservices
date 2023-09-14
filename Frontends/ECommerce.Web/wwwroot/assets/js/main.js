@@ -209,10 +209,11 @@
             $('#slider-range').slider({
                 range: true,
                 min: 0,
-                max: 5000,
-                values: [0, 3000],
+                max: 500,
+                values: [0, 500],
                 slide: function(event, ui) {
                     $('#amount').val('$' + ui.values[0] + '  $' + ui.values[1]);
+                    getPriceBetween(parseInt(ui.values[0]), parseInt(ui.values[1]))
                 }
             });
             $('#amount').val('$' + $('#slider-range').slider('values', 0) +
@@ -1190,4 +1191,61 @@
         });
     }
 
+// Price ranger filter
+    const getPriceBetween = (min, max) => {
+        let url = `/Product/ProductsJson`;
+        $.ajax({
+            type: 'GET',
+            url: url,
+            success: data => priceBetween(data, min, max)
+        })
+        .fail(error => console.log(error));
+    }
+    const priceBetween = (products, min, max) => {
+        products = products.filter(p => p.displayPrice <= max & p.displayPrice >=min)
+        // products.forEach(e => {
+        //     console.log('pb: ', e.displayPrice)
+        // });
+
+        listProducts(products)
+    }
+
+const listProducts = (produts) => {
+    var container = $('#listArea');
+    container.empty()
+    produts.forEach(product => {
+        console.log(product)
+        console.log(component(product))
+        container.append(component(product))
+    })
+    // container.append(component)
+}
+
+    const component = (product) => (`
+    <div class="col-xl-4 col-sm-6">
+                                <div class="axil-product product-style-one mb--30">
+                                    <div class="thumbnail">
+                                        <a asp-controller="Product" asp-action="ProductDetail2" asp-route-id="${product.id}">
+                                            <img src="${product.detailImage}" alt="Product Images">
+                                        </a>
+                                        <div class="product-hover-action">
+                                            <ul class="cart-action">
+                                                <li class="wishlist"><a href="wishlist.html"><i class="far fa-heart"></i></a></li>
+                                                <li class="select-option"><a asp-controller="Cart" asp-action="AddItemToCart" asp-route-productId="${product.id}">Add to Cart</a></li>
+                                                <li class="quickview"><a href="#" data-bs-toggle="modal" data-bs-target="#quick-view-modal"><i class="far fa-eye"></i></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="product-content">
+                                        <div class="inner">
+                                            <h5 class="title"><a asp-controller="Product" asp-action="ProductDetail2" asp-route-id="${product.id}">${product.name}</a></h5>
+                                            <div class="product-price-variant">
+                                                <span class="price current-price">$${product.displayPrice}</span>
+                                                <span class="price old-price">$30</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    `);
 })(window, document, jQuery);
