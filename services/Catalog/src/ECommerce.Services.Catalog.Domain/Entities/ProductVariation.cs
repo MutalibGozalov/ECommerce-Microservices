@@ -6,6 +6,6 @@ public class ProductVariation : BaseAuditable
     [BsonRepresentation(BsonType.Decimal128)]
     public decimal Price { get; set; }
     public string[] Media { get; set; }  = null!; 
-    // [BsonIgnore]
-    // public Product? Product { get; set; }
+    [BsonExtraElements]
+    public BsonDocument? ExtraElements {get; set;}
 }

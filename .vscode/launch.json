@@ -1,0 +1,211 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "name": "web",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/Frontends/ECommerce.Web/bin/Debug/net7.0/ECommerce.Web.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Frontends/ECommerce.Web",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
+            "name": "Identity",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_identity",
+            "program": "${workspaceFolder}/IdentityServer/ECommerce.IdentityServer/bin/Debug/netcoreapp3.1/ECommerce.IdentityServer.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/IdentityServer/ECommerce.IdentityServer",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
+            "name": "gateway",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_gateway",
+            "program": "${workspaceFolder}/Gateways/ECommerce.Gateway/bin/Debug/net7.0/ECommerce.Gateway.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Gateways/ECommerce.Gateway",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
+            "name": "catalog",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_catalog",
+            "program": "${workspaceFolder}/services/Catalog/src/ECommerce.Services.Catalog.Api/bin/Debug/net7.0/ECommerce.Services.Catalog.Api.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/services/Catalog/src/ECommerce.Services.Catalog.Api",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
+            "name": "photostock",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_photostock",
+            "program": "${workspaceFolder}/services/PhotoStock/ECommerce.Services.PhotoStock/bin/Debug/net7.0/ECommerce.Services.PhotoStock.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/services/PhotoStock/ECommerce.Services.PhotoStock",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
+            "name": "cart",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_cart",
+            "program": "${workspaceFolder}/services/Cart/src/ECommerce.Services.Cart.Api/bin/Debug/net7.0/ECommerce.Services.Cart.Api.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/services/Cart/src/ECommerce.Services.Cart.Api",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
+            "name": "discount",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_discount",
+            "program": "${workspaceFolder}/services/Discount/src/ECommerce.Services.Discount/bin/Debug/net7.0/ECommerce.Services.Discount.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/services/Discount/src/ECommerce.Services.Discount",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },
+        {
+            "name": "order",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_order",
+            "program": "${workspaceFolder}/services/Order/src/ECommerce.Services.Order.Api/bin/Debug/net7.0/ECommerce.Services.Order.Api.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/services/Order/src/ECommerce.Services.Order.Api",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },   
+        {
+            "name": "payment",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build_payment",
+            "program": "${workspaceFolder}/services/Payment/ECommerce.Services.Payment/bin/Debug/net7.0/ECommerce.Services.Payment.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/services/Payment/ECommerce.Services.Payment",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            }
+        },   
+        {
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach"
+        }
+    ],
+    "compounds": [
+        {
+          "name": "LAUNCH ALL",
+          "configurations": [
+            "web",
+            "Identity",
+            "gateway",
+            "catalog",
+            "photostock",
+            "cart",
+            "discount",
+            "order",
+            "payment"
+          ],
+          "stopAll": true
+        }
+      ]
+}

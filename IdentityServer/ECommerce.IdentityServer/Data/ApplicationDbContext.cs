@@ -11,6 +11,8 @@ namespace ECommerce.IdentityServer.Data
         {
         }
 
+        public DbSet<Store> Stores { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

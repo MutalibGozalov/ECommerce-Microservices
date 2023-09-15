@@ -1,0 +1,46 @@
+@{
+    Layout = "_Layout2";
+    ViewData["Title"] = "Update product";
+}
+@model ProductUpdateInput
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Update product</h5>
+                <form asp-controller="Product" asp-action="Update" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly"></div>
+                    <input type="hidden" asp-for="Id">
+                    <input type="hidden" asp-for="StoreId">
+                    <input type="hidden" asp-for="Image">
+                    <div class="mb-3">
+                        <label class="form-label" asp-for="CategoryId"></label>
+                        <select asp-for="CategoryId" class="form-control" asp-items="@ViewBag.categoryList"></select>
+                        <span class="text-danger" asp-validation-for="CategoryId"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Name" class="form-label"></label>
+                        <input asp-for="Name" class="form-control">
+                        <span class="text-danger" asp-validation-for="Name"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Description" class="form-label"></label>
+                        <textarea asp-for="Description" class="form-control"></textarea>
+                        <span class="text-danger" asp-validation-for="Description"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="DisplayPrice" class="form-label"></label>
+                        <input asp-for="DisplayPrice" class="form-control">
+                        <span class="text-danger" asp-validation-for="DisplayPrice"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="PhotoFormFile">Product image</label>
+                        <input type="file" asp-for="PhotoFormFile" class="form-control">
+                        <span class="text-danger" asp-validation-for="Image"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update Product</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

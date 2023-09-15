@@ -26,6 +26,8 @@ public class GetProductByIdQueryHandler : IRequestHandler<GetProductByIdQuery, R
             return Response<ProductDto>.Failure("Product couldn't found", 404);
         }
         product.Category = await _categoryCollection.Find(c => c.Id == product.CategoryId).FirstAsync();
-        return Response<ProductDto>.Success(_mapper.Map<ProductDto>(product), 200);
+        var productDto = _mapper.Map<ProductDto>(product);
+        productDto.CategoryName = product.Category.Name;
+        return Response<ProductDto>.Success(productDto, 200);
     }
 }

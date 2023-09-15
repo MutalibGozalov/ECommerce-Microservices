@@ -10,7 +10,7 @@ namespace ECommerce.Shared.Dtos
         public int StatusCode { get; set; }
         [JsonIgnore]
         public bool IsSuccessful { get; set; }
-        public List<string>? Errors { get; set; }
+        public List<string> Errors { get; set; }
 
 
         public static Response<T> Success(T data, int statusCode)

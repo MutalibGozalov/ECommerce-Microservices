@@ -11,6 +11,8 @@
     <PackageReference Include="Ardalis.GuardClauses" Version="4.0.1"/>
     <PackageReference Include="ZymLabs.NSwag.FluentValidation" Version="0.6.2"/>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.9"/>
+    <PackageReference Include="masstransit.aspnetcore" Version="7.3.1" />
+    <PackageReference Include="masstransit.rabbitmq" Version="8.1.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ECommerce.Services.Catalog.Infrastructure\ECommerce.Services.Catalog.Infrastructure.csproj"/>

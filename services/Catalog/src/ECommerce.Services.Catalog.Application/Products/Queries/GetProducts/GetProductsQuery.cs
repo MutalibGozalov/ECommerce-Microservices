@@ -1,5 +1,5 @@
 namespace ECommerce.Services.Catalog.Application.Products.Queries;
- public class GetProductsQuery : IRequest<Response<List<ProductDto>>> { }
+public class GetProductsQuery : IRequest<Response<List<ProductDto>>> { }
 
 public class GetProductsQueryHandler : IRequestHandler<GetProductsQuery, Response<List<ProductDto>>>
 {
@@ -19,17 +19,23 @@ public class GetProductsQueryHandler : IRequestHandler<GetProductsQuery, Respons
     }
     public async Task<Response<List<ProductDto>>> Handle(GetProductsQuery request, CancellationToken cancellationToken)
     {
-        var products = await _productCollection.Find(p => true).ToListAsync();
+        var products = await _productCollection.Find(p => true).ToListAsync(cancellationToken);
 
         if (products.Any())
         {
             foreach (var product in products)
             {
-                product.Category = await _categoryCollection.Find(c => c.Id == product.CategoryId).FirstAsync();
+                product.Category = await _categoryCollection.Find(c => c.Id == product.CategoryId).FirstAsync(cancellationToken);
             }
         }
         else products = new List<Product>();
 
-        return Response<List<ProductDto>>.Success(_mapper.Map<List<ProductDto>>(products), 200);
+        var productDtos = _mapper.Map<List<ProductDto>>(products);
+
+        foreach (var productDto in productDtos)
+        {
+            productDto.CategoryName = _mapper.Map<Product>(productDto).Category.Name;
+        }
+        return Response<List<ProductDto>>.Success(productDtos, 200);
     }
 }

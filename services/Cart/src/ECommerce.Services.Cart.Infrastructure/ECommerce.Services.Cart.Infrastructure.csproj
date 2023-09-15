@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
     <ProjectReference Include="..\ECommerce.Services.Cart.Application\ECommerce.Services.Cart.Application.csproj"/>
+    <ProjectReference Include="..\..\..\..\Shared\ECommerce.Shared\ECommerce.Shared.csproj"/>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="StackExchange.Redis" Version="2.6.122"/>

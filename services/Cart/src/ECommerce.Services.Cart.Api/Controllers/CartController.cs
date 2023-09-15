@@ -27,6 +27,7 @@ public class CartController : CustomBaseController
     [HttpPost]
     public async Task<IActionResult> SaveOrUpdateCart(CartDto cartDto)
     {
+        cartDto.UserId = _sharedIdentityService.GetUserId;
         var response = await _cartService.SaveOrUpdate(cartDto);
 
         return CreateActionResultInstance(response);

@@ -47,10 +47,10 @@ public class ProductVariationController : CustomBaseController
         return CreateActionResultInstance(response);
     }
 
-    [HttpDelete]
-    public async Task<IActionResult> Delete(DeleteProductVariationCommand command)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(string id)
     {
-        var response = await Mediator.Send(command);
+        var response = await Mediator.Send(new DeleteProductVariationCommand {Id = id});
         return CreateActionResultInstance(response);
     }
 }

@@ -19,7 +19,7 @@ public class PhotosController : CustomBaseController
             using (var stream = new FileStream(path, FileMode.Create))
                 await photo.CopyToAsync(stream, cancellationToken);
 
-            var returnPath = "photos/" + photo.FileName; 
+            var returnPath = photo.FileName; 
 
             PhotoDto photoDto = new() {Url = returnPath};
 
@@ -29,7 +29,7 @@ public class PhotosController : CustomBaseController
         return CreateActionResultInstance(Response<PhotoDto>.Failure("photo is empty", 400));
     }
 
-    // GET
+    [HttpDelete]
     public IActionResult PhotoDelete(string photoUrl)
     {
         var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/photos", photoUrl);
@@ -39,6 +39,6 @@ public class PhotosController : CustomBaseController
         }
         System.IO.File.Delete(path);
 
-        return CreateActionResultInstance(Response<NoContent>.Success(204));
+        return CreateActionResultInstance(Response<NoContent>.Success(200));
     }
 }

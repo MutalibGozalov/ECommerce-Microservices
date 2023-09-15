@@ -3,6 +3,9 @@ using ECommerce.Services.Catalog.Application.Products.Commands.CreateProduct;
 using ECommerce.Services.Catalog.Application.Products.Commands.UpdateProduct;
 using ECommerce.Services.Catalog.Application.Products.Commands.DeleteProduct;
 using ECommerce.Services.Catalog.Application.Products.Queries;
+using MassTransit;
+using ECommerce.Shared.Messages;
+using JetBrains.Annotations;
 
 
 namespace ECommerce.Services.Catalog.Api.Controllers;
@@ -14,9 +17,13 @@ public class ProductController : CustomBaseController
     private ISender? _mediator;
     protected ISender Mediator => _mediator ??= HttpContext.RequestServices.GetRequiredService<ISender>();
 
-    public ProductController(IMediator mediator)
+    private readonly IPublishEndpoint _publishEndpoint;
+
+    public ProductController(IMediator mediator, IPublishEndpoint publishEndpoint)
     {
         _mediator = mediator;
+        _publishEndpoint = publishEndpoint;
+
     }
 
     [HttpGet]
@@ -43,6 +50,11 @@ public class ProductController : CustomBaseController
     [HttpPost]
     public async Task<IActionResult> Create(CreateProductCommand command)
     {
+/*         command.ProductVariations.ForEach (async item =>
+        {
+            var itemResponse = await Mediator.Send(item);
+            command.ProductVariationIds.Append(itemResponse.Data.Id);
+        }); */
         var response = await Mediator.Send(command);
         return CreateActionResultInstance(response);
     }
@@ -51,13 +63,19 @@ public class ProductController : CustomBaseController
     public async Task<IActionResult> Update(UpdateProductCommand command)
     {
         var response = await Mediator.Send(command);
+
+        if (response.IsSuccessful)
+        {
+            await _publishEndpoint.Publish(new ProductNameChangedEvent {ProductId = command.Id, ProductName = command.Name});
+        }
+        
         return CreateActionResultInstance(response);
     }
 
-    [HttpDelete]
-    public async Task<IActionResult> Delete(DeleteProductCommand command)
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(string id)
     {
-        var response = await Mediator.Send(command);
+        var response = await Mediator.Send(new DeleteProductCommand {Id = id});
         return CreateActionResultInstance(response);
     }
 }

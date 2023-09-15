@@ -1,0 +1,29 @@
+@{
+    ViewData["Title"] = "Index";
+}
+@model UserViewModel
+<div class="row">
+    <div class="col-md-9">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">User credentials</h5>
+                <table class="table-striped table">
+                    <th>
+                        <td>Username</td>
+                        <td>Email</td>
+                    </th>
+                    <tr>
+                        <td></td>
+                        <td>@Model.UserName</td>
+                        <td>@Model.Email</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="list-group">
+            <a asp-controller="Product" asp-action="Index" class="list-group-item list-group-item-action">Products</a>
+        </div>
+    </div>
+</div>

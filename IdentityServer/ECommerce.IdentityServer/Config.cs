@@ -12,12 +12,16 @@ namespace ECommerce.IdentityServer
     public static class Config
     {
 
-        public static IEnumerable<ApiResource> ApiResources => new ApiResource[]
+        public static IEnumerable<ApiResource> ApiResources => new ApiResource[] //which API resource the token is for
         {
             new ApiResource("resource_catalog") {Scopes = {"catalog_fullpermission"}},
             new ApiResource("resource_photostock") {Scopes = {"photo_stock_fullpermission"}},
             new ApiResource("resource_cart") {Scopes = {"cart_fullpermission"}},
             new ApiResource("resource_discount") {Scopes = {"discount_fullpermission"}},
+            new ApiResource("resource_order") {Scopes = {"order_fullpermission"}},
+            new ApiResource("resource_payment") {Scopes = {"payment_fullpermission"}},
+            new ApiResource("resource_gateway") {Scopes = {"gateway_fullpermission"}}
+
         };
         public static IEnumerable<IdentityResource> IdentityResources =>
         new IdentityResource[]
@@ -28,13 +32,16 @@ namespace ECommerce.IdentityServer
             new IdentityResource() {Name = "roles", DisplayName="Roles", Description="User roles", UserClaims = new[] {"role"}}
         };
 
-        public static IEnumerable<ApiScope> ApiScopes =>  // Scope --> Claim
+        public static IEnumerable<ApiScope> ApiScopes =>  // Scope --> Claim     -> permission types
             new ApiScope[]
             {
                 new ApiScope("catalog_fullpermission", "Full permission for Catalog Api"),
                 new ApiScope("photo_stock_fullpermission", "Full permission for Photo Stock Api"),
                 new ApiScope("cart_fullpermission", "Full permission for Cart Api"),
                 new ApiScope("discount_fullpermission", "Full permission for Discount Api"),
+                new ApiScope("order_fullpermission", "Full permission for Order Api"),
+                new ApiScope("payment_fullpermission", "Full permission for Payment Api"),
+                new ApiScope("gateway_fullpermission", "Full permission for Payment Api"),
                 new ApiScope(IdentityServerConstants.LocalApi.ScopeName)
             };
 
@@ -49,8 +56,9 @@ namespace ECommerce.IdentityServer
                     AllowedScopes = {
                         "catalog_fullpermission",
                         "photo_stock_fullpermission",
+                        "gateway_fullpermission",
                         IdentityServerConstants.LocalApi.ScopeName
-                        }
+                        },
                 },
                 new Client {
                     ClientName = "Asp.Net Core MVC",
@@ -61,6 +69,9 @@ namespace ECommerce.IdentityServer
                     AllowedScopes = {
                         "cart_fullpermission",
                         "discount_fullpermission",
+                        "order_fullpermission",
+                        "payment_fullpermission",
+                        "gateway_fullpermission",
                         IdentityServerConstants.StandardScopes.Email,
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
@@ -71,7 +82,41 @@ namespace ECommerce.IdentityServer
                     AccessTokenLifetime = 3600, // 1 HOUR
                     RefreshTokenExpiration = TokenExpiration.Absolute,
                     AbsoluteRefreshTokenLifetime = (int)(DateTime.Now.AddDays(60) - DateTime.Now).TotalSeconds, // 60 DAYS
-                    RefreshTokenUsage = TokenUsage.ReUse
+                    RefreshTokenUsage = TokenUsage.ReUse,
+                },
+                new Client
+                {
+                    ClientId = "mvc",
+                    ClientSecrets = { new Secret("secret".Sha256()) },
+
+                    AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+                    RequireConsent = false,
+                    RequirePkce = true,
+
+                    // where to redirect to after login
+                    RedirectUris = { "http://localhost:5001/signin-oidc" },
+
+                    // where to redirect to after logout
+                    PostLogoutRedirectUris = { "http://localhost:5001/signout-callback-oidc" },
+
+                    AllowedScopes = new List<string>
+                    {
+                        "cart_fullpermission",
+                        "discount_fullpermission",
+                        "order_fullpermission",
+                        "payment_fullpermission",
+                        "gateway_fullpermission",
+                        IdentityServerConstants.StandardScopes.Email,
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        IdentityServerConstants.StandardScopes.OfflineAccess,
+                        IdentityServerConstants.LocalApi.ScopeName,
+                        "roles"
+                    },
+                    AccessTokenLifetime = 3600, // 1 HOUR
+                    RefreshTokenExpiration = TokenExpiration.Absolute,
+                    AbsoluteRefreshTokenLifetime = (int)(DateTime.Now.AddDays(60) - DateTime.Now).TotalSeconds, // 60 DAYS
+                    RefreshTokenUsage = TokenUsage.ReUse,
                 }
             };
     }
